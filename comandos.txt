@@ -1,0 +1,7 @@
+temperatura = vcgencmd measure_temp
+memoria = 
+uptime = uptime -s
+hostname = hostname
+data = date
+IP = ifconfig | grep 'Bcast' | cut -d : -f 2
+quantidade de processos = ps -aux | wc -l
