@@ -1,7 +1,49 @@
-temperatura = vcgencmd measure_temp
+##############################################  Comandos Para pegar as info da Rasp #################################################
+
+Temperatura = vcgencmd measure_temp
+-------------------------Codigo--------------------------------------
+temp = os.getoutput("vcgncmd measure_temp")
+str(temp)
+bot.sendMessage(chat_id, "Temperatura atual: %s" % temp)
+
+###################  Pega os valores da memoria #############################################
 memoria = free -h | cut -c 1-45 | head -2
+-------------------------Codigo--------------------------------------
+men = os.getoutput("-h | cut -c 1-45 | head -2")
+str(men)
+bot.sendMessage(chat_id,"Estado da memoria: %s" % men)
+
+############################  Pega o UpTime do sistema  ######################################
 uptime = uptime -p
+-------------------------Codigo--------------------------------------
+uptime = os.getoutput("uptime -p")
+str(uptime)
+bot.sendMessage(chat_id,"Up Time do sistema: %s" % uptime)
+
+#################################  Pega o uso do Micro SD  ####################################
 UsoSD = df -h
+-------------------------Codigo--------------------------------------
+sd = os.getoutput("df -h")
+srt(sd)
+bot.sendMessage(chat_id,"Uso do MicroSD: %s" % sd)
+
+#################################  Pega a Data/Hora do sistema #################################
 data = date
+-------------------------Codigo--------------------------------------
+data = os.getoutput("date")
+str(data)
+bot.sendMessage(chat_id,"Data e hora do Sistema: %s" % data)
+
+###################################  Pega o Endereço de IP da maquina  ########################
 IP = ifconfig | grep 'Bcast' | cut -c 22-35 ou ifconfig eth0 | grep 'inet' | grep -Eo "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b" | head -1
+-------------------------Codigo--------------------------------------
+ip = os.getoutput("ifconfig eth0 | grep 'inet' | grep -Eo "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b" | head -1 ")
+str(ip)
+bot.sendMessage(chat_id,"Ip do sistema e : %s" % ip)
+
+####################### Contador de processod Rodando na maquina  ###########################
 quantidade de processos = ps -aux | wc -l
+-------------------------Codigo--------------------------------------
+quantProc = os.getoutput("ps -aux | wc -1")
+str(quantProc)
+bot.sendMessage("Quantidade de processos rodando e igual a: %s processos" % quantProc)
