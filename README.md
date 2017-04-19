@@ -22,3 +22,8 @@ Bot do telegram feito em python rodando na raspberry pi usando a biblioteca Tele
 * Executa comandos no terminal
 * Grava o resultado dos comandos em variaveis
 * Retorna o valor das variaveis 
+
+## Versão 0.5
+* Melhora na estetica da saida das info
+* Modificação no codigo evitando repetiçao
+* 
