@@ -32,26 +32,29 @@ def handle(msg):
         	print 'Received a %s from %s' % (content_type, m.chat)
 
     elif comando == 'Temperatura':
-	bot.sendMessage(chat_id, ' Temperatura da CPU : ')
 	print 'Comando usado ', comando	
-
+	temp = os.getoutput("vcgncmd measure_temp | cut -c 6-12")
+	bot.sendMessage(chat_id, "Temperatura atual: %s" % str(temp))
+	
 	if chat_id < 0:
        		print 'Received a %s from %s, by %s' % (content_type, m.chat, m.from_)
     	else:
         	print 'Received a %s from %s' % (content_type, m.chat)
 
     elif comando == 'Memoria':
-	bot.sendMessage(chat_id, ' Memoria em uso: ')
 	print 'Comando usado ', comando
-
+	men = os.getoutput("free -h | cut -c 1-45 | head -2")
+	bot.sendMessage(chat_id,"Estado da memoria: %s" % str(men))
+	
 	if chat_id < 0:
 	        print 'Received a %s from %s, by %s' % (content_type, m.chat, m.from_)
     	else:
        		print 'Received a %s from %s' % (content_type, m.chat)
 
     elif comando == 'UpTime':
-	bot.sendMessage(chat_id, ' Uptime do Sistema: ')
 	print 'Comando usado ',  comando
+	uptime = os.getoutput("uptime -p")
+	bot.sendMessage(chat_id,"Up Time do sistema: %s" % str(uptime))
 
 	if chat_id < 0:
         	print 'Received a %s from %s, by %s' % (content_type, m.chat, m.from_)
@@ -59,25 +62,27 @@ def handle(msg):
         	print 'Received a %s from %s' % (content_type, m.chat)
 	
     elif comando == 'UsoSD':
-	bot.sendMessage(chat_id,'Informacoes sobre o uso do MicroSD')
 	print 'Comando usado ', comando
-
+	sd = os.getoutput("df -hlT")
+	bot.sendMessage(chat_id,"Uso do MicroSD: %s" % srt(sd))
+	
 	if chat_id < 0:
 	        print 'Received a %s from %s, by %s' % (content_type, m.chat, m.from_)
     	else:
         	print 'Received a %s from %s' % (content_type, m.chat)
 
     elif comando == 'Data':
-	bot.sendMessage(chat_id, 'Data e Hora da maquina ')
 	print 'Comando usado ', comando
-
+	ata = os.getoutput("date")
+ 	bot.sendMessage(chat_id,"Data e hora do Sistema: %s" % str(data))
+	
 	if chat_id < 0:
 	        print 'Received a %s from %s, by %s' % (content_type, m.chat, m.from_)
     	else:
         	print 'Received a %s from %s' % (content_type, m.chat)
 	
     elif comando == 'IP':
-	bot.sendMessage(chat_id, 'Aguarde essa funcao no futuro ta dificel  de fazer agora =/')
+	bot.sendMessage(chat_id, 'Aguarde... no futuro ta dificel  de fazer agora =/')
 	print 'Comando usado ', comando
 
 	if chat_id < 0:
@@ -86,9 +91,10 @@ def handle(msg):
                 print 'Received a %s from %s' % (content_type, m.chat)
                 
     elif comando == 'Processos':
-	bot.sendMessage(chat_id, 'Aqui esta o numero de processos: ')
 	print 'Comando usado ', comando
-
+	quantProc = os.getoutput("ps -aux | wc -l")
+	bot.sendMessage("Quantidade de processos rodando e igual a: %s processos" % str(quantProc))
+	
 	if chat_id < 0:
 	        print 'Received a %s from %s, by %s' % (content_type, m.chat, m.from_)
 	else:
