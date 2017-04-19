@@ -1,6 +1,5 @@
 import telepot
 import time
-import os
 
 def handle(msg):
     chatid = msg['chat']['id']
@@ -9,10 +8,10 @@ def handle(msg):
      
     
     if comando == '/start':
-        bot.sendMessage(chatid, '''Bem Vindo!! 
-        Bot desenvolvido por @joao_slv!
-        Use /start - Iniciando o Bot
-        Use os comandos do teclado abaixo: ''', )
+        bot.sendMessage(chatid,'Bem Vindo!!') 
+        bot.sendMessage(chatid,'Bot desenvolvido por @joao_slv!)
+        bot.sendMessage(chatid,'Iniciando o Bot...')
+        bot.sendMessage(chatid,'Use os comandos do teclado abaixo' )
         
     elif comando == 'Temperatura':
     
@@ -20,7 +19,7 @@ def handle(msg):
         
     elif comando == ' UpTime':
    
-    elif comando == 'Hostname':
+    elif comando == 'UsoSD':
    
     elif comando == 'Data':
     
@@ -31,9 +30,8 @@ def handle(msg):
     elif comando == 'Ajuda':
        
     else:
-        bot.sendMessage(chatid, '''Use os comandos no teclado para que possa ter acesso as opções do bot.''')
+        bot.sendMessage(chatid, 'Use os comandos no teclado para que possa ter acesso as opções do bot.')
 
-    
 bot = telepot.Bot('346248441;AAEGri00lPsFmKEzshGtthdoEgyawJ08s5k')
 bot.message_loop(handle)
               
