@@ -33,7 +33,7 @@ def handle(msg):
 
     elif comando == 'Temperatura':
 	print 'Comando usado ', comando	
-	temp = commands.getoutput("vcgncmd measure_temp | cut -c 6-12")
+	temp = commands.getoutput("vcgencmd measure_temp | cut -c 6-12")
 	bot.sendMessage(chat_id, "Temperatura atual: %s" % str(temp))
 	
 	if chat_id < 0:
@@ -64,7 +64,7 @@ def handle(msg):
     elif comando == 'UsoSD':
 	print 'Comando usado ', comando
 	sd = commands.getoutput("df -hlT")
-	bot.sendMessage(chat_id,"Uso do MicroSD: %s" % srt(sd))
+	bot.sendMessage(chat_id,"Uso do MicroSD: %s" % str(sd))
 	
 	if chat_id < 0:
 	        print 'Received a %s from %s, by %s' % (content_type, m.chat, m.from_)
@@ -93,7 +93,7 @@ def handle(msg):
     elif comando == 'Processos':
 	print 'Comando usado ', comando
 	quantProc = commands.getoutput("ps -aux | wc -l")
-	bot.sendMessage("Quantidade de processos rodando e igual a: %s processos" % str(quantProc))
+	bot.sendMessage("Quantidade de processos rodando e : %s" % str(quantProc))
 	
 	if chat_id < 0:
 	        print 'Received a %s from %s, by %s' % (content_type, m.chat, m.from_)
@@ -113,7 +113,7 @@ def handle(msg):
 
     else:
         bot.sendMessage(chat_id, 'Use os comandos no teclado')
-	bot.sendMessage(chat_id, 'Ainda nao sei ler')
+	bot.sendMessage(chat_id, 'Ainda nao sei ler =,(')
 
 bot = telepot.Bot('346248441:AAEGri00lPsFmKEzshGtthdoEgyawJO8s5k')
 bot.message_loop(handle)
