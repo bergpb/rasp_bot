@@ -1,6 +1,6 @@
 temperatura = vcgencmd measure_temp
 memoria = free -h | cut -c 1-45 | head -2
-uptime = uptime -s
+uptime = uptime -p
 UsoSD = df -h
 data = date
 IP = ifconfig | grep 'Bcast' | cut -c 22-35 ou ifconfig eth0 | grep 'inet' | grep -Eo "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b" | head -1
