@@ -33,7 +33,7 @@ def handle(msg):
 
     elif comando == 'Temperatura':
 	print 'Comando usado ', comando	
-	temp = os.getoutput("vcgncmd measure_temp | cut -c 6-12")
+	temp = commands.getoutput("vcgncmd measure_temp | cut -c 6-12")
 	bot.sendMessage(chat_id, "Temperatura atual: %s" % str(temp))
 	
 	if chat_id < 0:
@@ -43,7 +43,7 @@ def handle(msg):
 
     elif comando == 'Memoria':
 	print 'Comando usado ', comando
-	men = os.getoutput("free -h | cut -c 1-45 | head -2")
+	men = commands.getoutput("free -h | cut -c 1-45 | head -2")
 	bot.sendMessage(chat_id,"Estado da memoria: %s" % str(men))
 	
 	if chat_id < 0:
@@ -53,7 +53,7 @@ def handle(msg):
 
     elif comando == 'UpTime':
 	print 'Comando usado ',  comando
-	uptime = os.getoutput("uptime -p")
+	uptime = commands.getoutput("uptime -p")
 	bot.sendMessage(chat_id,"Up Time do sistema: %s" % str(uptime))
 
 	if chat_id < 0:
@@ -63,7 +63,7 @@ def handle(msg):
 	
     elif comando == 'UsoSD':
 	print 'Comando usado ', comando
-	sd = os.getoutput("df -hlT")
+	sd = commands.getoutput("df -hlT")
 	bot.sendMessage(chat_id,"Uso do MicroSD: %s" % srt(sd))
 	
 	if chat_id < 0:
@@ -73,7 +73,7 @@ def handle(msg):
 
     elif comando == 'Data':
 	print 'Comando usado ', comando
-	ata = os.getoutput("date")
+	ata = commands.getoutput("date")
  	bot.sendMessage(chat_id,"Data e hora do Sistema: %s" % str(data))
 	
 	if chat_id < 0:
@@ -92,7 +92,7 @@ def handle(msg):
                 
     elif comando == 'Processos':
 	print 'Comando usado ', comando
-	quantProc = os.getoutput("ps -aux | wc -l")
+	quantProc = commands.getoutput("ps -aux | wc -l")
 	bot.sendMessage("Quantidade de processos rodando e igual a: %s processos" % str(quantProc))
 	
 	if chat_id < 0:
@@ -121,4 +121,4 @@ bot.message_loop(handle)
 print 'Aguardando comandos ...'
 
 while 1:
-time.sleep(5)
+	time.sleep(5)
