@@ -13,6 +13,10 @@ Bot do telegram feito em python rodando na raspberry pi usando a biblioteca Tele
 * Teclado com opções 
 * Retorno de mensagens 
 
-## Versao 0.3
-* 
-* 
+## Versão 0.3
+* Mostra quem esta utilizando o bot
+* Informa se o chat e em grupo ou privado
+* Mostra qual comando foi usado
+
+## Versão 0.4
+
