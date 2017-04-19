@@ -73,7 +73,7 @@ def handle(msg):
 
     elif comando == 'Data':
 	print 'Comando usado ', comando
-	ata = commands.getoutput("date")
+	data = commands.getoutput("date")
  	bot.sendMessage(chat_id,"Data e hora do Sistema: %s" % str(data))
 	
 	if chat_id < 0:
@@ -93,7 +93,7 @@ def handle(msg):
     elif comando == 'Processos':
 	print 'Comando usado ', comando
 	quantProc = commands.getoutput("ps -aux | wc -l")
-	bot.sendMessage("Quantidade de processos rodando e : %s" % str(quantProc))
+	bot.sendMessage("Quantidade de processos rodando e : %i", int(quantProc))
 	
 	if chat_id < 0:
 	        print 'Received a %s from %s, by %s' % (content_type, m.chat, m.from_)
