@@ -17,7 +17,7 @@ def handle(msg):
     
     elif comando == 'Memoria':
         
-    elif comando == ' UpTime':
+    elif comando == 'UpTime':
    
     elif comando == 'UsoSD':
    
