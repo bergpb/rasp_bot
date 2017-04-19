@@ -14,10 +14,10 @@ def handle(msg):
 # Configuracoes do teclado 
     keyboard=ReplyKeyboardMarkup(
         keyboard=[
-            [KeyboardButton(text="Temperatura"), KeyboardButton(text="IP")],
-            [KeyboardButton(text="Memoria"), KeyboardButton(text="UsoSD")],
-            [KeyboardButton(text="UpTime"),  KeyboardButton(text="Data")],
-            [KeyboardButton(text="CPU_Info"), KeyboardButton(text="Ajuda")],
+            [KeyboardButton(text="Temperatura"), KeyboardButton(text="Memoria")],
+            [KeyboardButton(text="UpTime"), KeyboardButton(text="UsoSD")],
+            [KeyboardButton(text="Data"),  KeyboardButton(text="IP")],
+            [KeyboardButton(text="Processos"), KeyboardButton(text="Ajuda")],
         ])
 #menssagem incial do bot depois do comando \start
     if comando == '/start':
@@ -85,8 +85,8 @@ def handle(msg):
         else:
                 print 'Received a %s from %s' % (content_type, m.chat)
                 
-    elif comando == 'CPU_Info':
-	bot.sendMessage(chat_id, 'Aqui estao as informacoes sobre a CPU: ')
+    elif comando == 'Processos':
+	bot.sendMessage(chat_id, 'Aqui esta o numero de processos: ')
 	print 'Comando usado ', comando
 
 	if chat_id < 0:
