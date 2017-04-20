@@ -87,7 +87,7 @@ def handle(msg):
 		bot.sendMessage(chat_id, 'Estado da partiçao Boot')
 		partBoot = commands.getoutput("df -h | grep '/mmc'| head -6")
 		bot.sendMessage(chat_id, partBoot)
-		bot.sendMessage(chat_id, 'Estado da partiçao root")
+		bot.sendMessage(chat_id, 'Estado da partiçao root')
 		partRoot = commands.getoutput("df -h | grep '/dev'| head -1")
 		bot.sendMessage(chat_id, partRoot)
 		
@@ -103,7 +103,7 @@ def handle(msg):
 	
 	elif comando == 'IP':
 		print 'Comando usado ', comando
-		if chat_id == 345318600 || chat_id == 83074778 || chat_id == 24774270:
+		if chat_id == 345318600 or chat_id == 83074778 or chat_id == 24774270:
 			
 			# aqui pega o ip da lan
 			iplan = commands.getoutput("ifconfig wlan0 |  grep inet | cut -c 21-37 | head -1")
