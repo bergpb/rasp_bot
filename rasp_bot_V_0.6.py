@@ -103,7 +103,7 @@ def handle(msg):
 	# ela e pegar os dados separados chatid, username 
 	elif comando == 'IP':
 		print 'Comando usado ', comando
-		ip = commands.getoutput("ifconfig wlan0 |  grep inet | grep  -Eo "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b" | head -1")
+		ip = commands.getoutput("ifconfig wlan0 |  grep inet | grep  -Eo \b([0-9]{1,3}\.){3}[0-9]{1,3}\b" | head -1")
 		if chat_id == 345318600:
 			bot.sendMessage(chat_id, 'Endereço de ip :')
 			bot.sendMessage(chat_id,str(ip))
