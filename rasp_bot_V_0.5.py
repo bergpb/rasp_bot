@@ -118,10 +118,12 @@ print 'Aguardando comandos ...'
 # função criada para evitar repetindo o codigo ele faz 
 # verificação se a messagem foi enviada de um grupo ou de um chat privado
 def getinfo(chat_id):
+	content_type, chat_type, chat_id = telepot.glance(msg)
+	m = telepot.namedtuple.Message(**msg)
 	if chat_id < 0:
-		print 'Reebido uma %s de %s, por %s' % (content_type, m.chat, m.from_)
+		print '%s %s %s' % (content_type, m.chat, m.from_)
 	else:
-		print 'Recebida uma %s de %s' % (content_type, m.chat)
+		print '%s %s' % (content_type, m.chat)
 
 while 1:
 	time.sleep(5)
