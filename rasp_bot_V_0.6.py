@@ -64,7 +64,7 @@ def handle(msg):
 		memu = commands.getoutput("free -h | grep 'Mem' | cut -c 26-29")
 		bot.sendMessage(chat_id, 'Memoria em uso: ')
 		bot.sendMessage(chat_id, memu)
-		menf = commands.getoutput("free -h | grep 'Mem' | cut -c 37-40")
+		memf = commands.getoutput("free -h | grep 'Mem' | cut -c 37-40")
 		bot.sendMessage(chat_id, 'Memoria livre: ')
 		bot.sendMessage(chat_id, memf)
 		
@@ -83,7 +83,7 @@ def handle(msg):
 		bot.sendMessage(chat_id, 'Estado da partiçao Boot')
 		partBoot = commands.getoutput("df -h | grep '/mmc'| head -6")
 		bot.sendMessage(chat_id, partBoot)
-		bot.senMessage(chat_id, 'Estado da partiçao root")
+		bot.sendMessage(chat_id, 'Estado da partiçao root")
 		partRoot = commands.getoutput("df -h | grep '/dev'| head -1")
 		bot.sendMessage(chat_id, partRoot)
 		
@@ -97,14 +97,10 @@ def handle(msg):
 		
 		getinfo(chat_id)
 	
-	# if comando ip que vai demorar um pouco pra 
-	# implementar pois tem que fazer a verificação 
-	# por chat_id que uma tupla tem que querbar 
-	# ela e pegar os dados separados chatid, username 
 	elif comando == 'IP':
 		print 'Comando usado ', comando
-		ip = commands.getoutput("ifconfig wlan0 |  grep inet | grep  -Eo \b([0-9]{1,3}\.){3}[0-9]{1,3}\b" | head -1")
 		if chat_id == 345318600:
+			ip = commands.getoutput("ifconfig wlan0 |  grep inet | cut -c 21-37 | head -1")
 			bot.sendMessage(chat_id, 'Endereço de ip :')
 			bot.sendMessage(chat_id,str(ip))
 		else:
@@ -141,4 +137,4 @@ bot.message_loop(handle)
 print 'Aguardando comandos ...'
 
 while 1:
-time.sleep(5)
+	time.sleep(5)
