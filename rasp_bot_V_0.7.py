@@ -1,5 +1,3 @@
-import httplib
-import urllib
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 
@@ -9,8 +7,7 @@ import telepot
 import time
 import os
 import commands
-
-
+import urllib2
 
 # função principal do bot estrutura de decisão
 def handle(msg):
@@ -25,6 +22,11 @@ def handle(msg):
 	def getinfo(chat_id):
 		if chat_id < 0:
 			print '%s %s %s' % (content_type, m.chat, m.from_)
+			bot.sendMessage(chat_id, 'Grupo legal')
+		elif chat_id == 83074778:
+			bot.sendMessage(chat_id, 'Vai durmir Douglas')
+		elif chat_id == 24774270:
+			bot.sendMessage(chat_id, 'Corre berg')
 		else:
 			print '%s %s' % (content_type, m.chat)
 
@@ -101,13 +103,23 @@ def handle(msg):
 	
 	elif comando == 'IP':
 		print 'Comando usado ', comando
-		if chat_id == 345318600:
-			ip = commands.getoutput("ifconfig wlan0 |  grep inet | cut -c 21-37 | head -1")
-			bot.sendMessage(chat_id, 'Endereço de ip :')
-			bot.sendMessage(chat_id,str(ip))
+		if chat_id == 345318600 || chat_id == 83074778 || chat_id == 24774270:
+			
+			# aqui pega o ip da lan
+			iplan = commands.getoutput("ifconfig wlan0 |  grep inet | cut -c 21-37 | head -1")
+			bot.sendMessage(chat_id, 'Endereço de ip local :')
+			bot.sendMessage(chat_id,str(iplan))
+				
+			# aqui pega o ip externo dessa bagaça 
+			response = urllib2.urlopen('http://bot.whatismyipaddress.com/')
+			ipex = response.read()			
+			bot.sendMessage(chat_id, 'Endereço de ip externo :')
+			bot.sendMessage(chat_id,str(ipex))
+			
+			bot.senMessage(chat_id, 'Aqui ta o IP porra!!!!')
+	
 		else:
-			bot.sendMessage(chat_id, 'Voce nao tem permissoes para ver o endereço de IP =P')
-			bot.sendMessage(chat_id, 'Fica com esse IP aqui 127.0.0')
+			bot.sendMessage(chat_id, 'Sai daqui voce nao vai ver o endereço de IP!!! ')
   		
 		getinfo(chat_id)
 		
