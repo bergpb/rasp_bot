@@ -8,6 +8,9 @@ import time
 import os
 import commands
 
+
+
+
 # função principal do bot estrutura de decisão
 def handle(msg):
 	# configurações da variavel para controlar 
@@ -15,6 +18,15 @@ def handle(msg):
 	comando = msg['text']
 	content_type, chat_type, chat_id = telepot.glance(msg)
 	m = telepot.namedtuple.Message(**msg)
+	
+	# função criada para evitar repetindo o codigo ele faz 
+# verificação se a messagem foi enviada de um grupo ou de um chat privado
+	def getinfo(chat_id):
+		if chat_id < 0:
+			print '%s %s %s' % (content_type, m.chat, m.from_)
+		else:
+			print '%s %s' % (content_type, m.chat)
+
 	
 	# Aqui e o teclado que aparece para o usuario 
 	# define as palavras que aparecem e as que seram 
@@ -32,7 +44,6 @@ def handle(msg):
 	if comando == '/start':
 		bot.sendMessage(chat_id, ' Bem Vindo!!')
 		bot.sendMessage(chat_id, ' Bot desenvolvido por @joao_slv')
-		bot.sendMessage(chat_id, ' Versão 0.5')
 		bot.sendMessage(chat_id, ' Iniciando o Bot...')
 		bot.sendMessage(chat_id, ' Use os comandos do teclado abaixo: ', reply_markup=keyboard )
 		
@@ -50,7 +61,7 @@ def handle(msg):
 		print 'Comando usado ', comando
 		men = commands.getoutput("free -h | cut -c 1-45 | head -2")
 		bot.sendMessage(chat_id,"Estado da memória:")
-  		bot.sendMessge(chat_id, str(men))
+  		bot.sendMessage(chat_id, str(men))
 		
 		getinfo(chat_id)
 		
@@ -114,16 +125,6 @@ bot = telepot.Bot('346248441:AAEGri00lPsFmKEzshGtthdoEgyawJO8s5k')
 bot.message_loop(handle)
 
 print 'Aguardando comandos ...'
-
-# função criada para evitar repetindo o codigo ele faz 
-# verificação se a messagem foi enviada de um grupo ou de um chat privado
-def getinfo(chat_id):
-	content_type, chat_type, chat_id = telepot.glance(msg)
-	m = telepot.namedtuple.Message(**msg)
-	if chat_id < 0:
-		print '%s %s %s' % (content_type, m.chat, m.from_)
-	else:
-		print '%s %s' % (content_type, m.chat)
 
 while 1:
 	time.sleep(5)
