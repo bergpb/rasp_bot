@@ -30,4 +30,4 @@ Bot do telegram feito em python rodando na raspberry pi usando a biblioteca Tele
 ## Versão 0.6
 * Melhorias nas saidas dos comandos memoria e usoSD
 * Comando IP retornando o IP da maquina
-* Verficação de chat_id para retornar o IP
+* Verficação de chat_id para retornar o IP apenas para quem tem autorização
