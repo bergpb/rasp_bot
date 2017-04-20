@@ -21,7 +21,7 @@ def handle(msg):
 	# enviadas quando forem selecionadas
 	keyboard=ReplyKeyboardMarkup(
         keyboard=[
-            [KeyboardButton(text="Temperatura"), KeyboardButton(text="Memória")],
+            [KeyboardButton(text="Temperatura"), KeyboardButton(text="Memoria")],
             [KeyboardButton(text="UpTime"), KeyboardButton(text="UsoSD")],
             [KeyboardButton(text="Data"),  KeyboardButton(text="IP")],
             [KeyboardButton(text="Processos"), KeyboardButton(text="Ajuda")],
@@ -46,7 +46,7 @@ def handle(msg):
 		
 		getinfo()
 		
-	elif comando == 'Memória':
+	elif comando == 'Memoria':
 		print 'Comando usado ', comando
 		men = commands.getoutput("free -h | cut -c 1-45 | head -2")
 		bot.sendMessage(chat_id,"Estado da memória:")
@@ -64,7 +64,7 @@ def handle(msg):
 		
     	elif comando == 'UsoSD':
 		print 'Comando usado ', comando
-		sd = commands.getoutput("df -hlT")
+		sd = commands.getoutput("df -h")
 		bot.sendMessage(chat_id,"Uso do MicroSD:")
   		bot.sendMessage(chat_id, str(sd))
 		
@@ -74,7 +74,7 @@ def handle(msg):
 		print 'Comando usado ', comando
 		data = commands.getoutput("date")
  		bot.sendMessage(chat_id,"Data e hora do Sistema: ")
-  		bot.sendMessage(chat-id, str(data))
+  		bot.sendMessage(chat_id, str(data))
 		
 		getinfo()
 	
@@ -84,9 +84,10 @@ def handle(msg):
 	# ela e pegar os dados separados chatid, username 
 	elif comando == 'IP':
 		print 'Comando usado ', comando
-		bot.sendMessage(chat_id, 'Aguarde... no futuro ta dificel  de fazer agora =/')
-		bot.sendMessage(chat_id, 'Fica com esse IP aqui 127.0.0...')
-                
+		bot.sendMessage(chat_id, 'Aguarde essa funçao em versoes futuras')
+		bot.sendMessage(chat_id, 'usa esse ip aqui 127.0.0')
+  		
+		getinfo()
     	elif comando == 'Processos':
 		print 'Comando usado ', comando
 		quantProc = commands.getoutput("ps -aux | wc -l")
@@ -116,7 +117,7 @@ print 'Aguardando comandos ...'
 
 # função criada para evitar repetindo o codigo ele faz 
 # verificação se a messagem foi enviada de um grupo ou de um chat privado
-def getinfo():
+def getinfo(chat_id):
 	if chat_id < 0:
 		print 'Reebido uma %s de %s, por %s' % (content_type, m.chat, m.from_)
 	else:
