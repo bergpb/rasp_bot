@@ -36,7 +36,7 @@ def handle(msg):
 		bot.sendMessage(chat_id, ' Iniciando o Bot...')
 		bot.sendMessage(chat_id, ' Use os comandos do teclado abaixo: ', reply_markup=keyboard )
 		
-		getinfo()
+		getinfo(chat_id)
 		
 	elif comando == 'Temperatura':
 		print 'Comando usado ', comando	
@@ -44,7 +44,7 @@ def handle(msg):
 		bot.sendMessage(chat_id, "Temperatura atual: ")
   		bot.sendMessage(chat_id, str(temp))
 		
-		getinfo()
+		getinfo(chat_id)
 		
 	elif comando == 'Memoria':
 		print 'Comando usado ', comando
@@ -52,7 +52,7 @@ def handle(msg):
 		bot.sendMessage(chat_id,"Estado da memória:")
   		bot.sendMessge(chat_id, str(men))
 		
-		getinfo()
+		getinfo(chat_id)
 		
 	elif comando == 'UpTime':
 		print 'Comando usado ',  comando
@@ -60,7 +60,7 @@ def handle(msg):
 		bot.sendMessage(chat_id,"Up Time do sistema:")
   		bot.sendMessage(chat_id, str(uptime))
 		
-		getinfo()
+		getinfo(chat_id)
 		
     	elif comando == 'UsoSD':
 		print 'Comando usado ', comando
@@ -68,7 +68,7 @@ def handle(msg):
 		bot.sendMessage(chat_id,"Uso do MicroSD:")
   		bot.sendMessage(chat_id, str(sd))
 		
-		getinfo()
+		getinfo(chat_id)
 		
 	elif comando == 'Data':
 		print 'Comando usado ', comando
@@ -76,7 +76,7 @@ def handle(msg):
  		bot.sendMessage(chat_id,"Data e hora do Sistema: ")
   		bot.sendMessage(chat_id, str(data))
 		
-		getinfo()
+		getinfo(chat_id)
 	
 	# if comando ip que vai demorar um pouco pra 
 	# implementar pois tem que fazer a verificação 
@@ -87,14 +87,14 @@ def handle(msg):
 		bot.sendMessage(chat_id, 'Aguarde essa funçao em versoes futuras')
 		bot.sendMessage(chat_id, 'usa esse ip aqui 127.0.0')
   		
-		getinfo()
+		getinfo(chat_id)
     	elif comando == 'Processos':
 		print 'Comando usado ', comando
 		quantProc = commands.getoutput("ps -aux | wc -l")
 		bot.sendMessage(chat_id, 'Quantidade de processos rodando e :')
   		bot.sendMessage(chat_id, str(quantProc))
 		
-		getinfo()
+		getinfo(chat_id)
 		
 	# IF do menu de ajuda so que ainda nao tem nada de ajudar nessa porra tbm	
 	elif comando == 'Ajuda':
@@ -102,7 +102,7 @@ def handle(msg):
 		bot.sendMessage(chat_id, 'Menu de Ajuda')
 		bot.sendMessage(chat_id, 'Aqui era pra ter informações uteis mas nao tem =/')
 		
-		getinfo()
+		getinfo(chat_id)
 		
 	# messagem para caso o usuario envie comandos digitados manualmente	
 	else:
