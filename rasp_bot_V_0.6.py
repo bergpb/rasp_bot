@@ -19,7 +19,7 @@ def handle(msg):
 	m = telepot.namedtuple.Message(**msg)
 	
 	# função criada para evitar repetindo o codigo ele faz 
-# verificação se a messagem foi enviada de um grupo ou de um chat privado
+	# verificação se a messagem foi enviada de um grupo ou de um chat privado
 	def getinfo(chat_id):
 		if chat_id < 0:
 			print '%s %s %s' % (content_type, m.chat, m.from_)
@@ -58,9 +58,15 @@ def handle(msg):
 		
 	elif comando == 'Memoria':
 		print 'Comando usado ', comando
-		men = commands.getoutput("free -h | cut -c 1-45 | head -2")
-		bot.sendMessage(chat_id,"Estado da memória:")
-  		bot.sendMessage(chat_id, str(men))
+		memt = commands.getoutput("free -h | grep 'Mem' | cut -c 15-18")
+		bot.sendMessage(chat_id, 'Memoria total: ')
+		bot.sendMessage(chat_id, memt)
+		memu = commands.getoutput("free -h | grep 'Mem' | cut -c 26-29")
+		bot.sendMessage(chat_id, 'Memoria em uso: ')
+		bot.sendMessage(chat_id, memu)
+		menf = commands.getoutput("free -h | grep 'Mem' | cut -c 37-40")
+		bot.sendMessage(chat_id, 'Memoria livre: ')
+		bot.sendMessage(chat_id, memf)
 		
 		getinfo(chat_id)
 		
@@ -74,9 +80,12 @@ def handle(msg):
 		
     	elif comando == 'UsoSD':
 		print 'Comando usado ', comando
-		sd = commands.getoutput("df -h")
-		bot.sendMessage(chat_id,"Uso do MicroSD:")
-  		bot.sendMessage(chat_id, str(sd))
+		bot.sendMessage(chat_id, 'Estado da partiçao Boot')
+		partBoot = commands.getoutput("df -h | grep '/mmc'| head -6")
+		bot.sendMessage(chat_id, partBoot)
+		bot.senMessage(chat_id, 'Estado da partiçao root")
+		partRoot = commands.getoutput("df -h | grep '/dev'| head -1")
+		bot.sendMessage(chat_id, partRoot)
 		
 		getinfo(chat_id)
 		
@@ -94,10 +103,16 @@ def handle(msg):
 	# ela e pegar os dados separados chatid, username 
 	elif comando == 'IP':
 		print 'Comando usado ', comando
-		bot.sendMessage(chat_id, 'Aguarde essa funçao em versoes futuras')
-		bot.sendMessage(chat_id, 'usa esse ip aqui 127.0.0')
+		ip = commands.getoutput("ifconfig wlan0 |  grep inet | grep  -Eo "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b" | head -1")
+		if chat_id == 345318600:
+			bot.sendMessage(chat_id, 'Endereço de ip :')
+			bot.sendMessage(chat_id,str(ip))
+		else:
+			bot.sendMessage(chat_id, 'Voce nao tem permissoes para ver o endereço de IP =P')
+			bot.sendMessage(chat_id, 'Fica com esse IP aqui 127.0.0')
   		
 		getinfo(chat_id)
+		
     	elif comando == 'Processos':
 		print 'Comando usado ', comando
 		quantProc = commands.getoutput("ps -aux | wc -l")
