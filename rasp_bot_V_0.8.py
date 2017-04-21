@@ -70,6 +70,7 @@ def handle(msg):
 	# foi escolhido se escolhido retorna a temperatura da cpu	
 	elif comando == 'Temperatura':
 		print 'Comando usado ', comando	
+		print '---------------------------'
 		temp = commands.getoutput("vcgencmd measure_temp | cut -c 6-12")
 		bot.sendMessage(chat_id, "Temperatura atual: ")
   		bot.sendMessage(chat_id, str(temp))
@@ -81,6 +82,7 @@ def handle(msg):
 	# memoria em uso e memoria livre respectivamente
 	elif comando == 'Memoria':
 		print 'Comando usado ', comando
+		print '---------------------------'
 		memt = commands.getoutput("free -h | grep 'Mem' | cut -c 15-18")
 		bot.sendMessage(chat_id, 'Memoria total: ')
 		bot.sendMessage(chat_id, memt)
@@ -97,6 +99,7 @@ def handle(msg):
 	# foi escolhido se escolhido retorna o uptime do sistema 
 	elif comando == 'UpTime':
 		print 'Comando usado ',  comando
+		print '---------------------------'
 		uptime = commands.getoutput("uptime -p")
 		bot.sendMessage(chat_id,"Up Time do sistema:")
   		bot.sendMessage(chat_id, str(uptime))
@@ -108,6 +111,7 @@ def handle(msg):
 	# de espaço nas partiçoes de boot e root do sistema
     	elif comando == 'UsoSD':
 		print 'Comando usado ', comando
+		print '---------------------------'
 		bot.sendMessage(chat_id, 'Estado da partiçao root')
 		partRoot = commands.getoutput("df -h | grep '/dev'| head -1")
 		bot.sendMessage(chat_id, partRoot)
@@ -119,6 +123,7 @@ def handle(msg):
 	# informaçoes de data e hora atual da raspberry
 	elif comando == 'Data':
 		print 'Comando usado ', comando
+		print '---------------------------'
 		data = commands.getoutput("date")
  		bot.sendMessage(chat_id,"Data e hora do Sistema: ")
   		bot.sendMessage(chat_id, str(data))
@@ -131,7 +136,8 @@ def handle(msg):
 	# abaixo ele retorna o endereço de ip local e externo
 	elif comando == 'IP':
 		print 'Comando usado ', comando
-		# ip local para min dougras e berg
+		print '---------------------------'
+		# ip local 
 		if chat_id == 345318600 or chat_id == 83074778 or chat_id == 24774270:
 			
 			# aqui pega o ip da lan   ** eth0 para cabo wlan0 para wifi **
@@ -157,6 +163,7 @@ def handle(msg):
 	# processos estao rodando no momento e retorna para o usuario	
     	elif comando == 'Processos':
 		print 'Comando usado ', comando
+		print '---------------------------'
 		quantProc = commands.getoutput("ps -aux | wc -l")
 		bot.sendMessage(chat_id, 'Quantidade de processos rodando e :')
   		bot.sendMessage(chat_id, str(quantProc))
@@ -164,8 +171,9 @@ def handle(msg):
 		getinfo(chat_id)
 		
 	# IF do menu de ajuda so que ainda nao tem nada de ajudar nessa porra tbm	
-	elif comando == 'Ajuda' or comando == '\help':
+	elif comando == 'Ajuda' or comando == '/help':
 		print 'Comando usado ', comando
+		print '---------------------------'
 		bot.sendMessage(chat_id, 'Menu de Ajuda')
 		bot.sendMessage(chat_id, 'Aqui era pra ter informações uteis mas nao tem =/')
 		
