@@ -182,22 +182,48 @@ def handle(msg):
 		
 	# IF do menu de ajuda so que ainda nao tem nada de ajudar nessa porra tbm	
 	elif comando == 'Ajuda' or comando == '/help':
-    keyboardHelp=ReplyKeyboardMarkup(
-        keyboardHelp=[
-            [KeyboardButton(text="Temperatura"), KeyboardButton(text="Memoria")],
-            [KeyboardButton(text="UpTime"), KeyboardButton(text="UsoSD")],
-            [KeyboardButton(text="Data"),  KeyboardButton(text="IP")],
-            [KeyboardButton(text="Processos"), KeyboardButton(text="Ajuda")],
-])
 		print '---------------------------'
 		print 'Comando usado ', comando
 		print '---------------------------'
 		bot.sendMessage(chat_id, 'Seja Bem Vindo ao Menu de Ajuda')
 		bot.sendMessage(chat_id, 'Aqui voce encontra informaçoes sobre os comandos disponiveis nesse bot.')
-    bot.sendMessage(chat_id, 'Escolha um comando para ter informaçoes sobre ele.')
+    		bot.sendMessage(chat_id, 'Escolha um comando para ter informaçoes sobre ele.' reply_markup=keyboardHelp)
 		
 		getinfo(chat_id)
 		
+		comandoHelp = msg['text']
+		
+		keyboardHelp=ReplyKeyboardMarkup(
+        	keyboardHelp=[
+            	[KeyboardButton(text="Temperatura"), KeyboardButton(text="Memoria")],
+            	[KeyboardButton(text="UpTime"), KeyboardButton(text="UsoSD")],
+            	[KeyboardButton(text="Data"),  KeyboardButton(text="IP")],
+            	[KeyboardButton(text="Processos"), KeyboardButton(text="Ajuda")],
+		])
+		if comandoHelp == 'Temperatura':
+			bot.sendMessage(chat_id, 'Aqui voce encontra informações sobre o comando Temperatura')
+			bot.sendMessage(chat_id, 'Lorem ipsum dolor sit amet, consectetur adipiscing elite')
+		elif comandoHelp == 'Memoria':
+			bot.sendMessage(chat_id, 'Aqui voce encontra informaçes sobre o comando Memoria')
+			bot.sendMessage(chat_id, 'Lorem ipsum dolor sit amet, consectetur adipiscing elite')
+		elif comandoHelp == 'UpTime':
+			bot.sendMessage(chat_id, 'Aqui voce encontra informações sobre o comando UpTime')
+			bot.sendMessage(chat_id, 'Lorem ipsum dolor sit amet, consectetur adipiscing elite')
+		elif comandoHelp == 'UsoSD':
+			bot.sendMessage(chat_id, 'Aqui voce encontra informações sobre o comando UsoSD')
+			bot.sendMessage(chat_id, 'Lorem ipsum dolor sit amet, consectetur adipiscing elite')
+		elif comandoHelp == 'Data':
+			bot.sendMessage(chat_id, 'Aqui voce encontra informações sobre o comando  Data')
+			bot.sendMessage(chat_id, 'Lorem ipsum dolor sit amet, consectetur adipiscing elite')
+		elif comandoHelp == 'IP':
+			bot.sendMessage(chat_id, 'Aqui voce encontra informações sobre o comando IP')
+			bot.sendMessage(chat_id, 'Lorem ipsum dolor sit amet, consectetur adipiscing elite')
+		elif comandoHelp == 'Processos':
+			bot.sendMessage(chat_id, 'Aqui voce encontra informações sobre o comando Processos')
+			bot.sendMessage(chat_id, 'Lorem ipsum dolor sit amet, consectetur adipiscing elite')
+		elif comandoHelp == 'Ajuda':
+			bot.sendMessage(chat_id, 'Aqui voce encontra informações sobre o comando Ajuda')
+			bot.sendMessage(chat_id, 'Lorem ipsum dolor sit amet, consectetur adipiscing elite')
 	# messagem para caso o usuario envie comandos digitados manualmente	
 	else:
         	bot.sendMessage(chat_id, 'Use os comandos no teclado')
@@ -210,4 +236,4 @@ bot.message_loop(handle)
 print 'Aguardando comandos ...'
 
 while 1:
-      time.sleep(5)
+	time.sleep(5)
