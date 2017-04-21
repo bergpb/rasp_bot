@@ -38,5 +38,5 @@ Bot do telegram feito em python rodando na raspberry pi usando a biblioteca Tele
 
 ## Versão 0.8
 * Retornar ip externo apenas para meu usuario
-* Melhora na saida das info dos chat serverside
-* Separaçao das saidas das info quebrei a tupla 
+* Melhora na saida da info do Micro SD
+* Separaçao das saidas das info chat
