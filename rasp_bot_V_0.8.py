@@ -32,6 +32,8 @@ def handle(msg):
 			print 'First Name: %s' % m.chat[4]
 			print 'Last Name: %s' % m.chat[5]
 			print 'Enviada por %s' % (m.from_,)
+			print '--------------------------------------'
+		# envia messangens de acordo com o chat id
 		elif chat_id == 83074778:
 			bot.sendMessage(chat_id, 'Seja Bem Vindo Sr. Douglas Zuqueto')
 		elif chat_id == 24774270:
@@ -44,6 +46,7 @@ def handle(msg):
 			print 'Username : %s' % m.chat[3]
 			print 'First Name: %s' % m.chat[4]
 			print 'Last Name: %s' % m.chat[5]
+			print '--------------------------------------'
 	
 	# Aqui e o teclado que aparece para o usuario 
 	# define as palavras que aparecem e os comanos
@@ -69,6 +72,7 @@ def handle(msg):
 	# primeira verificaçao verifica se o comando temperatura
 	# foi escolhido se escolhido retorna a temperatura da cpu	
 	elif comando == 'Temperatura':
+		print '---------------------------'
 		print 'Comando usado ', comando	
 		print '---------------------------'
 		temp = commands.getoutput("vcgencmd measure_temp | cut -c 6-12")
@@ -81,6 +85,7 @@ def handle(msg):
 	# foi escolhido se escolhido retorna a memoria toral
 	# memoria em uso e memoria livre respectivamente
 	elif comando == 'Memoria':
+		print '---------------------------'
 		print 'Comando usado ', comando
 		print '---------------------------'
 		memt = commands.getoutput("free -h | grep 'Mem' | cut -c 15-18")
@@ -98,6 +103,7 @@ def handle(msg):
 	# terceira verificaçao verifica se o comando uptime
 	# foi escolhido se escolhido retorna o uptime do sistema 
 	elif comando == 'UpTime':
+		print '---------------------------'
 		print 'Comando usado ',  comando
 		print '---------------------------'
 		uptime = commands.getoutput("uptime -p")
@@ -110,6 +116,7 @@ def handle(msg):
 	# foi escolhido se escolhido retorna informaçes 
 	# de espaço nas partiçoes de boot e root do sistema
     	elif comando == 'UsoSD':
+		print '---------------------------'
 		print 'Comando usado ', comando
 		print '---------------------------'
 		bot.sendMessage(chat_id, 'Estado da partiçao root')
@@ -122,6 +129,7 @@ def handle(msg):
 	# foi escolhido se escolhido retorna as 
 	# informaçoes de data e hora atual da raspberry
 	elif comando == 'Data':
+		print '---------------------------'
 		print 'Comando usado ', comando
 		print '---------------------------'
 		data = commands.getoutput("date")
@@ -135,6 +143,7 @@ def handle(msg):
 	# chat_id do solicitante for igual aos listados 
 	# abaixo ele retorna o endereço de ip local e externo
 	elif comando == 'IP':
+		print '---------------------------'
 		print 'Comando usado ', comando
 		print '---------------------------'
 		# ip local 
@@ -162,6 +171,7 @@ def handle(msg):
 	# foi escolhido se escolhido ele conta quantos 
 	# processos estao rodando no momento e retorna para o usuario	
     	elif comando == 'Processos':
+		print '---------------------------'
 		print 'Comando usado ', comando
 		print '---------------------------'
 		quantProc = commands.getoutput("ps -aux | wc -l")
@@ -172,6 +182,7 @@ def handle(msg):
 		
 	# IF do menu de ajuda so que ainda nao tem nada de ajudar nessa porra tbm	
 	elif comando == 'Ajuda' or comando == '/help':
+		print '---------------------------'
 		print 'Comando usado ', comando
 		print '---------------------------'
 		bot.sendMessage(chat_id, 'Menu de Ajuda')
