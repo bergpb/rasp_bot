@@ -23,23 +23,27 @@ def handle(msg):
 	# verificação se a messagem foi enviada de um grupo ou de um chat privado
 	def getinfo(chat_id):
 		if chat_id < 0:
-			print '%s' % ( m.chat,)
 			print 'Menssage do tipo %s' % (content_type,)
+			print '-------------------------------------'
+			print 'Chat ID : %s' % m.chat[0]
+			print 'Tipo de chat : %s' % m.chat[1]
+			print 'Nome do Grupo: %s' % m.chat[2]
+			print 'Username : %s' % m.chat[3]
+			print 'First Name: %s' % m.chat[4]
+			print 'Last Name: %s' % m.chat[5]
 			print 'Enviada por %s' % (m.from_,)
 		elif chat_id == 83074778:
-			bot.sendMessage(chat_id, 'Vai durmir Douglas')
+			bot.sendMessage(chat_id, 'Seja Bem Vindo Sr. Douglas Zuqueto')
 		elif chat_id == 24774270:
 			bot.sendMessage(chat_id, 'Corre berg')
 		else:
 			print 'Messagem do tipo %s ' % (content_type,)
-			print '%s ' % (m.chat,)
+			print '--------------------------------------'
 			print 'Chat ID : %s' % m.chat[0]
 			print 'Tipo de chat : %s' % m.chat[1]
-			print 'Titulo: %s' % m.chat[2]
 			print 'Username : %s' % m.chat[3]
 			print 'First Name: %s' % m.chat[4]
 			print 'Last Name: %s' % m.chat[5]
-			print 'All Men are ADM: %s' % m.chat[6]
 	
 	# Aqui e o teclado que aparece para o usuario 
 	# define as palavras que aparecem e os comanos
@@ -104,9 +108,6 @@ def handle(msg):
 	# de espaço nas partiçoes de boot e root do sistema
     	elif comando == 'UsoSD':
 		print 'Comando usado ', comando
-		bot.sendMessage(chat_id, 'Estado da partiçao Boot')
-		partBoot = commands.getoutput("df -h | grep '/mmc'| head -6")
-		bot.sendMessage(chat_id, partBoot)
 		bot.sendMessage(chat_id, 'Estado da partiçao root')
 		partRoot = commands.getoutput("df -h | grep '/dev'| head -1")
 		bot.sendMessage(chat_id, partRoot)
@@ -133,8 +134,8 @@ def handle(msg):
 		# ip local para min dougras e berg
 		if chat_id == 345318600 or chat_id == 83074778 or chat_id == 24774270:
 			
-			# aqui pega o ip da lan
-			iplan = commands.getoutput("ifconfig wlan0 |  grep inet | cut -c 21-37 | head -1")
+			# aqui pega o ip da lan   ** eth0 para cabo wlan0 para wifi **
+			iplan = commands.getoutput("ifconfig eth0 |  grep inet | cut -c 21-37 | head -1")
 			bot.sendMessage(chat_id, 'Endereço de ip local :')
 			bot.sendMessage(chat_id,str(iplan))
 			
@@ -163,7 +164,7 @@ def handle(msg):
 		getinfo(chat_id)
 		
 	# IF do menu de ajuda so que ainda nao tem nada de ajudar nessa porra tbm	
-	elif comando == 'Ajuda':
+	elif comando == 'Ajuda' or comando == '\help':
 		print 'Comando usado ', comando
 		bot.sendMessage(chat_id, 'Menu de Ajuda')
 		bot.sendMessage(chat_id, 'Aqui era pra ter informações uteis mas nao tem =/')
