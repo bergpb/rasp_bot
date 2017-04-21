@@ -10,7 +10,7 @@ def handle(msg):
         	bot.sendMessage(chatid,'Bem Vindo!!') 
        		bot.sendMessage(chatid,'Bot desenvolvido por @joao_slv!')
         	bot.sendMessage(chatid,'Iniciando o Bot...')
-        	bot.sendMessage(chatid,'Use os comandos do teclado...' )
+        	bot.sendMessage(chatid,'Iniciado saporra ainda nao faz nada.' )
         
     	elif comando == 'Temperatura':
    		print 'oi' 		
