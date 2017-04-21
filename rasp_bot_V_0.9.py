@@ -182,10 +182,10 @@ def handle(msg):
 		
 	# IF do menu de ajuda so que ainda nao tem nada de ajudar nessa porra tbm	
 	elif comando == 'Ajuda' or comando == '/help':
-		comandoHelp = msg['text']
 		
-		keyboard2=ReplyKeyboardMarkup(
-        	keyboard2=[
+		
+		keyboard=ReplyKeyboardMarkup(
+        	keyboard=[
             	[KeyboardButton(text="Help_Temp"), KeyboardButton(text="Help_Mem")],
             	[KeyboardButton(text="Help_Up"), KeyboardButton(text="Help_SD")],
             	[KeyboardButton(text="Help_Data"),  KeyboardButton(text="Help_IP")],
@@ -201,7 +201,7 @@ def handle(msg):
 		getinfo(chat_id)
 		
 		while comando == 'Ajuda' or comando == '/help':
-		
+			comandoHelp = msg['text']
 			if comandoHelp == 'Temperatura':
 				bot.sendMessage(chat_id, 'Aqui voce encontra informações sobre o comando Temperatura')
 				bot.sendMessage(chat_id, 'Lorem ipsum dolor sit amet, consectetur adipiscing elite')
