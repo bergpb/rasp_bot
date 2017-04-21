@@ -114,7 +114,7 @@ def handle(msg):
         	bot.sendMessage(chat_id, 'Use os comandos no teclado')
 		bot.sendMessage(chat_id, 'Ainda nao sei ler =,(')
 
-bot = telepot.Bot('346248441:AAEGri00lPsFmKEzshGtthdoEgyawJO8s5k') 
+bot = telepot.Bot('BOT API here') 
 bot.message_loop(handle)
 
 print 'Aguardando comandos ...'
