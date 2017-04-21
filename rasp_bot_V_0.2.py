@@ -54,10 +54,10 @@ def handle(msg):
     	else:
         	bot.sendMessage(chatid, 'Use os comandos no teclado')
 
-bot = telepot.Bot('346248441:AAEGri00lPsFmKEzshGtthdoEgyawJO8s5k')
+bot = telepot.Bot(' BOT API gere')
 bot.message_loop(handle)
 
 print 'Aguardando comandos ...'
 
 while 1:
- time.sleep(5)
+	time.sleep(5)
