@@ -196,34 +196,33 @@ def handle(msg):
 		print '---------------------------'
 		bot.sendMessage(chat_id, 'Seja Bem Vindo ao Menu de Ajuda')
 		bot.sendMessage(chat_id, 'Aqui voce encontra informaçoes sobre os comandos')
-    		bot.sendMessage(chat_id, 'Escolha sair para fechar o meu de ajuda' reply_markup=keyboard2)
+    		bot.sendMessage(chat_id, 'Escolha sair para fechar o meu de ajuda', reply_markup=keyboard)
 		
 		getinfo(chat_id)
 		
 		while comando == 'Ajuda' or comando == '/help':
-			comandoHelp = msg['text']
-			if comandoHelp == 'Temperatura':
+			if comando == 'Temperatura':
 				bot.sendMessage(chat_id, 'Aqui voce encontra informações sobre o comando Temperatura')
 				bot.sendMessage(chat_id, 'Lorem ipsum dolor sit amet, consectetur adipiscing elite')
-			elif comandoHelp == 'Memoria':
+			elif comando == 'Memoria':
 				bot.sendMessage(chat_id, 'Aqui voce encontra informaçes sobre o comando Memoria')
 				bot.sendMessage(chat_id, 'Lorem ipsum dolor sit amet, consectetur adipiscing elite')
-			elif comandoHelp == 'UpTime':
+			elif comando == 'UpTime':
 				bot.sendMessage(chat_id, 'Aqui voce encontra informações sobre o comando UpTime')
 				bot.sendMessage(chat_id, 'Lorem ipsum dolor sit amet, consectetur adipiscing elite')
-			elif comandoHelp == 'UsoSD':
+			elif comando == 'UsoSD':
 				bot.sendMessage(chat_id, 'Aqui voce encontra informações sobre o comando UsoSD')
 				bot.sendMessage(chat_id, 'Lorem ipsum dolor sit amet, consectetur adipiscing elite')
-			elif comandoHelp == 'Data':
+			elif comando == 'Data':
 				bot.sendMessage(chat_id, 'Aqui voce encontra informações sobre o comando  Data')
 				bot.sendMessage(chat_id, 'Lorem ipsum dolor sit amet, consectetur adipiscing elite')
-			elif comandoHelp == 'IP':
+			elif comando == 'IP':
 				bot.sendMessage(chat_id, 'Aqui voce encontra informações sobre o comando IP')
 				bot.sendMessage(chat_id, 'Lorem ipsum dolor sit amet, consectetur adipiscing elite')
-			elif comandoHelp == 'Processos':
+			elif comando == 'Processos':
 				bot.sendMessage(chat_id, 'Aqui voce encontra informações sobre o comando Processos')
 				bot.sendMessage(chat_id, 'Lorem ipsum dolor sit amet, consectetur adipiscing elite')
-			elif comandoHelp == 'Sair':
+			elif comando == 'Sair':
 				bot.sendMessage(chat_id, 'Saindo do menu de ajuda...', reply_markup=keyboard)
 	# messagem para caso o usuario envie comandos digitados manualmente	
 	else:
