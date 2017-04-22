@@ -161,7 +161,6 @@ def handle(msg):
 		# trocar o wlan0 pela sua interface wireless
 		rx_wifi = commands.getoutput("cat /sys/class/net/wlan0/statistics/rx_bytes")
 		bot.sendMessage(chat_id,'Quantidade de banda recebida pela rede Wifi: ')
-		#bot.sendMessage(chat_id,int(rx_wifi))
 		rx_float = float(rx_wifi)
 		rx_float_mb = rx_float / 1024 / 1024
 		if rx_float_mb > 1024:
@@ -174,7 +173,6 @@ def handle(msg):
 		# trocar o wlan0 pela sua interface de rede semfio
 		tx_wifi = commands.getoutput("cat /sys/class/net/wlan0/statistics/tx_bytes")
 		bot.sendMessage(chat_id,'Quantidade de banda enviada pela rede Wifi: ')
-		#bot.sendMessage(chat_id,int(tx_wifi))
 		tx_float = float(tx_wifi)
 		tx_float_mb = tx_float / 1024 / 1024
 		if tx_float_mb > 1024:
@@ -188,7 +186,6 @@ def handle(msg):
 		# trocar o eth0 pela sua interface de rede cabeada
 		rx_cable = commands.getoutput("cat /sys/class/net/eth0/statistics/rx_bytes")
 		bot.sendMessage(chat_id,'Quantidade de banda recebida pela rede cabeada: ')
-		bot.sendMessage(chat_id,int(rx_cable))
 		rx_float = float(rx_cable)
 		rx_float_mb = rx_float / 1024 / 1024
 		if rx_float_mb > 1024:
@@ -202,7 +199,6 @@ def handle(msg):
 		# trocar o eth0 pela sua interface de rede cabeada
 		tx_cable = commands.getoutput("cat /sys/class/net/eth0/statistics/tx_bytes")
 		bot.sendMessage(chat_id,'Quantidade de banda enviada pela rede cabeada')
-		bot.sendMessage(chat_id,int(tx_cable))
 		tx_float = float(tx_cable)
 		tx_float_mb = tx_float / 1024 / 1024
 		if tx_float_mb > 1024:
