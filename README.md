@@ -41,4 +41,8 @@ Bot do telegram feito em python rodando na raspberry pi usando a biblioteca Tele
 * Melhora na saida da info do Micro SD
 * Separaçao das saidas das info chat
 ## Versão 0.9
-* Versao em produçao e em fase de testes nao esta pronta
+* Adicionado comandos para informações do trafego de banda
+* Mudança do meu de Ajuda do teclado para o /help
+
+## Versão 1.0
+* Comming in english
