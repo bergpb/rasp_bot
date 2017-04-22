@@ -42,7 +42,7 @@ Bot do telegram feito em python rodando na raspberry pi usando a biblioteca Tele
 * Separaçao das saidas das info chat
 ## Versão 0.9
 * Adicionado comandos para informações do trafego de banda
-* Mudança do meu de Ajuda do teclado para o /help
+* Mudança de local do menu de Ajuda do teclado para o /help
 
 ## Versão 1.0
 * Comming in english
