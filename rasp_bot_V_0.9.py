@@ -161,52 +161,25 @@ def handle(msg):
 		# trocar o wlan0 pela sua interface wireless
 		rx_wifi = commands.getoutput("cat /sys/class/net/wlan0/statistics/rx_bytes")
 		bot.sendMessage(chat_id,'Quantidade de banda recebida pela rede Wifi: ')
-		rx_float = float(rx_wifi)
-		rx_float_mb = rx_float / 1024 / 1024
-		if rx_float_mb > 1024:
-  			rx_float_gb = rx_float_mb / 1024
-  			bot.sendMessage(chat_id, '%.2f Gbs' % rx_float_gb)
-		else:
-			bot.sendMessage(chat_id, '%.2f Mbs' % rx_float_mb)
+		bot.sendMessage(chat_id,str(rx_wifi))
 		
 		# pega a quantidade de dados recebidas pelo cabo desde a ultima reinicialização
 		# trocar o wlan0 pela sua interface de rede semfio
 		tx_wifi = commands.getoutput("cat /sys/class/net/wlan0/statistics/tx_bytes")
 		bot.sendMessage(chat_id,'Quantidade de banda enviada pela rede Wifi: ')
-		tx_float = float(tx_wifi)
-		tx_float_mb = tx_float / 1024 / 1024
-		if tx_float_mb > 1024:
-  			tx_float_gb = tx_float_mb / 1024
-  			bot.sendMessage(chat_id, '%.2f Gbs' % tx_float_gb)
-	
-		else:
-			bot.sendMessage(chat_id, '%.2f Mbs' % tx_float_mb)
+		bot.sendMessage(chat_id,str(tx_wifi)
 		
 		# pega a quantidade de dados enviados pelo cabo desde a ultima reinicialização
 		# trocar o eth0 pela sua interface de rede cabeada
 		rx_cable = commands.getoutput("cat /sys/class/net/eth0/statistics/rx_bytes")
 		bot.sendMessage(chat_id,'Quantidade de banda recebida pela rede cabeada: ')
-		rx_float = float(rx_cable)
-		rx_float_mb = rx_float / 1024 / 1024
-		if rx_float_mb > 1024:
-  			rx_float_gb = rx_float_mb / 1024
-  			bot.sendMessage(chat_id, '%.2f Gbs' % rx_float_gb)
-	
-		else:
-			bot.sendMessage(chat_id, '%.2f Mbs' % rx_float_mb)
+		bot.sendMessage(chat_id,str(rx_cable))
 		
 		# pega a quantidade de dados recebidos pelo cabo desde a ultima reinicialização
 		# trocar o eth0 pela sua interface de rede cabeada
 		tx_cable = commands.getoutput("cat /sys/class/net/eth0/statistics/tx_bytes")
 		bot.sendMessage(chat_id,'Quantidade de banda enviada pela rede cabeada')
-		tx_float = float(tx_cable)
-		tx_float_mb = tx_float / 1024 / 1024
-		if tx_float_mb > 1024:
-  			tx_float_gb = tx_float_mb / 1024
-  			bot.sendMessage(chat_id, '%.2f Gbs' % tx_float_gb)
-	
-		else:
-			bot.sendMessage(chat_id, '%.2f Mbs' % tx_float_mb)
+		bot.sendMessage(chat_id,str(tx_cable))
 		
 	# oitava verificação verifica se o comando ip foi executado
 	# se executado verifica o chat_id de quem solicitou se o 
