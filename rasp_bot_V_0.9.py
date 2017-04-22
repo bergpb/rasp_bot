@@ -48,10 +48,10 @@ def handle(msg):
 	# que seram enviadas quando forem clicados
 	keyboard=ReplyKeyboardMarkup(
         keyboard=[
-            [KeyboardButton(text="Temperatura"), KeyboardButton(text="Memoria")],
-            [KeyboardButton(text="UpTime"), KeyboardButton(text="UsoSD")],
-            [KeyboardButton(text="Data"),  KeyboardButton(text="IP")],
-            [KeyboardButton(text="Processos"), KeyboardButton(text="Rede")],
+            [KeyboardButton(text="Temperatura"), KeyboardButton(text="Processos")],
+            [KeyboardButton(text="Memoria"), KeyboardButton(text="Uptime")],
+            [KeyboardButton(text="UsoSD"),  KeyboardButton(text="Data")],
+            [KeyboardButton(text="Rede"), KeyboardButton(text="IP")],
         ])
 	
 	# primeiro IF que inicia o bot quando começa a 
@@ -68,7 +68,7 @@ def handle(msg):
 	# foi escolhido se escolhido retorna a temperatura da cpu	
 	elif command == 'Temperatura':
 		print '---------------------------'
-		print 'Comando usado ', comando	
+		print 'Comando usado ', command
 		print '---------------------------'
 		temp = commands.getoutput("vcgencmd measure_temp | cut -c 6-12")
 		bot.sendMessage(chat_id, "Temperatura atual: ")
@@ -76,12 +76,25 @@ def handle(msg):
 		
 		getinfo(chat_id)
 		
-	# segunda verificaçao verifica se o comando memoria
+	# segunda verificação verifica se o comando processos 
+	# foi escolhido se escolhido ele conta quantos 
+	# processos estao rodando no momento e retorna para o usuario	
+    	elif command == 'Processos':
+		print '---------------------------'
+		print 'Comando usado ', command
+		print '---------------------------'
+		quantProc = commands.getoutput("ps -aux | wc -l")
+		bot.sendMessage(chat_id, 'Quantidade de processos rodando e :')
+  		bot.sendMessage(chat_id, str(quantProc))
+		
+		getinfo(chat_id)
+		
+	# terceira verificaçao verifica se o comando memoria
 	# foi escolhido se escolhido retorna a memoria toral
 	# memoria em uso e memoria livre respectivamente
 	elif command == 'Memoria':
 		print '---------------------------'
-		print 'Comando usado ', comando
+		print 'Comando usado ', command
 		print '---------------------------'
 		# memoria total
 		mem_total = commands.getoutput("free -h | grep 'Mem' | cut -c 15-18")
@@ -98,11 +111,11 @@ def handle(msg):
 		
 		getinfo(chat_id)
 	
-	# terceira verificaçao verifica se o comando uptime
+	# quarta verificaçao verifica se o comando uptime
 	# foi escolhido se escolhido retorna o uptime do sistema 
 	elif command == 'UpTime':
 		print '---------------------------'
-		print 'Comando usado ',  comando
+		print 'Comando usado ',  command
 		print '---------------------------'
 		uptime = commands.getoutput("uptime -p")
 		bot.sendMessage(chat_id,"Up Time do sistema:")
@@ -110,12 +123,12 @@ def handle(msg):
 		
 		getinfo(chat_id)
 		
-	# quarta verificaçao verifica se o comando SD 
+	# quinta verificaçao verifica se o comando SD 
 	# foi escolhido se escolhido retorna informaçes 
 	# de espaço nas partiçoes de boot e root do sistema
     	elif command == 'UsoSD':
 		print '---------------------------'
-		print 'Comando usado ', comando
+		print 'Comando usado ', command
 		print '---------------------------'
 		bot.sendMessage(chat_id, 'Estado da partiçao root')
 		partRoot = commands.getoutput("df -h | grep '/dev'| head -1")
@@ -123,26 +136,55 @@ def handle(msg):
 		
 		getinfo(chat_id)
 	
-	# quinta verificação verifica se o comando data 
+	# sexta verificação verifica se o comando data 
 	# foi escolhido se escolhido retorna as 
 	# informaçoes de data e hora atual da raspberry
 	elif command == 'Data':
 		print '---------------------------'
-		print 'Comando usado ', comando
+		print 'Comando usado ', command
 		print '---------------------------'
 		date = commands.getoutput("date")
  		bot.sendMessage(chat_id,"Data e hora do Sistema: ")
   		bot.sendMessage(chat_id, str(date))
 		
 		getinfo(chat_id)
+		
+	# setima verificação verifica se o comando Rede foi executa
+	# se executado ele pega a quantidade de bytes trafegadas 
+	# pelas interfaces de rede desde a ultima reinicializaçao
+	elif command == 'Rede':
+		print '---------------------------'
+		print 'Comando usado ', command
+		print '---------------------------'
+		# pegar a quantidade de dados enviados pelo Wireless desde a ultima reinicialização  
+		# trocar o wlan0 pela sua interface wireless
+		rx_wifi = commands.getoutput("cat /sys/class/net/wlan0/statistics/rx_bytes")
+		bot.sendMessage(chat_id,"Quantidade de banda recebida pela rede Wifi: ")
+		bot.sendMessage(chat_id,int(rx_wifi))
+		# pega a quantidade de dados enviados pelo cabo desde a ultima reinicialização
+		# trocar o eth0 pela sua interface de rede cabeada
+		rx_cable = commands.getoutpu("cat /sys/class/net/eth0/statistics/rx_bytes")
+		bot.sendMessage(chat_id,"Quantidade de banda recebida pela rede cabeada: ")
+		bot.sendMessage(chat_id,int(rx_cable))
+		# pega a quantidade de dados recebidas pelo cabo desde a ultima reinicialização
+		# trocar o wlan0 pela sua interface de rede semfio
+		tx_wifi = commands.getoutput("cat /sys/class/net/wlan0/statistics/tx_bytes")
+		bot.sendMessage(chat_id,"Quantidade de banda enviada pela rede Wifi: ")
+		bot.sendMessage(chat_id,int(tx_wifi))
+		# pega a quantidade de dados recebidos pelo cabo desde a ultima reinicialização
+		# trocar o eth0 pela sua interface de rede cabeada
+		tx_cable = commands.getoutput("cat /sys/class/net/eth0/statistics/tx_bytes")
+		bot.sendMessage(chat_id,"Quantidade de banda enviada pela rede cabeada")
+		bot.sendMessage(chat_id,int(tx_cable))
+
 	
-	# sexta verificação verifica se o comando ip foi executado
+	# oitava verificação verifica se o comando ip foi executado
 	# se executado verifica o chat_id de quem solicitou se o 
 	# chat_id do solicitante for igual aos listados 
 	# abaixo ele retorna o endereço de ip local e externo
 	elif command == 'IP':
 		print '---------------------------'
-		print 'Comando usado ', comando
+		print 'Comando usado ', command
 		print '---------------------------'
 		# ip local 
 		if chat_id == 345318600 or chat_id == 83074778 or chat_id == 24774270:
@@ -163,53 +205,24 @@ def handle(msg):
 		else:
 			bot.sendMessage(chat_id, 'Sai daqui voce nao vai ver o endereço de IP!!! ')
   		
-		getinfo(chat_id)
-		
-	# setima verificaçao verifica se o comando processos 
-	# foi escolhido se escolhido ele conta quantos 
-	# processos estao rodando no momento e retorna para o usuario	
-    	elif command == 'Processos':
-		print '---------------------------'
-		print 'Comando usado ', comando
-		print '---------------------------'
-		quantProc = commands.getoutput("ps -aux | wc -l")
-		bot.sendMessage(chat_id, 'Quantidade de processos rodando e :')
-  		bot.sendMessage(chat_id, str(quantProc))
-		
-		getinfo(chat_id)
-		
-	elif command == 'Rede':
-		print '---------------------------'
-		print 'Comando usado ', comando
-		print '---------------------------'
-		# pegar a quantidade de dados enviados pelo Wireless desde a ultima reinicialização  
-		# trocar o wlan0 pela sua interface wireless
-		rx_wifi = commands.getoutput("cat /sys/class/net/wlan0/statistics/rx_bytes")
-		bot.sendMessage(chat_id,"Quantidade de banda recebida pela rede Wifi: ")
-		bot.sendMessage(chat_id,int(rx_wifi))
-		# pega a quantidade de dados enviados pelo cabo desde a ultima reinicialização
-		# trocar o eth0 pela sua interface de rede cabeada
-		rx_cable = commands.getoutpu("cat /sys/class/net/eth0/statistics/rx_bytes")
-		bot.sendMessage(chat_id,"Quantidade de banda recebida pela rede cabeada: ")
-		bot.sendMessage(chat_id,int(rx_cable))
-		# pega a quantidade de dados recebidas pelo cabo desde a ultima reinicialização
-		# trocar o wlan0 pela sua interface de rede semfio
-		tx_wifi = commands.getoutput("cat /sys/class/net/wlan0/statistics/tx_bytes")
-		bot.sendMessage(chat_id,"Quantidade de banda enviada pela rede Wifi: ")
-		bot.sendMessage(chat_id,int(tx_wifi))
-		# pega a quantidade de dados recebidos pelo cabo desde a ultima reinicialização
-		# trocar o eth0 pela sua interface de rede cabeada
-		tx_cable = commands.getoutput("cat /sys/class/net/eth0/statistics/tx_bytes)
-		bot.sendMessage(chat_id,"Quantidade de banda enviada pela rede cabeada")
-		bot.sendMessage(chat_id,int(tx_cable))
-
+		getinfo(chat_id)	
+	
 		
 	
-	# IF do menu de ajuda so que ainda nao tem nada de ajudar nessa porra tbm	
+	# IF do menu de ajuda agora tem alguma coisa pra ajudar 	
 	elif  command == '/help':
-	
-		bot.sendMessage(chat_id, 'Menu de Ajuda')
-		bot.sendMessage(chat_id, 'Aqui era pra ter informações uteis mas nao tem =/')
+		print '---------------------------'
+		print 'Comando usado ', command
+		print '---------------------------'
+		bot.sendMessage(chat_id, 'Menu de Ajuda. Encontre aqui informações sobre os comandos')
+		bot.sendMessage(chat_id, 'Comando Temperatura -->')
+		bot.sendMessage(chat_id, 'Comando Processos -->')
+		bot.sendMessage(chat_id, 'Comando Memoria -->')
+		bot.sendMessage(chat_id, 'Comando UpTime -->')
+		bot.sendMessage(chat_id, 'Comando UsoSD -->')
+		bot.sendMessage(chat_id, 'Comando Data -->')
+		bot.sendMessage(chat_id, 'Comando Rede -->')
+		bot.sendMessage(chat_id, 'Comando IP -->')
 					      
 		getinfo(chat_id)
 		
@@ -226,4 +239,3 @@ print 'Aguardando comandos ...'
 
 while 1:
 	time.sleep(5)
-
