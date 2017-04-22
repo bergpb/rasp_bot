@@ -71,7 +71,7 @@ def handle(msg):
 		print 'Comando usado ', command
 		print '---------------------------'
 		temp = commands.getoutput("vcgencmd measure_temp | cut -c 6-12")
-		bot.sendMessage(chat_id, "Temperatura atual: ")
+		bot.sendMessage(chat_id, 'Temperatura atual: ')
   		bot.sendMessage(chat_id, str(temp))
 		
 		getinfo(chat_id)
@@ -118,7 +118,7 @@ def handle(msg):
 		print 'Comando usado ',  command
 		print '---------------------------'
 		uptime = commands.getoutput("uptime -p")
-		bot.sendMessage(chat_id,"Up Time do sistema:")
+		bot.sendMessage(chat_id, 'Up Time do sistema: ')
   		bot.sendMessage(chat_id, str(uptime))
 		
 		getinfo(chat_id)
@@ -130,8 +130,8 @@ def handle(msg):
 		print '---------------------------'
 		print 'Comando usado ', command
 		print '---------------------------'
-		bot.sendMessage(chat_id, 'Estado da partiçao root')
 		partRoot = commands.getoutput("df -h | grep '/dev'| head -1")
+		bot.sendMessage(chat_id, 'Estado da partiçao root')
 		bot.sendMessage(chat_id, str(partRoot))
 		
 		getinfo(chat_id)
@@ -144,7 +144,7 @@ def handle(msg):
 		print 'Comando usado ', command
 		print '---------------------------'
 		date = commands.getoutput("date")
- 		bot.sendMessage(chat_id,"Data e hora do Sistema: ")
+ 		bot.sendMessage(chat_id,'Data e hora do Sistema: ')
   		bot.sendMessage(chat_id, str(date))
 		
 		getinfo(chat_id)
@@ -160,20 +160,20 @@ def handle(msg):
 		# pegar a quantidade de dados enviados pelo Wireless desde a ultima reinicialização  
 		# trocar o wlan0 pela sua interface wireless
 		rx_wifi = commands.getoutput("cat /sys/class/net/wlan0/statistics/rx_bytes")
-		bot.sendMessage(chat_id,"Quantidade de banda recebida pela rede Wifi: ")
+		bot.sendMessage(chat_id,'Quantidade de banda recebida pela rede Wifi: ')
 		#bot.sendMessage(chat_id,int(rx_wifi))
 		rx_float = float(rx_wifi)
 		rx_float_mb = rx_float / 1024 / 1024
 		if rx_float_mb > 1024:
   			rx_float_gb = rx_float_mb / 1024
-  			bot.sendMessage(chat_id, '%.2f' % rx_float_gb,'Gbs')
+  			bot.sendMessage(chat_id, '%.2f Gbs' % rx_float_gb)
 		else:
-			bot.sendMessage(chat_id, '%.2f' % rx_float_mb, 'Mbs')
+			bot.sendMessage(chat_id, '%.2f Mbs' % rx_float_mb)
 		
 		# pega a quantidade de dados recebidas pelo cabo desde a ultima reinicialização
 		# trocar o wlan0 pela sua interface de rede semfio
 		tx_wifi = commands.getoutput("cat /sys/class/net/wlan0/statistics/tx_bytes")
-		bot.sendMessage(chat_id,"Quantidade de banda enviada pela rede Wifi: ")
+		bot.sendMessage(chat_id,'Quantidade de banda enviada pela rede Wifi: ')
 		#bot.sendMessage(chat_id,int(tx_wifi))
 		tx_float = float(tx_wifi)
 		tx_float_mb = tx_float / 1024 / 1024
@@ -187,7 +187,7 @@ def handle(msg):
 		# pega a quantidade de dados enviados pelo cabo desde a ultima reinicialização
 		# trocar o eth0 pela sua interface de rede cabeada
 		rx_cable = commands.getoutput("cat /sys/class/net/eth0/statistics/rx_bytes")
-		bot.sendMessage(chat_id,"Quantidade de banda recebida pela rede cabeada: ")
+		bot.sendMessage(chat_id,'Quantidade de banda recebida pela rede cabeada: ')
 		bot.sendMessage(chat_id,int(rx_cable))
 		rx_float = float(rx_cable)
 		rx_float_mb = rx_float / 1024 / 1024
@@ -201,7 +201,7 @@ def handle(msg):
 		# pega a quantidade de dados recebidos pelo cabo desde a ultima reinicialização
 		# trocar o eth0 pela sua interface de rede cabeada
 		tx_cable = commands.getoutput("cat /sys/class/net/eth0/statistics/tx_bytes")
-		bot.sendMessage(chat_id,"Quantidade de banda enviada pela rede cabeada")
+		bot.sendMessage(chat_id,'Quantidade de banda enviada pela rede cabeada')
 		bot.sendMessage(chat_id,int(tx_cable))
 		tx_float = float(tx_cable)
 		tx_float_mb = tx_float / 1024 / 1024
@@ -237,7 +237,7 @@ def handle(msg):
 				bot.sendMessage(chat_id,str(ip_ex))
 	
 		else:
-			bot.sendMessage(chat_id, 'Sai daqui voce nao vai ver o endereço de IP!!! ')
+			bot.sendMessage(chat_id, 'Sai daqui voce nao vai ver o meu endereço de IP!!! ')
   		
 		getinfo(chat_id)	
 	
