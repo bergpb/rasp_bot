@@ -49,7 +49,7 @@ def handle(msg):
 	keyboard=ReplyKeyboardMarkup(
         keyboard=[
             [KeyboardButton(text="Temperatura"), KeyboardButton(text="Processos")],
-            [KeyboardButton(text="Memoria"), KeyboardButton(text="Uptime")],
+            [KeyboardButton(text="Memoria"), KeyboardButton(text="UpTime")],
             [KeyboardButton(text="UsoSD"),  KeyboardButton(text="Data")],
             [KeyboardButton(text="Rede"), KeyboardButton(text="IP")],
         ])
@@ -99,15 +99,15 @@ def handle(msg):
 		# memoria total
 		mem_total = commands.getoutput("free -h | grep 'Mem' | cut -c 15-18")
 		bot.sendMessage(chat_id, 'Memoria total: ')
-		bot.sendMessage(chat_id, str(mem_total),'M')
+		bot.sendMessage(chat_id, str(mem_total))
 		# memoria em uso
 		mem_used = commands.getoutput("free -h | grep 'Mem' | cut -c 26-29")
 		bot.sendMessage(chat_id, 'Memoria em uso: ')
-		bot.sendMessage(chat_id, str(mem_used),'M')
+		bot.sendMessage(chat_id, str(mem_used))
 		# memoria livre
 		mem_free = commands.getoutput("free -h | grep 'Mem' | cut -c 37-40")
 		bot.sendMessage(chat_id, 'Memoria livre: ')
-		bot.sendMessage(chat_id, str(mem_free),'M')
+		bot.sendMessage(chat_id, str(mem_free))
 		
 		getinfo(chat_id)
 	
@@ -156,28 +156,63 @@ def handle(msg):
 		print '---------------------------'
 		print 'Comando usado ', command
 		print '---------------------------'
+		getinfo(chat_id)
 		# pegar a quantidade de dados enviados pelo Wireless desde a ultima reinicialização  
 		# trocar o wlan0 pela sua interface wireless
 		rx_wifi = commands.getoutput("cat /sys/class/net/wlan0/statistics/rx_bytes")
 		bot.sendMessage(chat_id,"Quantidade de banda recebida pela rede Wifi: ")
 		bot.sendMessage(chat_id,int(rx_wifi))
-		# pega a quantidade de dados enviados pelo cabo desde a ultima reinicialização
-		# trocar o eth0 pela sua interface de rede cabeada
-		rx_cable = commands.getoutpu("cat /sys/class/net/eth0/statistics/rx_bytes")
-		bot.sendMessage(chat_id,"Quantidade de banda recebida pela rede cabeada: ")
-		bot.sendMessage(chat_id,int(rx_cable))
+		rx_float = float(rx_wifi)
+		rx_float_mb = rx_float / 1024 / 1024
+		if rx_float_mb > 1024:
+  			rx_float_gb = rx_float_mb / 1024
+  			bot.sendMessage(chat_id, '%.2f' % rx_float_gb,'Gbs')
+	
+		else:
+			bot.sendMessage(chat_id, '%.2f' % rx_float_mb, 'Mbs')
+		
 		# pega a quantidade de dados recebidas pelo cabo desde a ultima reinicialização
 		# trocar o wlan0 pela sua interface de rede semfio
 		tx_wifi = commands.getoutput("cat /sys/class/net/wlan0/statistics/tx_bytes")
 		bot.sendMessage(chat_id,"Quantidade de banda enviada pela rede Wifi: ")
 		bot.sendMessage(chat_id,int(tx_wifi))
+		tx_float = float(tx_wifi)
+		tx_float_mb = tx_float / 1024 / 1024
+		if tx_float_mb > 1024:
+  			tx_float_gb = tx_float_mb / 1024
+  			bot.sendMessage(chat_id, '%.2f' % tx_float_gb,'Gbs')
+	
+		else:
+			bot.sendMessage(chat_id, '%.2f' % tx_float_mb, 'Mbs')
+		
+		# pega a quantidade de dados enviados pelo cabo desde a ultima reinicialização
+		# trocar o eth0 pela sua interface de rede cabeada
+		rx_cable = commands.getoutput("cat /sys/class/net/eth0/statistics/rx_bytes")
+		bot.sendMessage(chat_id,"Quantidade de banda recebida pela rede cabeada: ")
+		bot.sendMessage(chat_id,int(rx_cable))
+		rx_float = float(rx_cable)
+		rx_float_mb = rx_float / 1024 / 1024
+		if rx_float_mb > 1024:
+  			rx_float_gb = rx_float_mb / 1024
+  			bot.sendMessage(chat_id, '%.2f' % rx_float_gb,'Gbs')
+	
+		else:
+			bot.sendMessage(chat_id, '%.2f' % rx_float_mb, 'Mbs')
+		
 		# pega a quantidade de dados recebidos pelo cabo desde a ultima reinicialização
 		# trocar o eth0 pela sua interface de rede cabeada
 		tx_cable = commands.getoutput("cat /sys/class/net/eth0/statistics/tx_bytes")
 		bot.sendMessage(chat_id,"Quantidade de banda enviada pela rede cabeada")
 		bot.sendMessage(chat_id,int(tx_cable))
-
+		tx_float = float(tx_cable)
+		tx_float_mb = tx_float / 1024 / 1024
+		if tx_float_mb > 1024:
+  			tx_float_gb = tx_float_mb / 1024
+  			bot.sendMessage(chat_id, '%.2f' % tx_float_gb,'Gbs')
 	
+		else:
+			bot.sendMessage(chat_id, '%.2f' % tx_float_mb, 'Mbs')
+		
 	# oitava verificação verifica se o comando ip foi executado
 	# se executado verifica o chat_id de quem solicitou se o 
 	# chat_id do solicitante for igual aos listados 
@@ -215,14 +250,14 @@ def handle(msg):
 		print 'Comando usado ', command
 		print '---------------------------'
 		bot.sendMessage(chat_id, 'Menu de Ajuda. Encontre aqui informações sobre os comandos')
-		bot.sendMessage(chat_id, 'Comando Temperatura -->')
-		bot.sendMessage(chat_id, 'Comando Processos -->')
-		bot.sendMessage(chat_id, 'Comando Memoria -->')
-		bot.sendMessage(chat_id, 'Comando UpTime -->')
-		bot.sendMessage(chat_id, 'Comando UsoSD -->')
-		bot.sendMessage(chat_id, 'Comando Data -->')
-		bot.sendMessage(chat_id, 'Comando Rede -->')
-		bot.sendMessage(chat_id, 'Comando IP -->')
+		bot.sendMessage(chat_id, 'Comando Temperatura --> Comando que tem como função retornar ao usuario as informações de temperatura da CPU')
+		bot.sendMessage(chat_id, 'Comando Processos --> Comando que tem como função contar e retornar ao usuario a quantidade de processos que estao sendo execuados')
+		bot.sendMessage(chat_id, 'Comando Memoria --> Comando que tem como funçao retornar ao usuario dados da memoria como memoria total, memoria em uso e memoria livre')
+		bot.sendMessage(chat_id, 'Comando UpTime --> Comando que tem como funçao retornar ao usuario a informaçao do UpTime do sistema ou seja a quanto tempo a maquina esta ligada')
+		bot.sendMessage(chat_id, 'Comando UsoSD --> Comando que tem como função retornar informação de espaço utilizando e espaço livre na partição principal do sistema')
+		bot.sendMessage(chat_id, 'Comando Data --> Comando que tem como funçao retornar ao usuario a Hora e Data exatas do sistema')
+		bot.sendMessage(chat_id, 'Comando Rede --> Comando que tem como funçao medir e retornar ao usuario a quantidade de banda que foi utilizada em Upload e Download tanto em Wifi ou Ethernet')
+		bot.sendMessage(chat_id, 'Comando IP --> Comando que tem como funçao pegaro IP externo e IP local e retornar para o administrador ambos IPs e para usuarios normais somente o IP local')
 					      
 		getinfo(chat_id)
 		
@@ -232,7 +267,7 @@ def handle(msg):
 		bot.sendMessage(chat_id, 'Ainda nao sei ler =(')
 		
 # Aqui fica API do bot gerada pelo botfather
-bot = telepot.Bot(' ')
+bot = telepot.Bot('')
 bot.message_loop(handle)
 
 print 'Aguardando comandos ...'
