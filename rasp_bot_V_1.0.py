@@ -235,7 +235,7 @@ def handle(msg):
 				bot.sendMessage(chat_id,str(ip_ex))
 	
 		else:
-			bot.sendMessage(chat_id, 'Sai daqui voce nao vai ver o meu endereço de IP!!! ')
+			bot.sendMessage(chat_id, 'Sai daqui voce nao vai ver o meu endereço de IP!!!')
   		
 		getinfo(chat_id)	
 	
@@ -246,15 +246,15 @@ def handle(msg):
 		print '---------------------------'
 		print 'Comando usado ', command
 		print '---------------------------'
-		bot.sendMessage(chat_id, ' Ajuda. Encontre aqui informações sobre os comandos')
-		bot.sendMessage(chat_id, ' ** Comando Temperatura ** --> Comando que tem como função retornar ao usuario as informações de temperatura da CPU')
-		bot.sendMessage(chat_id, ' ** Comando Processos ** --> Comando que tem como função contar e retornar ao usuario a quantidade de processos que estao sendo execuados')
-		bot.sendMessage(chat_id, ' ** Comando Memoria ** --> Comando que tem como funçao retornar ao usuario dados da memoria como memoria total, memoria em uso e memoria livre')
-		bot.sendMessage(chat_id, ' ** Comando UpTime ** --> Comando que tem como funçao retornar ao usuario a informaçao do UpTime do sistema ou seja a quanto tempo a maquina esta ligada')
-		bot.sendMessage(chat_id, ' ** Comando UsoSD ** --> Comando que tem como função retornar informação de espaço utilizando e espaço livre na partição principal do sistema')
-		bot.sendMessage(chat_id, ' ** Comando Data ** --> Comando que tem como funçao retornar ao usuario a Hora e Data exatas do sistema')
-		bot.sendMessage(chat_id, ' ** Comando Rede ** --> Comando que tem como funçao medir e retornar ao usuario a quantidade de banda que foi utilizada em Upload e Download tanto em Wifi ou Ethernet')
-		bot.sendMessage(chat_id, ' ** Comando IP ** --> Comando que tem como funçao pegaro IP externo e IP local e retornar para o administrador ambos IPs e para usuarios normais somente o IP local')
+		bot.sendMessage(chat_id, 'Ajuda. Encontre aqui informações sobre os comandos')
+		bot.sendMessage(chat_id, 'Comando Temperatura :: Comando que tem como função retornar ao usuario as informações de temperatura da CPU')
+		bot.sendMessage(chat_id, 'Comando Processos :: Comando que tem como função contar e retornar ao usuario a quantidade de processos que estao sendo execuados')
+		bot.sendMessage(chat_id, 'Comando Memoria :: Comando que tem como funçao retornar ao usuario dados da memoria como memoria total, memoria em uso e memoria livre')
+		bot.sendMessage(chat_id, 'Comando UpTime :: Comando que tem como funçao retornar ao usuario a informaçao do UpTime do sistema ou seja a quanto tempo a maquina esta ligada')
+		bot.sendMessage(chat_id, 'Comando UsoSD :: Comando que tem como função retornar informação de espaço utilizando e espaço livre na partição principal do sistema')
+		bot.sendMessage(chat_id, 'Comando Data :: Comando que tem como funçao retornar ao usuario a Hora e Data exatas do sistema')
+		bot.sendMessage(chat_id, 'Comando Rede :: Comando que tem como funçao medir e retornar ao usuario a quantidade de banda que foi utilizada em Upload e Download tanto em Wifi ou Ethernet')
+		bot.sendMessage(chat_id, 'Comando IP :: Comando que tem como funçao pegaro IP externo e IP local e retornar para o administrador ambos IPs e para usuarios normais somente o IP local')
 					      
 		getinfo(chat_id)
 		
