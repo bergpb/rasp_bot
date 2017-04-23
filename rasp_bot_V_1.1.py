@@ -73,7 +73,7 @@ def handle(msg):
 		print 'Comando usado ', command
 		print '---------------------------'
 		temp = commands.getoutput("vcgencmd measure_temp | cut -c 6-12")
-		bot.sendMessage(chat_id, '*Temperatura atual: *',)
+		bot.sendMessage(chat_id, '*Temperatura atual: *', parse_mode="Markdown")
   		bot.sendMessage(chat_id, "`%s`" % temp, parse_mode="Markdown")
 		
 		getinfo(chat_id)
@@ -86,7 +86,7 @@ def handle(msg):
 		print 'Comando usado ', command
 		print '---------------------------'
 		quantProc = commands.getoutput("ps -aux | wc -l")
-		bot.sendMessage(chat_id, '*Quantidade de processos rodando: *',)
+		bot.sendMessage(chat_id, '*Quantidade de processos rodando: *', parse_mode="Markdown")
   		bot.sendMessage(chat_id, "`%s`" % quantProc, parse_mode="Markdown")
 		
 		getinfo(chat_id)
