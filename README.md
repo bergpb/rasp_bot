@@ -4,10 +4,9 @@ Bot do telegram feito em python rodando na raspberry pi usando a biblioteca Tele
 ## Telepot
 [Telepot](https://github.com/nickoala/telepot)
 
-## Links para o bot
-[Rasp_Bot](https://web.telegram.org/#/im?p=@Rasp_BoT_Pi_bot)
 
 # Versões
+
 ## Versão 0.1
 * Esqueleto do bot
 * Estrutura de decisão
@@ -53,5 +52,4 @@ Bot do telegram feito em python rodando na raspberry pi usando a biblioteca Tele
 * Adicionada data/hora na saida dos chat info view
 
 ## Versão 1.1
-* Saidas formatadas no telegram negrito italico 
-* Menu de ajuda formatado com Bold 
+* Informações retornadas formatadas com Markedown
