@@ -249,7 +249,7 @@ def handle(msg):
 		bot.sendMessage(chat_id, '`Ajuda. Encontre aqui informações sobre os comandos` ', parse_mode="Markdown")
 		bot.sendMessage(chat_id, '*Temperatura:* ``` Comando que tem como função retornar ao usuario as informações de temperatura da CPU``` ', parse_mode="Markdown")
 		bot.sendMessage(chat_id, '*Processos:* ``` Comando que tem como função contar e retornar ao usuario a quantidade de processos que estao sendo execuados``` ', parse_mode="Markdown")
-		bot.sendMessage(chat_id, '*Memoria:* ``` Comando que tem como funçao retornar ao usuario dados da memoria como memoria total, memoria em uso e memoria livre``` ' parse_mode="Markdown")
+		bot.sendMessage(chat_id, '*Memoria:* ``` Comando que tem como funçao retornar ao usuario dados da memoria como memoria total, memoria em uso e memoria livre``` ', parse_mode="Markdown")
 		bot.sendMessage(chat_id, '*UpTime:* ``` Comando que tem como funçao retornar ao usuario a informaçao do UpTime do sistema ou seja a quanto tempo a maquina esta ligada``` ', parse_mode="Markdown")
 		bot.sendMessage(chat_id, '*UsoSD:* ``` Comando que tem como função retornar informação de espaço utilizando e espaço livre na partição principal do sistema``` ', parse_mode="Markdown")
 		bot.sendMessage(chat_id, '*Data:* ``` Comando que tem como funçao retornar ao usuario a Hora e Data exatas do sistema``` ', parse_mode="Markdown")
@@ -270,4 +270,4 @@ bot.message_loop(handle)
 print 'Aguardando comandos ...'
 
 while 1:
-time.sleep(5)
+	time.sleep(5)
