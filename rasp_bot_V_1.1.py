@@ -73,7 +73,7 @@ def handle(msg):
 		print 'Comando usado ', command
 		print '---------------------------'
 		temp = commands.getoutput("vcgencmd measure_temp | cut -c 6-12")
-		bot.sendMessage(chat_id, 'Temperatura atual: ',)
+		bot.sendMessage(chat_id, '*Temperatura atual: *',)
   		bot.sendMessage(chat_id, "`%s`" % temp, parse_mode="Markdown")
 		
 		getinfo(chat_id)
@@ -86,7 +86,7 @@ def handle(msg):
 		print 'Comando usado ', command
 		print '---------------------------'
 		quantProc = commands.getoutput("ps -aux | wc -l")
-		bot.sendMessage(chat_id, 'Quantidade de processos rodando: ',)
+		bot.sendMessage(chat_id, '*Quantidade de processos rodando: *',)
   		bot.sendMessage(chat_id, "`%s`" % quantProc, parse_mode="Markdown")
 		
 		getinfo(chat_id)
@@ -105,7 +105,7 @@ def handle(msg):
 		# memoria em uso
 		mem_used = commands.getoutput("free -h | grep 'Mem' | cut -c 26-29")
 		bot.sendMessage(chat_id, '*Memoria em uso: *', parse_mode="Markdown")
-		bot.sendMessage(chat_id, "`%s`" % men_used, parse_mode="Markdown")
+		bot.sendMessage(chat_id, "`%s`" % mem_used, parse_mode="Markdown")
 		# memoria livre
 		mem_free = commands.getoutput("free -h | grep 'Mem' | cut -c 37-40")
 		bot.sendMessage(chat_id, '*Memoria livre: *', parse_mode="Markdown")
@@ -147,7 +147,7 @@ def handle(msg):
 		print '---------------------------'
 		date = commands.getoutput("date")
  		bot.sendMessage(chat_id,'*Data e hora do Sistema: *', parse_mode="Markdown")
-  		bot.sendMessage(chat_id,  "`%s`" % date, parse_mode="Markdown")
+  		bot.sendMessage(chat_id,  "_%s_" % date, parse_mode="Markdown")
 		
 		getinfo(chat_id)
 		
@@ -247,14 +247,14 @@ def handle(msg):
 		print 'Comando usado ', command
 		print '---------------------------'
 		bot.sendMessage(chat_id, '`Ajuda. Encontre aqui informações sobre os comandos` ', parse_mode="Markdown")
-		bot.sendMessage(chat_id, '*Comando Temperatura:* ```Comando que tem como função retornar ao usuario as informações de temperatura da CPU``` ', parse_mode="Markdown")
-		bot.sendMessage(chat_id, '*Comando Processos:* ```Comando que tem como função contar e retornar ao usuario a quantidade de processos que estao sendo execuados``` ', parse_mode="Markdown")
-		bot.sendMessage(chat_id, '*Comando Memoria:* ```Comando que tem como funçao retornar ao usuario dados da memoria como memoria total, memoria em uso e memoria livre``` ' parse_mode="Markdown")
-		bot.sendMessage(chat_id, '*Comando UpTime:* ```Comando que tem como funçao retornar ao usuario a informaçao do UpTime do sistema ou seja a quanto tempo a maquina esta ligada``` ', parse_mode="Markdown")
-		bot.sendMessage(chat_id, '*Comando UsoSD:* ```Comando que tem como função retornar informação de espaço utilizando e espaço livre na partição principal do sistema``` ', parse_mode="Markdown")
-		bot.sendMessage(chat_id, '*Comando Data:* ```Comando que tem como funçao retornar ao usuario a Hora e Data exatas do sistema``` ', parse_mode="Markdown")
-		bot.sendMessage(chat_id, '*Comando Rede:* ```Comando que tem como funçao medir e retornar ao usuario a quantidade de banda que foi utilizada em Upload e Download tanto em Wifi ou Ethernet``` ', parse_mode="Markdown")
-		bot.sendMessage(chat_id, '*Comando IP:* ```Comando que tem como funçao pegaro IP externo e IP local e retornar para o administrador ambos IPs e para usuarios normais somente o IP local``` ', parse_mode="Markdown")
+		bot.sendMessage(chat_id, '*Temperatura:* ``` Comando que tem como função retornar ao usuario as informações de temperatura da CPU``` ', parse_mode="Markdown")
+		bot.sendMessage(chat_id, '*Processos:* ``` Comando que tem como função contar e retornar ao usuario a quantidade de processos que estao sendo execuados``` ', parse_mode="Markdown")
+		bot.sendMessage(chat_id, '*Memoria:* ``` Comando que tem como funçao retornar ao usuario dados da memoria como memoria total, memoria em uso e memoria livre``` ' parse_mode="Markdown")
+		bot.sendMessage(chat_id, '*UpTime:* ``` Comando que tem como funçao retornar ao usuario a informaçao do UpTime do sistema ou seja a quanto tempo a maquina esta ligada``` ', parse_mode="Markdown")
+		bot.sendMessage(chat_id, '*UsoSD:* ``` Comando que tem como função retornar informação de espaço utilizando e espaço livre na partição principal do sistema``` ', parse_mode="Markdown")
+		bot.sendMessage(chat_id, '*Data:* ``` Comando que tem como funçao retornar ao usuario a Hora e Data exatas do sistema``` ', parse_mode="Markdown")
+		bot.sendMessage(chat_id, '*Rede:* ``` Comando que tem como funçao medir e retornar ao usuario a quantidade de banda que foi utilizada em Upload e Download tanto em Wifi ou Ethernet``` ', parse_mode="Markdown")
+		bot.sendMessage(chat_id, '*IP:* ``` Comando que tem como funçao pegaro IP externo e IP local e retornar para o administrador ambos IPs e para usuarios normais somente o IP local``` ', parse_mode="Markdown")
 					      
 		getinfo(chat_id)
 		
