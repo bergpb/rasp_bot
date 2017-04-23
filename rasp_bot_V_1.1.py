@@ -73,8 +73,8 @@ def handle(msg):
 		print 'Comando usado ', command
 		print '---------------------------'
 		temp = commands.getoutput("vcgencmd measure_temp | cut -c 6-12")
-		bot.sendMessage(chat_id, 'Temperatura atual: ')
-  		bot.sendMessage(chat_id, str(temp))
+		bot.sendMessage(chat_id, 'Temperatura atual: ',)
+  		bot.sendMessage(chat_id, "`%s`" % temp, parse_mode="Markdown")
 		
 		getinfo(chat_id)
 		
@@ -86,8 +86,8 @@ def handle(msg):
 		print 'Comando usado ', command
 		print '---------------------------'
 		quantProc = commands.getoutput("ps -aux | wc -l")
-		bot.sendMessage(chat_id, 'Quantidade de processos rodando e :')
-  		bot.sendMessage(chat_id, str(quantProc))
+		bot.sendMessage(chat_id, 'Quantidade de processos rodando: ',)
+  		bot.sendMessage(chat_id, "`%s`" % quantProc, parse_mode="Markdown")
 		
 		getinfo(chat_id)
 		
@@ -100,16 +100,16 @@ def handle(msg):
 		print '---------------------------'
 		# memoria total
 		mem_total = commands.getoutput("free -h | grep 'Mem' | cut -c 15-18")
-		bot.sendMessage(chat_id, 'Memoria total: ')
-		bot.sendMessage(chat_id, str(mem_total))
+		bot.sendMessage(chat_id, '*Memoria total: *', parse_mode="Markdown")
+		bot.sendMessage(chat_id, "`%s`" % mem_total, parse_mode="Markdown")
 		# memoria em uso
 		mem_used = commands.getoutput("free -h | grep 'Mem' | cut -c 26-29")
-		bot.sendMessage(chat_id, 'Memoria em uso: ')
-		bot.sendMessage(chat_id, str(mem_used))
+		bot.sendMessage(chat_id, '*Memoria em uso: *', parse_mode="Markdown")
+		bot.sendMessage(chat_id, "`%s`" % men_used, parse_mode="Markdown")
 		# memoria livre
 		mem_free = commands.getoutput("free -h | grep 'Mem' | cut -c 37-40")
-		bot.sendMessage(chat_id, 'Memoria livre: ')
-		bot.sendMessage(chat_id, str(mem_free))
+		bot.sendMessage(chat_id, '*Memoria livre: *', parse_mode="Markdown")
+		bot.sendMessage(chat_id, "`%s`" % mem_free, parse_mode="Markdown")
 		
 		getinfo(chat_id)
 	
@@ -120,21 +120,21 @@ def handle(msg):
 		print 'Comando usado ',  command
 		print '---------------------------'
 		uptime = commands.getoutput("uptime -p")
-		bot.sendMessage(chat_id, 'Up Time do sistema: ')
-  		bot.sendMessage(chat_id, str(uptime))
+		bot.sendMessage(chat_id, '*Up Time do sistema: *',parse_mode="Markdown")
+  		bot.sendMessage(chat_id,  "_%s_" % uptime, parse_mode="Markdown")
 		
 		getinfo(chat_id)
 		
 	# quinta verificaçao verifica se o comando SD 
 	# foi escolhido se escolhido retorna informaçes 
-	# de espaço nas partiçoes de boot e root do sistema
+	# de espaço nas partiçao root do sistema
     	elif command == 'UsoSD':
 		print '---------------------------'
 		print 'Comando usado ', command
 		print '---------------------------'
 		partRoot = commands.getoutput("df -h | grep '/dev'| head -1")
-		bot.sendMessage(chat_id, 'Estado da partiçao root')
-		bot.sendMessage(chat_id, str(partRoot))
+		bot.sendMessage(chat_id, '*Estado da partiçao root: *', parse_mode="Markdown")
+		bot.sendMessage(chat_id,  "`%s`" % partRoot, parse_mode="Markdown")
 		
 		getinfo(chat_id)
 	
@@ -146,8 +146,8 @@ def handle(msg):
 		print 'Comando usado ', command
 		print '---------------------------'
 		date = commands.getoutput("date")
- 		bot.sendMessage(chat_id,'Data e hora do Sistema: ')
-  		bot.sendMessage(chat_id, str(date))
+ 		bot.sendMessage(chat_id,'*Data e hora do Sistema: *', parse_mode="Markdown")
+  		bot.sendMessage(chat_id,  "`%s`" % date, parse_mode="Markdown")
 		
 		getinfo(chat_id)
 		
@@ -162,53 +162,53 @@ def handle(msg):
 		# pegar a quantidade de dados enviados pelo Wireless desde a ultima reinicialização  
 		# trocar o wlan0 pela sua interface wireless
 		rx_wifi = commands.getoutput("cat /sys/class/net/wlan0/statistics/rx_bytes")
-		bot.sendMessage(chat_id,'Quantidade de banda recebida pela rede Wifi: ')
+		bot.sendMessage(chat_id,'*Quantidade de banda recebida pela rede Wifi: *', parse_mode="Markdown")
 		rx_float = float(rx_wifi)
 		rx_float_mb = rx_float / 1024 / 1024
 		if rx_float_mb > 1024:
   			rx_float_gb = rx_float_mb / 1024
-  			bot.sendMessage(chat_id, '%.2f Gbs' % rx_float_gb)
+  			bot.sendMessage(chat_id, '_%.2f Gbs_' % rx_float_gb, parse_mode="Markdown")
 		else:
-			bot.sendMessage(chat_id, '%.2f Mbs' % rx_float_mb)
+			bot.sendMessage(chat_id, '_%.2f Mbs_' % rx_float_mb="Markdown")
 		
 		# pega a quantidade de dados recebidas pelo cabo desde a ultima reinicialização
 		# trocar o wlan0 pela sua interface de rede semfio
 		tx_wifi = commands.getoutput("cat /sys/class/net/wlan0/statistics/tx_bytes")
-		bot.sendMessage(chat_id,'Quantidade de banda enviada pela rede Wifi: ')
+		bot.sendMessage(chat_id,'*Quantidade de banda enviada pela rede Wifi: *', parse_mode="Markdown")
 		tx_float = float(tx_wifi)
 		tx_float_mb = tx_float / 1024 / 1024
 		if tx_float_mb > 1024:
   			tx_float_gb = tx_float_mb / 1024
-  			bot.sendMessage(chat_id, '%.2f Gbs' % tx_float_gb)
+  			bot.sendMessage(chat_id, '_%.2f Gbs_' % tx_float_gb, parse_mode="Markdown")
 	
 		else:
-			bot.sendMessage(chat_id, '%.2f Mbs' % tx_float_mb)
+			bot.sendMessage(chat_id, '_%.2f Mbs_' % tx_float_mb, parse_mode="Markdown")
 		
 		# pega a quantidade de dados enviados pelo cabo desde a ultima reinicialização
 		# trocar o eth0 pela sua interface de rede cabeada
 		rx_cable = commands.getoutput("cat /sys/class/net/eth0/statistics/rx_bytes")
-		bot.sendMessage(chat_id,'Quantidade de banda recebida pela rede cabeada: ')
+		bot.sendMessage(chat_id,'*Quantidade de banda recebida pela rede cabeada: *', parse_mode="Markdown")
 		rx_float = float(rx_cable)
 		rx_float_mb = rx_float / 1024 / 1024
 		if rx_float_mb > 1024:
   			rx_float_gb = rx_float_mb / 1024
-  			bot.sendMessage(chat_id, '%.2f Gbs' % rx_float_gb)
+  			bot.sendMessage(chat_id, '_%.2f Gbs_' % rx_float_gb, parse_mode="Markdown")
 	
 		else:
-			bot.sendMessage(chat_id, '%.2f Mbs' % rx_float_mb)
+			bot.sendMessage(chat_id, '_%.2f Mbs_' % rx_float_mb, parse_mode="Markdown")
 		
 		# pega a quantidade de dados recebidos pelo cabo desde a ultima reinicialização
 		# trocar o eth0 pela sua interface de rede cabeada
 		tx_cable = commands.getoutput("cat /sys/class/net/eth0/statistics/tx_bytes")
-		bot.sendMessage(chat_id,'Quantidade de banda enviada pela rede cabeada')
+		bot.sendMessage(chat_id,'*Quantidade de banda enviada pela rede cabeada: *', parse_mode="Markdown")
 		tx_float = float(tx_cable)
 		tx_float_mb = tx_float / 1024 / 1024
 		if tx_float_mb > 1024:
   			tx_float_gb = tx_float_mb / 1024
-  			bot.sendMessage(chat_id, '%.2f Gbs' % tx_float_gb)
+  			bot.sendMessage(chat_id, '_%.2f Gbs_' % tx_float_gb, parse_mode="Markdown")
 	
 		else:
-			bot.sendMessage(chat_id, '%.2f Mbs' % tx_float_mb)
+			bot.sendMessage(chat_id, '_%.2f Mbs_' % tx_float_mb, parse_mode="Markdown")
 		
 	# oitava verificação verifica se o comando ip foi executado
 	# se executado verifica o chat_id de quem solicitou se o 
@@ -223,16 +223,16 @@ def handle(msg):
 			
 			# aqui pega o ip da lan   ** eth0 para cabo wlan0 para wifi **
 			ip_lan = commands.getoutput("ifconfig eth0 |  grep inet | cut -c 21-37 | head -1")
-			bot.sendMessage(chat_id, 'Endereço de ip local :')
-			bot.sendMessage(chat_id,str(ip_lan))
+			bot.sendMessage(chat_id, '*Endereço de ip local :*', parse_mode="Markdown")
+			bot.sendMessage(chat_id, "_%s_" % ip_lan, parse_mode="Markdown")
 			
 			#ip externo so pra min
 			if chat_id == 345318600:	
 				# aqui pega o ip externo dessa bagaça 
 				response = urllib2.urlopen('http://bot.whatismyipaddress.com/')
 				ip_ex = response.read()			
-				bot.sendMessage(chat_id, 'Endereço de ip externo :')
-				bot.sendMessage(chat_id,str(ip_ex))
+				bot.sendMessage(chat_id, '*Endereço de ip externo: *', parse_mode="Markdown")
+				bot.sendMessage(chat_id, "_%s_" % ip_ex, parse_mode="Markdown")
 	
 		else:
 			bot.sendMessage(chat_id, 'Sai daqui voce nao vai ver o meu endereço de IP!!!')
@@ -246,15 +246,15 @@ def handle(msg):
 		print '---------------------------'
 		print 'Comando usado ', command
 		print '---------------------------'
-		bot.sendMessage(chat_id, 'Ajuda. Encontre aqui informações sobre os comandos')
-		bot.sendMessage(chat_id, 'Comando Temperatura :: Comando que tem como função retornar ao usuario as informações de temperatura da CPU')
-		bot.sendMessage(chat_id, 'Comando Processos :: Comando que tem como função contar e retornar ao usuario a quantidade de processos que estao sendo execuados')
-		bot.sendMessage(chat_id, 'Comando Memoria :: Comando que tem como funçao retornar ao usuario dados da memoria como memoria total, memoria em uso e memoria livre')
-		bot.sendMessage(chat_id, 'Comando UpTime :: Comando que tem como funçao retornar ao usuario a informaçao do UpTime do sistema ou seja a quanto tempo a maquina esta ligada')
-		bot.sendMessage(chat_id, 'Comando UsoSD :: Comando que tem como função retornar informação de espaço utilizando e espaço livre na partição principal do sistema')
-		bot.sendMessage(chat_id, 'Comando Data :: Comando que tem como funçao retornar ao usuario a Hora e Data exatas do sistema')
-		bot.sendMessage(chat_id, 'Comando Rede :: Comando que tem como funçao medir e retornar ao usuario a quantidade de banda que foi utilizada em Upload e Download tanto em Wifi ou Ethernet')
-		bot.sendMessage(chat_id, 'Comando IP :: Comando que tem como funçao pegaro IP externo e IP local e retornar para o administrador ambos IPs e para usuarios normais somente o IP local')
+		bot.sendMessage(chat_id, '`Ajuda. Encontre aqui informações sobre os comandos` ', parse_mode="Markdown")
+		bot.sendMessage(chat_id, '*Comando Temperatura:* ```Comando que tem como função retornar ao usuario as informações de temperatura da CPU``` ', parse_mode="Markdown)
+		bot.sendMessage(chat_id, '*Comando Processos:* ```Comando que tem como função contar e retornar ao usuario a quantidade de processos que estao sendo execuados``` ', parse_mode="Markdown)
+		bot.sendMessage(chat_id, '*Comando Memoria:* ```Comando que tem como funçao retornar ao usuario dados da memoria como memoria total, memoria em uso e memoria livre``` ' parse_mode="Markdown)
+		bot.sendMessage(chat_id, '*Comando UpTime:* ```Comando que tem como funçao retornar ao usuario a informaçao do UpTime do sistema ou seja a quanto tempo a maquina esta ligada``` ', parse_mode="Markdown)
+		bot.sendMessage(chat_id, '*Comando UsoSD:* ```Comando que tem como função retornar informação de espaço utilizando e espaço livre na partição principal do sistema``` ', parse_mode="Markdown)
+		bot.sendMessage(chat_id, '*Comando Data:* ```Comando que tem como funçao retornar ao usuario a Hora e Data exatas do sistema``` ', parse_mode="Markdown)
+		bot.sendMessage(chat_id, '*Comando Rede:* ```Comando que tem como funçao medir e retornar ao usuario a quantidade de banda que foi utilizada em Upload e Download tanto em Wifi ou Ethernet``` ', parse_mode="Markdown)
+		bot.sendMessage(chat_id, '*Comando IP:* ```Comando que tem como funçao pegaro IP externo e IP local e retornar para o administrador ambos IPs e para usuarios normais somente o IP local``` ', parse_mode="Mar")
 					      
 		getinfo(chat_id)
 		
