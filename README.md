@@ -56,5 +56,4 @@ Bot do telegram feito em python rodando na raspberry pi usando a biblioteca Tele
 
 ## Versão 1.2
 * Estruturação do codigo em funçoes facilitando a manutençao e alteração 
-* Feita pelo Douglas
-[Douglas Zuqueto](https://github.com/douglaszuqueto/)
+* Feita pelo [Douglas Zuqueto](https://github.com/douglaszuqueto/)
