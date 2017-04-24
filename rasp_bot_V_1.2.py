@@ -116,7 +116,6 @@ def network(chat_id, command):
   print '---------------------------'
   print 'Comando usado ', command
   print '---------------------------'
-  getinfo(chat_id)
 # pega a quantidade de dados recebidos pela rede wireless
   rx_wifi = commands.getoutput("cat /sys/class/net/wlan0/statistics/rx_bytes")
   bot.sendMessage(chat_id, 'Quantidade de banda recebida pela rede Wifi: ')
@@ -174,7 +173,7 @@ def ip(chat_id, command):
   if chat_id == 345318600 or chat_id == 83074778 or chat_id == 24774270:
 
     # aqui pega o ip da lan   **Trocar o eth0 para sua interface de rede**
-    ip_lan = commands.getoutput("ifconfig eth0 |  grep inet | cut -c 21-37 | head -1")
+    ip_lan = commands.getoutput("ifconfig wlan0 |  grep inet | cut -c 21-37 | head -1")
     bot.sendMessage(chat_id, 'Endereço de ip local :')
     bot.sendMessage(chat_id, str(ip_lan))
 
@@ -275,7 +274,7 @@ def handle(msg):
     getinfo(chat_id)
 
   elif command == 'Processos':
-    proccess(chat_id, command)
+    process(chat_id, command)
     getinfo(chat_id)
 
   elif command == 'Memoria':
