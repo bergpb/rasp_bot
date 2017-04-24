@@ -13,23 +13,23 @@ def handle(msg):
         	bot.sendMessage(chatid,'Iniciado saporra ainda nao faz nada.' )
         
     	elif comando == 'Temperatura':
-   		print 'oi' 		
+   		print 'Comando temperatura: ok' 		
     	elif comando == 'Memoria':
-        	print 'oi'
+        	print 'Comando Memoria: ok'
     	elif comando == 'UpTime':
-		print 'oi'   		
+		print 'Comando UpTime: ok'   		
     	elif comando == 'UsoSD':
-   		print 'oi'
+   		print 'Comando UsoSD: ok'
     	elif comando == 'Data':
-    		print 'oi'
+    		print 'Comando Data: oj'
     	elif comando == 'IP':
-    		print 'oi'
+    		print 'Comando ip: ok'
     	elif comando == 'CPU_Info':
-    		print 'oi'
+    		print 'comando cpu_info: ok'
     	elif comando == 'Ajuda':
-       		print 'oi'
+       		print 'comando ajuda: ok'
     	else:
-        	bot.sendMessage(chatid, 'Use os comandos no teclado para... Nem tem teclado aqui')
+        	bot.sendMessage(chatid, 'Use os comandos no teclado para!! Nem tem teclado aqui ainda ...')
 
 bot = telepot.Bot('API BOT here')
 bot.message_loop(handle)
@@ -37,4 +37,4 @@ bot.message_loop(handle)
 print 'Aguardando comandos ...'
 
 while 1:
-    time.sleep(5)
+	time.sleep(5)
