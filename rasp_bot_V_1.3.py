@@ -19,9 +19,9 @@ keyboard = ReplyKeyboardMarkup(
    	[KeyboardButton(text="Rede"), KeyboardButton(text="IP")],
     ])
 
-#aqui estao as constantes para controle
+#aqui estao as constantes para controle colcoar o bot API aqui agora
 chatid_admin = 345318600
-botAPI = '346248441:AAEGri00lPsFmKEzshGtthdoEgyawJO8s5k'
+botAPI = ' '
 chatid_autorizado1 = 83074778
 chatid_autorizado2 = 24774270
 
