@@ -20,10 +20,10 @@ keyboard = ReplyKeyboardMarkup(
     ])
 
 #aqui estao as constantes para controle colcoar o bot API aqui agora
-chatid_admin = 345318600
-botAPI = ' '
-chatid_autorizado1 = 83074778
-chatid_autorizado2 = 24774270
+CHAT_ADMIN= 345318600
+BOT_API = ' '
+CHAT_AUTHORIZED_1 = 83074778
+chatid_AUTHORIZED_2 = 24774270
 
 # primeira função que inicia o bot quando 
 # clicado em começar ou enviado /start
@@ -178,7 +178,7 @@ def ip(chat_id, command):
   print 'Comando usado ', command
   print '---------------------------'
   # ip local para quem tem permissao do 
-  if chat_id == chatid_admin or chat_id == chatid_autorizado1 or chat_id == chatid_autorizado2:
+  if chat_id == CHAT_ADMIN or chat_id == CHAT_AUTHORIZED_1 or chat_id == CHAT_AUTHORIZED_2:
 
     # aqui pega o ip da lan   **Trocar o eth0 para sua interface de rede**
     ip_lan = commands.getoutput("ifconfig wlan0 |  grep inet | cut -c 21-37 | head -1")
@@ -186,7 +186,7 @@ def ip(chat_id, command):
     bot.sendMessage(chat_id, '`%s`' % ip_lan, parse_mode="Markdown")
 
     # ip externo so para o administrador
-    if chat_id == chatid_admin:
+    if chat_id == CHAT_ADMIN:
     # aqui pega o ip externo usando uma API
       response = urllib2.urlopen('http://bot.whatismyipaddress.com/')
       ip_ex = response.read()
@@ -315,7 +315,7 @@ def handle(msg):
     bot.sendMessage(chat_id, 'Ainda nao sei ler =(')
 
 # colocar aqui a API do bot gerada pelo botfather
-bot = telepot.Bot(botAPI)
+bot = telepot.Bot(BOT_API)
 bot.message_loop(handle)
 
 print 'Aguardando comandos ...'
