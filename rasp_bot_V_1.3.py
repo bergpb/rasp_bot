@@ -8,6 +8,17 @@ import urllib2
 import commands
 from telepot.namedtuple import ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove
 
+# Aqui e o teclado que aparece para o usuario 
+# as palavras do teclado sao os comanos
+# que seram enviadas para a estrutura de decisao
+keyboard = ReplyKeyboardMarkup(
+  keyboard=[
+	[KeyboardButton(text="Temperatura"), KeyboardButton(text="Processos")],
+   	[KeyboardButton(text="Memoria"), KeyboardButton(text="UpTime")],
+   	[KeyboardButton(text="UsoSD"), KeyboardButton(text="Data")],
+   	[KeyboardButton(text="Rede"), KeyboardButton(text="IP")],
+    ])
+
 #aqui estao as constantes para controle
 chatid_admin = 345318600
 botAPI = '346248441:AAEGri00lPsFmKEzshGtthdoEgyawJO8s5k'
@@ -179,7 +190,7 @@ def ip(chat_id, command):
     # aqui pega o ip externo usando uma API
       response = urllib2.urlopen('http://bot.whatismyipaddress.com/')
       ip_ex = response.read()
-      bot.sendMessage(chat_id, '*Endereço de ip externo :*')
+      bot.sendMessage(chat_id, '*Endereço de ip externo :*', parse_mode="Markdown")
       bot.sendMessage(chat_id, '`%s`' % ip_ex, parse_mode="Markdown")
 
   else:
@@ -227,7 +238,6 @@ def handle(msg):
   content_type, chat_type, chat_id = telepot.glance(msg)
   m = telepot.namedtuple.Message(**msg)
 
-
 # função criada para fazer uma verificação 
 # e ver se a messagem foi enviada de um grupo
 # ou de um chat privado e tambem mostrar para
@@ -257,20 +267,11 @@ def handle(msg):
       print time.strftime('%Y-%m-%d %H:%M:%S')
       print '--------------------------------------'
 	
-# Aqui e o teclado que aparece para o usuario 
-# as palavras do teclado sao os comanos
-# que seram enviadas para a estrutura de decisao
-  keyboard = ReplyKeyboardMarkup(
-  keyboard=[
-      [KeyboardButton(text="Temperatura"), KeyboardButton(text="Processos")],
-      [KeyboardButton(text="Memoria"), KeyboardButton(text="UpTime")],
-      [KeyboardButton(text="UsoSD"), KeyboardButton(text="Data")],
-      [KeyboardButton(text="Rede"), KeyboardButton(text="IP")],
-    ])
+
 
   if command == '/start':
-    start(chat_id, keyboard)
-    getinfo(chat_id)
+	start(chat_id, keyboard)
+	getinfo(chat_id)
 
   elif command == 'Temperatura':
     temperature(chat_id, command)
