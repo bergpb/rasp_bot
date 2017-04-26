@@ -48,8 +48,6 @@ def start(chat_id, command):
 # executa o conteudo da funçao fazendo a leitura da temperatura
 # e gravnado em uma variacel que sera retornada para o usuario do bot
 def temperature(chat_id, command):
-	print 'Comando usado -->', command
-	print '---------------------------'
 	temp = commands.getoutput("vcgencmd measure_temp | cut -c 6-12")
 	bot.sendMessage(chat_id, '*Temperatura atual da CPU: *', parse_mode="Markdown")
 	bot.sendMessage(chat_id, "`%s`" % temp, parse_mode="Markdown")
@@ -60,8 +58,6 @@ def temperature(chat_id, command):
 # processo estao ativos rodando no momento e gravando 
 # em uma variavel que sera retornada para o usuario do bot
 def process(chat_id, command):
-	print 'Comando usado -->', command
-	print '---------------------------'
 	quantProc = commands.getoutput("ps -aux | wc -l")
 	bot.sendMessage(chat_id, '*Quantidade de processos ativos: *', parse_mode="Markdown")
 	bot.sendMessage(chat_id, "`%s`" % quantProc, parse_mode="Markdown")
@@ -72,8 +68,6 @@ def process(chat_id, command):
 # quantidade de memoria total, memoria em uso e memoria livre
 # gravando  em uma variavel que sera retornada para o usuario do bot
 def memory(chat_id, command):
-	print 'Comando usado -->', command
-	print '---------------------------'
 	mem_total = commands.getoutput("free -h | grep 'Mem' | cut -c 15-18")
 	bot.sendMessage(chat_id, '*Memoria total: *', parse_mode="Markdown")
 	bot.sendMessage(chat_id, "`%s`" % mem_total, parse_mode="Markdown")
@@ -92,8 +86,6 @@ def memory(chat_id, command):
 # do sistema(tempo ativo desde a ultima reinicialização)
 # gravando  em uma variavel que sera retornada para o usuario do bot
 def upTime(chat_id, command):
-	print 'Comando usado -->', command
-	print '---------------------------'
 	uptime = commands.getoutput("uptime -p")
 	bot.sendMessage(chat_id, '*Up Time do sistema: *',parse_mode="Markdown")
 	bot.sendMessage(chat_id,  "_%s_" % uptime, parse_mode="Markdown")
@@ -105,8 +97,6 @@ def upTime(chat_id, command):
 # ou HD que esta em uso gravando  em uma variavel 
 # que sera retornada para o usuario do bot
 def sdCard(chat_id, command):
-	print 'Comando usado -->', command
-	print '---------------------------'
 	sd = commands.getoutput("df -h | grep '/dev'| head -1")
 	bot.sendMessage(chat_id, '*Uso do MicroSD: *', parse_mode="Markdown")
 	bot.sendMessage(chat_id,  "`%s`" % sd, parse_mode="Markdown")
@@ -117,8 +107,6 @@ def sdCard(chat_id, command):
 # a data/hora atual do sistema e grava em uma
 # variavel e retorna para  usuario do bot
 def date(chat_id, command):
-	print 'Comando usado -->', command
-	print '---------------------------'
 	date = commands.getoutput("date")
 	bot.sendMessage(chat_id,'*Data e hora do Sistema: *', parse_mode="Markdown")
 	bot.sendMessage(chat_id,  "_%s_" % date, parse_mode="Markdown")
@@ -131,8 +119,6 @@ def date(chat_id, command):
 # sejam elas redes wireless ou rede ethernet grava
 # em uma variavel e retonar para o usuario do bot
 def network(chat_id, command):
-	print 'Comando usado -->', command
-	print '---------------------------'
 # pega a quantidade de dados recebidos pela rede wireless
 	rx_wifi = commands.getoutput("cat /sys/class/net/wlan0/statistics/rx_bytes")
 	bot.sendMessage(chat_id, '*Quantidade de banda recebida pela rede Wifi: *', parse_mode="Markdown")
@@ -180,9 +166,6 @@ def network(chat_id, command):
 # atraves de comandos e o ip externo atraves de uma API 
 # grava em uma variavel e retorna para usuario do bot
 def ip(chat_id, command):
-	print 'Comando usado ', command
-	print '---------------------------'
-
 # verifica se o chat id e igual ao do admin ou de alguns dos autorizados
 	if chat_id == admin_id or chat_id == autho_1 or chat_id == autho_2:
 # pega o ip local da maquina por meio de comandos no terminal
@@ -200,13 +183,12 @@ def ip(chat_id, command):
 	else:
 		bot.sendMessage(chat_id, 'Me desculpe Vossa Excelencia...') 
 		bot.sendMessage(chat_id, 'Sou apenas um mero bot e nao posso lhe informar o meu endereco IP')
+		
 # funçao help verifica se o command e igual a /help 
 # (nao tem no teclado tem que ser digitado manual igua la /start)
 # entao retornar infomaçoes de funcionamento de todos os comandos
 # disponiveis no bot para o usuario
 def help(chat_id, command):
-	print 'Comando usado -->', command
-	print '---------------------------'
 	bot.sendMessage(chat_id, 'Ajuda. Encontre aqui informacoes sobre os comandos')
 	bot.sendMessage(chat_id, '*Comando Temperatura*', parse_mode="Markdown") 
 	bot.sendMessage(chat_id, 'Comando que tem como funcao retornar ao usuario as informacoes de temperatura da CPU')
@@ -248,20 +230,25 @@ def handle(msg):
 # e quais comandos e em que hora ** NO FUTURO SALVAR ISSO NO BANCO**
 	def getinfo(chat_id):
 		if chat_id < 0:
+			print 'Comando usado -->', command 
+			print '---------------------------'
 			print 'Menssage do tipo %s: \n' % (content_type,)
-			print 'Chat ID do Grupo : %s' % m.chat[0]
+			print 'Chat ID do Grupo : %s' % m.chat[0] 
 			print 'Tipo de chat : %s' % m.chat[1]
 			print 'Nome do Grupo: %s' % m.chat[2]
+			print 'Chat Id User: %s' % m.from_[0]
+			print 'Username: %s' % m.from_[3] 
 			print 'First Name : %s' % m.from_[1]
 			print 'Last Name: %s' % m.from_[2]
-			print 'Username: %s' % m.from_[3]
 			print time.strftime('%Y-%m-%d %H:%M:%S')
 			print '--------------------------------------'
 		else:
+			print 'Comando usado -->', command
+			print '---------------------------'
 			print 'Messagem do tipo %s: \n' % (content_type,)
-			print 'Chat ID : %s' % m.chat[0]
+			print 'Chat ID : %s' % m.chat[0] 
 			print 'Tipo de chat : %s' % m.chat[1]
-			print 'Username : %s' % m.chat[3]
+			print 'Username : %s' % m.chat[3] 
 			print 'First Name: %s' % m.chat[4]
 			print 'Last Name: %s' % m.chat[5]
 			print time.strftime('%Y-%m-%d %H:%M:%S')
