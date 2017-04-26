@@ -23,7 +23,7 @@ keyboard = ReplyKeyboardMarkup(
 CHAT_ADMIN= 345318600
 BOT_API = ' '
 CHAT_AUTHORIZED_1 = 83074778
-chatid_AUTHORIZED_2 = 24774270
+CHAT_AUTHORIZED_2 = 24774270
 
 # primeira função que inicia o bot quando 
 # clicado em começar ou enviado /start
