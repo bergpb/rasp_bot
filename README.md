@@ -10,6 +10,7 @@ Bot do telegram feito em python rodando na raspberry pi usando a biblioteca Tele
 ## Versão 1.4
 * Arquivo de configuraçao externo para salvar chat_id e API do bot
 * Feita pelo [René](https://github.com/shenef)
+* Bug maldito arrumado pelo [Berg](https://github.com/bergpb)
 
 ## Versão 1.3 
 * Constantes com os chatid do admin e autorizados as verem o ip
