@@ -221,7 +221,7 @@ def help(chat_id, command):
 	bot.sendMessage(chat_id, 'Comando que tem como funcao retornar ao usuario a informacao do UpTime do sistema ou seja a quanto tempo a maquina esta ligada')
 	time.sleep(0.5)
 	bot.sendMessage(chat_id, '*Comando UsoSD*', parse_mode="Markdown")
-	bot.sendMessage(chat_id, 'Comando que tem como funcao retornar informacao de espaço utilizando e espaço livre na particao principal do sistema')
+	bot.sendMessage(chat_id, 'Comando que tem como funcao retornar informacao de espaco utilizando e espaco livre na particao principal do sistema')
 	time.sleep(0.5)
 	bot.sendMessage(chat_id, '*Comando Data*', parse_mode="Markdown")
 	bot.sendMessage(chat_id, 'Comando que tem como funcao retornar ao usuario a Hora e Data exatas do sistema')
