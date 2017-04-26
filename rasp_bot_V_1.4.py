@@ -207,9 +207,9 @@ def ip(chat_id, command):
 def help(chat_id, command):
 	print 'Comando usado -->', command
 	print '---------------------------'
-	bot.sendMessage(chat_id, 'Ajuda. Encontre aqui informações sobre os comandos')
+	bot.sendMessage(chat_id, 'Ajuda. Encontre aqui informacoes sobre os comandos')
 	bot.sendMessage(chat_id, '*Comando Temperatura*', parse_mode="Markdown") 
-	bot.sendMessage(chat_id, 'Comando que tem como função retornar ao usuario as informacoes de temperatura da CPU')
+	bot.sendMessage(chat_id, 'Comando que tem como funcao retornar ao usuario as informacoes de temperatura da CPU')
 	time.sleep(0.5)
 	bot.sendMessage(chat_id, '*Comando Processos*', parse_mode="Markdown")
 	bot.sendMessage(chat_id, 'Comando que tem como funcao contar e retornar ao usuario a quantidade de processos que estao sendo execuados')
