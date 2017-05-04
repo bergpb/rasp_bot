@@ -214,6 +214,26 @@ def help(chat_id, command):
 	bot.sendMessage(chat_id, '*Comando IP*', parse_mode="Markdown")
 	bot.sendMessage(chat_id, 'Comando que tem como funcao pegar o IP externo e IP local e retornar para o administrador ambos IPs e para usuarios normais somente o IP local')
 
+
+def monitor(chat_id, command):
+	while command == '/monitorar':	
+		temp = commands.getoutput("vcgencmd measure_temp | cut -c 6-12")
+		float(temp)
+		if temp >= 45:
+			bot.sendMessage(chat_id, 'Temperatura esta acima de 45*C ')
+			bot.sendMessage(chat_id, 'Cuidado... ')
+		
+			if temp >= 55:
+				bot.sendMessage(chat_id, 'Temperatura esta acima de 55*C ')
+				bot.sendMessage(chat_id, 'Procure uma forma de diminuir a temperatura... ')
+		
+				if temp > 65:
+					bot.sendMessage(chat_id, 'Temperatura esta acima de 65*C ')
+					bot.sendMessage(chat_id, 'Saporra vai explodir !!! ')
+					
+		time.sleep(300)
+		
+	
 # Função principal do bot, estrutura de decisão 
 def handle(msg):
 # Configurações da variavel para controlar 
@@ -293,7 +313,11 @@ def handle(msg):
 	elif command == '/help':
 		help(chat_id, command)
 		getinfo(chat_id)
-
+		
+	elif command == '/monitorar':
+		monitor(chat_id, command)
+		getinfo(chat_id)
+		
 # menssagem de erro caso o usuario digite alguma coisa manualmente
 	else:
 		bot.sendMessage(chat_id, 'Use os comandos no teclado')
