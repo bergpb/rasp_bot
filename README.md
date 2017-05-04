@@ -8,8 +8,10 @@ Bot do telegram feito em python rodando na raspberry pi usando a biblioteca Tele
 # Versões
 
 ## Versão 1.5
-* 
-* 
+* Criação da função monitor
+* Monitorar a temperatura da placa e enviar alertas de tempos em tempos 
+* (nao foi testada)
+
 ## Versão 1.4
 * Arquivo de configuraçao externo config.ini usado para guardar API do bot e chat_id com privilegios
 * Feita pelo [René](https://github.com/shenef)
