@@ -38,10 +38,10 @@ keyboard = ReplyKeyboardMarkup(
 # clicado em começar ou enviado /start
 # envia messagens de boas vindas e ativa o teclado
 def start(chat_id, command):
-	bot.sendMessage(chat_id, ' Bem Vindo!!')
-	bot.sendMessage(chat_id, ' Bot desenvolvido por @joao_slv')
-	bot.sendMessage(chat_id, ' Iniciando o Bot...')
-	bot.sendMessage(chat_id, ' Use os comandos do teclado abaixo: ', reply_markup=keyboard)
+	bot.sendMessage(chat_id, 'Bem Vindo!!')
+	bot.sendMessage(chat_id, 'Bot desenvolvido por @joao_slv')
+	bot.sendMessage(chat_id, 'Iniciando o Bot...')
+	bot.sendMessage(chat_id, 'Use os comandos do teclado abaixo:', reply_markup=keyboard)
 
 # função temperature verifica qual opçao do teclado
 # foi selecionada e se o command for igual a temperatura 
@@ -49,7 +49,7 @@ def start(chat_id, command):
 # e gravnado em uma variacel que sera retornada para o usuario do bot
 def temperature(chat_id, command):
 	temp = commands.getoutput("vcgencmd measure_temp | cut -c 6-12")
-	bot.sendMessage(chat_id, '*Temperatura atual da CPU: *', parse_mode="Markdown")
+	bot.sendMessage(chat_id, '*Temperatura atual da CPU:*', parse_mode="Markdown")
 	bot.sendMessage(chat_id, "`%s`" % temp, parse_mode="Markdown")
 
 # função process verifica qual opçao do teclado
@@ -59,7 +59,7 @@ def temperature(chat_id, command):
 # em uma variavel que sera retornada para o usuario do bot
 def process(chat_id, command):
 	quantProc = commands.getoutput("ps -aux | wc -l")
-	bot.sendMessage(chat_id, '*Quantidade de processos ativos: *', parse_mode="Markdown")
+	bot.sendMessage(chat_id, '*Quantidade de processos ativos:*', parse_mode="Markdown")
 	bot.sendMessage(chat_id, "`%s`" % quantProc, parse_mode="Markdown")
 
 # função memory verifica qual opçao do teclado
@@ -69,15 +69,15 @@ def process(chat_id, command):
 # gravando  em uma variavel que sera retornada para o usuario do bot
 def memory(chat_id, command):
 	mem_total = commands.getoutput("free -h | grep 'Mem' | cut -c 15-18")
-	bot.sendMessage(chat_id, '*Memoria total: *', parse_mode="Markdown")
+	bot.sendMessage(chat_id, '*Memoria total:*', parse_mode="Markdown")
 	bot.sendMessage(chat_id, "`%s`" % mem_total, parse_mode="Markdown")
 # memoria em uso
 	mem_used = commands.getoutput("free -h | grep 'Mem' | cut -c 26-29")
-	bot.sendMessage(chat_id, '*Memoria em uso: *', parse_mode="Markdown")
+	bot.sendMessage(chat_id, '*Memoria em uso:*', parse_mode="Markdown")
 	bot.sendMessage(chat_id, "`%s`" % mem_used, parse_mode="Markdown")
 # memoria livre
 	mem_free = commands.getoutput("free -h | grep 'Mem' | cut -c 37-40")
-	bot.sendMessage(chat_id, '*Memoria livre: *', parse_mode="Markdown")
+	bot.sendMessage(chat_id, '*Memoria livre:*', parse_mode="Markdown")
 	bot.sendMessage(chat_id, "`%s`" % mem_free, parse_mode="Markdown")
 
 # funçao upTime verifica qual opção do teclado
@@ -87,7 +87,7 @@ def memory(chat_id, command):
 # gravando  em uma variavel que sera retornada para o usuario do bot
 def upTime(chat_id, command):
 	uptime = commands.getoutput("uptime -p")
-	bot.sendMessage(chat_id, '*Up Time do sistema: *',parse_mode="Markdown")
+	bot.sendMessage(chat_id, '*Up Time do sistema:*',parse_mode="Markdown")
 	bot.sendMessage(chat_id,  "_%s_" % uptime, parse_mode="Markdown")
 
 # funçao sdCard verifica qual opção do teclado
@@ -98,7 +98,7 @@ def upTime(chat_id, command):
 # que sera retornada para o usuario do bot
 def sdCard(chat_id, command):
 	sd = commands.getoutput("df -h | grep '/dev'| head -1")
-	bot.sendMessage(chat_id, '*Uso do MicroSD: *', parse_mode="Markdown")
+	bot.sendMessage(chat_id, '*Uso do MicroSD:*', parse_mode="Markdown")
 	bot.sendMessage(chat_id,  "`%s`" % sd, parse_mode="Markdown")
 
 # funçao date verifica qual opção do teclado
@@ -108,7 +108,7 @@ def sdCard(chat_id, command):
 # variavel e retorna para  usuario do bot
 def date(chat_id, command):
 	date = commands.getoutput("date")
-	bot.sendMessage(chat_id,'*Data e hora do Sistema: *', parse_mode="Markdown")
+	bot.sendMessage(chat_id,'*Data e hora do Sistema:*', parse_mode="Markdown")
 	bot.sendMessage(chat_id,  "_%s_" % date, parse_mode="Markdown")
 
 # funçao network verifica qual opção do teclado 
@@ -121,7 +121,7 @@ def date(chat_id, command):
 def network(chat_id, command):
 # pega a quantidade de dados recebidos pela rede wireless
 	rx_wifi = commands.getoutput("cat /sys/class/net/wlan0/statistics/rx_bytes")
-	bot.sendMessage(chat_id, '*Quantidade de banda recebida pela rede Wifi: *', parse_mode="Markdown")
+	bot.sendMessage(chat_id, '*Quantidade de banda recebida pela rede Wifi:*', parse_mode="Markdown")
 	rx_float = float(rx_wifi)
 	rx_float_mb = rx_float / 1024 / 1024
 	if rx_float_mb > 1024:
@@ -131,7 +131,7 @@ def network(chat_id, command):
 		bot.sendMessage(chat_id, '`%.2f Mbs`' % rx_float_mb, parse_mode="Markdown")
 # pega a quantidade de dados eviados pela rede wireless
 	tx_wifi = commands.getoutput("cat /sys/class/net/wlan0/statistics/tx_bytes")
-	bot.sendMessage(chat_id, '*Quantidade de banda enviada pela rede Wifi: *', parse_mode="Markdown")
+	bot.sendMessage(chat_id, '*Quantidade de banda enviada pela rede Wifi:*', parse_mode="Markdown")
 	tx_float = float(tx_wifi)
 	tx_float_mb = tx_float / 1024 / 1024
 	if tx_float_mb > 1024:
@@ -141,7 +141,7 @@ def network(chat_id, command):
 		bot.sendMessage(chat_id, '`%.2f Mbs`' % tx_float_mb, parse_mode="Markdown")
 # pega a quantidade de dados recebidos pela rede ethernet
 	rx_cable = commands.getoutput("cat /sys/class/net/eth0/statistics/rx_bytes")
-	bot.sendMessage(chat_id, '*Quantidade de banda recebida pela rede cabeada: *', parse_mode="Markdown")
+	bot.sendMessage(chat_id, '*Quantidade de banda recebida pela rede cabeada:*', parse_mode="Markdown")
 	rx_float = float(rx_cable)
 	rx_float_mb = rx_float / 1024 / 1024
 	if rx_float_mb > 1024:
@@ -151,7 +151,7 @@ def network(chat_id, command):
 		bot.sendMessage(chat_id, '`%.2f Mbs`' % rx_float_mb, parse_mode="Markdown")
 # pega quantidade de dados enviados pela rede ethernet
 	tx_cable = commands.getoutput("cat /sys/class/net/eth0/statistics/tx_bytes")
-	bot.sendMessage(chat_id, '*Quantidade de banda enviada pela rede cabeada: *', parse_mode="Markdown")
+	bot.sendMessage(chat_id, '*Quantidade de banda enviada pela rede cabeada:*', parse_mode="Markdown")
 	tx_float = float(tx_cable)
 	tx_float_mb = tx_float / 1024 / 1024
 	if tx_float_mb > 1024:
@@ -170,14 +170,14 @@ def ip(chat_id, command):
 	if chat_id == admin_id or chat_id == autho_1 or chat_id == autho_2:
 # pega o ip local da maquina por meio de comandos no terminal
 		ip_lan = commands.getoutput("ifconfig wlan0 |  grep inet | cut -c 21-37 | head -1")
-		bot.sendMessage(chat_id, 'Ip local: ', parse_mode="Markdown")
+		bot.sendMessage(chat_id, '*Ip local:*', parse_mode="Markdown")
 		bot.sendMessage(chat_id, '%s' % ip_lan, parse_mode="Markdown")
 # verifica se o chat id e igual ao do admin 
 		if chat_id == admin_id:
 # pega o ip externo atraves de api 
 			response = urllib2.urlopen('http://bot.whatismyipaddress.com/')
 			ip_ex = response.read()
-			bot.sendMessage(chat_id, '*Ip externo: *', parse_mode="Markdown")
+			bot.sendMessage(chat_id, '*Ip externo:*', parse_mode="Markdown")
 			bot.sendMessage(chat_id, '`%s`' % ip_ex, parse_mode="Markdown")
 # se o chat id nao estiver na lista retonar essa menssagem
 	else:
@@ -218,18 +218,20 @@ def help(chat_id, command):
 def monitor(chat_id, command):
 	while command == '/monitorar':	
 		temp = commands.getoutput("vcgencmd measure_temp | cut -c 6-12")
+		bot.sendMessage(chat_id, '*Temperatura Atual:*', parse_mode="Markdown")
+		bot.sendMessage(chat_id, "`%s`" % temp, parse_mode="Markdown")
 		float(temp)
 		if temp >= 45:
-			bot.sendMessage(chat_id, 'Temperatura esta acima de 45*C ')
-			bot.sendMessage(chat_id, 'Cuidado... ')
+			bot.sendMessage(chat_id, 'Temperatura esta acima de `45*C` ', parse_mode="Markdown")
+			bot.sendMessage(chat_id, '*Cuidado...*', parse_mode="Markdown")
 		
 			if temp >= 55:
-				bot.sendMessage(chat_id, 'Temperatura esta acima de 55*C ')
-				bot.sendMessage(chat_id, 'Procure uma forma de diminuir a temperatura... ')
+				bot.sendMessage(chat_id, 'Temperatura esta acima de `55*C` ', parse_mode="Markdown")
+				bot.sendMessage(chat_id, '*Procure uma forma de diminuir a temperatura...*', parse_mode="Markdown")
 		
 				if temp > 65:
-					bot.sendMessage(chat_id, 'Temperatura esta acima de 65*C ')
-					bot.sendMessage(chat_id, 'Saporra vai explodir !!! ')
+					bot.sendMessage(chat_id, 'Temperatura esta acima de `65*C` ', parse_mode="Markdown")
+					bot.sendMessage(chat_id, '*Saporra vai explodir !!!*', parse_mode="Markdown")
 					
 		time.sleep(300)
 		
