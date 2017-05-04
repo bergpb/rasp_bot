@@ -214,7 +214,11 @@ def help(chat_id, command):
 	bot.sendMessage(chat_id, '*Comando IP*', parse_mode="Markdown")
 	bot.sendMessage(chat_id, 'Comando que tem como funcao pegar o IP externo e IP local e retornar para o administrador ambos IPs e para usuarios normais somente o IP local')
 
-
+# funçao monitor verifica se o command e igual a /monitorar
+# (nao tem no teclado tem que ser digitado manualmente igual ao /start e /help)
+# fica verificando a temperatura e retornando menssagens de 
+# acordo com a temperatura atual e fica rodando por tempo 
+# indeterminado ate que outro comando seja usado no teclado
 def monitor(chat_id, command):
 	while command == '/monitorar':	
 		temp = commands.getoutput("vcgencmd measure_temp | cut -c 6-12")
@@ -238,6 +242,7 @@ def monitor(chat_id, command):
 	
 # Função principal do bot, estrutura de decisão 
 def handle(msg):
+
 # Configurações da variavel para controlar 
 # a estrutura de decisao e tambem a variavel
 # que salva os dados do chat em uma tupla 
