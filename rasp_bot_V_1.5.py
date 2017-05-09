@@ -221,25 +221,22 @@ def help(chat_id, command):
 # indeterminado ate que outro comando seja usado no teclado
 def monitor(chat_id, command):
 	while command == '/monitorar':	
-		temp = commands.getoutput("vcgencmd measure_temp | cut -c 6-12")
+		t = commands.getoutput("vcgencmd measure_temp | cut -c 6-9")
 		bot.sendMessage(chat_id, '*Temperatura Atual:*', parse_mode="Markdown")
-		bot.sendMessage(chat_id, "`%s`" % temp, parse_mode="Markdown")
-		float(temp)
-		if temp >= 45:
-			bot.sendMessage(chat_id, 'Temperatura esta acima de `45*C` ', parse_mode="Markdown")
-			bot.sendMessage(chat_id, '*Cuidado...*', parse_mode="Markdown")
-		
-			if temp >= 55:
-				bot.sendMessage(chat_id, 'Temperatura esta acima de `55*C` ', parse_mode="Markdown")
-				bot.sendMessage(chat_id, '*Procure uma forma de diminuir a temperatura...*', parse_mode="Markdown")
-		
-				if temp > 65:
-					bot.sendMessage(chat_id, 'Temperatura esta acima de `65*C` ', parse_mode="Markdown")
-					bot.sendMessage(chat_id, '*Saporra vai explodir !!!*', parse_mode="Markdown")
-					
-		time.sleep(300)
-		
-	
+		bot.sendMessage(chat_id, "`%s`" % t, parse_mode="Markdown")
+		temp=float(t)
+		if temp < 35:
+			bot.sendMessage(chat_id, '*Temperatura esta Otima!!*', parse_mode="Markdown")
+		elif temp >= 40 and temp <= 49.9:
+			bot.sendMessage(chat_id, '*Temperatura esta Boa!!*', parse_mode="Markdown")
+		elif temp >= 50 and temp <= 64.9:
+			bot.sendMessage(chat_id, '*Temperatura esta alta cuidado...*', parse_mode="Markdown")
+		elif temp >= 65 and temp <= 74.9:
+			bot.sendMessage(chat_id, '*Temperatura esta muito alta procure diminuir!!*', parse_mode="Markdown")
+		elif temp > 75:
+			bot.sendMessage(chat_id, '*Saporra vai explodir!!*', parse_mode="Markdown")
+		time.sleep(10)
+
 # Função principal do bot, estrutura de decisão 
 def handle(msg):
 
@@ -322,8 +319,8 @@ def handle(msg):
 		getinfo(chat_id)
 		
 	elif command == '/monitorar':
-		monitor(chat_id, command)
 		getinfo(chat_id)
+		monitor(chat_id, command)
 		
 # menssagem de erro caso o usuario digite alguma coisa manualmente
 	else:
@@ -339,4 +336,3 @@ print 'Aguardando comandos ...'
 # loop while que mantem o bot rodando por tempo indeterminado
 while 1:
 	time.sleep(5)
- 
