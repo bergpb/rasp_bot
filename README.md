@@ -7,6 +7,11 @@ Bot do telegram feito em python rodando na raspberry pi usando a biblioteca Tele
 
 # Versões
 
+## Versão 1.5
+* Foi adicionado um novo teclado para funções futuras
+* Criado a função next que chama o teclado novo
+* Criado a função back que chama de volta o teclado antigo
+
 ## Versão 1.4
 * Arquivo de configuraçao externo config.ini usado para guardar API do bot e chat_id com privilegios
 * Feita pelo [René](https://github.com/shenef)
