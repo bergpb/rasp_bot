@@ -23,10 +23,12 @@ autho_1 = int(autho_1)
 
 autho_2 = config['AUTHORIZED'] ['id_2']
 autho_2 = int(autho_2)
-# Aqui e o teclado que aparece para o usuario 
+
+# Aqui fica os teclados que aparecem para o usuario 
 # as palavras do teclado sao os comandos
 # que seram enviadas para a estrutura de decisao
 
+# teclado 1 comando NEXT chama o teclado 2
 keyboard = ReplyKeyboardMarkup(
 	keyboard=[
 		[KeyboardButton(text="Temperatura"), KeyboardButton(text="Processos")],
@@ -36,6 +38,7 @@ keyboard = ReplyKeyboardMarkup(
        		[KeyboardButton(text="NEXT")],
 ])
 
+# teclado 2 comando BACK chama o teclado 1
 newkeyboard = ReplyKeyboardMarkup(
 	keyboard=[
         	[KeyboardButton(text="..."), KeyboardButton(text="...")],
@@ -193,9 +196,11 @@ def ip(chat_id, command):
 	else:
 		bot.sendMessage(chat_id, '127.0.0.1') 
 		
+# funcao next chama o teclado 2 e retorna menssagem		
 def next(chat_id, command):
 	bot.sendMessage(chat_id,'Teclado 2 como novos comandos', reply_markup=newkeyboard)
 	
+# fucnao back chama o teclado 1 e retorna a menssage	
 def back(chat_id, command):
 	bot.sendMessage(chat_id,'Teclado 1 de volta', reply_markup=keyboard)
 
