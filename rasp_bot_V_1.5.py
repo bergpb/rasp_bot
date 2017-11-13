@@ -104,7 +104,7 @@ def date(chat_id, command):
 def network(chat_id, command):
 # pega a quantidade de dados recebidos pela rede wireless
 	rx_wifi = commands.getoutput("cat /sys/class/net/wlan0/statistics/rx_bytes")
-	bot.sendMessage(chat_id, '*Quantidade de banda recebida pela rede Wifi: *', parse_mode="Markdown")
+	bot.sendMessage(chat_id, '*Donwload pela rede Wifi: *', parse_mode="Markdown")
 	rx_float = float(rx_wifi)
 	rx_float_mb = rx_float / 1024 / 1024
 	if rx_float_mb > 1024:
@@ -112,9 +112,9 @@ def network(chat_id, command):
 		bot.sendMessage(chat_id, '`%.2f Gbs`' % rx_float_gb, parse_mode="Markdown")
 	else:
 		bot.sendMessage(chat_id, '`%.2f Mbs`' % rx_float_mb, parse_mode="Markdown")
-# pega a quantidade de dados eviados pela rede wireless
+# pega a quantidade de upload pela rede wireless
 	tx_wifi = commands.getoutput("cat /sys/class/net/wlan0/statistics/tx_bytes")
-	bot.sendMessage(chat_id, '*Quantidade de banda enviada pela rede Wifi: *', parse_mode="Markdown")
+	bot.sendMessage(chat_id, '*Upload pela rede Wifi: *', parse_mode="Markdown")
 	tx_float = float(tx_wifi)
 	tx_float_mb = tx_float / 1024 / 1024
 	if tx_float_mb > 1024:
@@ -122,9 +122,9 @@ def network(chat_id, command):
 		bot.sendMessage(chat_id, '`%.2f Gbs`' % tx_float_gb, parse_mode="Markdown")
 	else:
 		bot.sendMessage(chat_id, '`%.2f Mbs`' % tx_float_mb, parse_mode="Markdown")
-# pega a quantidade de dados recebidos pela rede ethernet
+# pega a quantidade de download pela rede ethernet
 	rx_cable = commands.getoutput("cat /sys/class/net/eth0/statistics/rx_bytes")
-	bot.sendMessage(chat_id, '*Quantidade de banda recebida pela rede cabeada: *', parse_mode="Markdown")
+	bot.sendMessage(chat_id, '*Donwload pela rede cabeada: *', parse_mode="Markdown")
 	rx_float = float(rx_cable)
 	rx_float_mb = rx_float / 1024 / 1024
 	if rx_float_mb > 1024:
@@ -134,7 +134,7 @@ def network(chat_id, command):
 		bot.sendMessage(chat_id, '`%.2f Mbs`' % rx_float_mb, parse_mode="Markdown")
 # pega quantidade de dados enviados pela rede ethernet
 	tx_cable = commands.getoutput("cat /sys/class/net/eth0/statistics/tx_bytes")
-	bot.sendMessage(chat_id, '*Quantidade de banda enviada pela rede cabeada: *', parse_mode="Markdown")
+	bot.sendMessage(chat_id, '*Upload pela rede cabeada: *', parse_mode="Markdown")
 	tx_float = float(tx_cable)
 	tx_float_mb = tx_float / 1024 / 1024
 	if tx_float_mb > 1024:
@@ -169,7 +169,8 @@ def next(chat_id, command):
 # fucnao back chama o teclado 1 e retorna a menssage	
 def back(chat_id, command):
 	bot.sendMessage(chat_id,'Teclado 1 de volta', reply_markup=keyboard)
-
+# help contem todass  as iformaçoes sobre 
+# os comandos que estao em uso no bot
 def help(chat_id, command):
 	bot.sendMessage(chat_id, 'Ajuda. Encontre aqui informacoes sobre os comandos')
 	bot.sendMessage(chat_id, '*Comando Temperatura*', parse_mode="Markdown") 
