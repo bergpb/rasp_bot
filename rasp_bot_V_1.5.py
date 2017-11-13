@@ -23,12 +23,9 @@ autho_1 = int(autho_1)
 
 autho_2 = config['AUTHORIZED'] ['id_2']
 autho_2 = int(autho_2)
-
-# Aqui fica os teclados que aparecem para o usuario 
-# as palavras do teclado sao os comandos
-# que seram enviadas para a estrutura de decisao
-
-# teclado 1 comando NEXT chama o teclado 2
+ 
+# teclado 1 
+# comando NEXT chama o teclado 2
 keyboard = ReplyKeyboardMarkup(
 	keyboard=[
 		[KeyboardButton(text="Temperatura"), KeyboardButton(text="Processos")],
@@ -38,7 +35,9 @@ keyboard = ReplyKeyboardMarkup(
        		[KeyboardButton(text="NEXT")],
 ])
 
-# teclado 2 comando BACK chama o teclado 1
+
+# teclado 2 
+# comando BACK chama o teclado 1
 newkeyboard = ReplyKeyboardMarkup(
 	keyboard=[
         	[KeyboardButton(text="..."), KeyboardButton(text="...")],
@@ -47,39 +46,29 @@ newkeyboard = ReplyKeyboardMarkup(
         	[KeyboardButton(text="..."), KeyboardButton(text="...")],
         	[KeyboardButton(text="BACK")],
 ])
+
 # primeira função que inicia o bot quando 
 # clicado em começar ou enviado /start
-# envia messagens de boas vindas e ativa o teclado
+# envia messagens de boas vindas e ativa o teclado 1
 def start(chat_id, command):
 	bot.sendMessage(chat_id, ' Bem Vindo!!')
 	bot.sendMessage(chat_id, ' Bot desenvolvido por @joao_slv')
 	bot.sendMessage(chat_id, ' Iniciando o Bot...')
 	bot.sendMessage(chat_id, ' Use os comandos do teclado abaixo:', reply_markup=keyboard)
 
-# função temperature verifica qual opçao do teclado
-# foi selecionada e se o command for igual a temperatura 
-# executa o conteudo da funçao fazendo a leitura da temperatura
-# e gravnado em uma variacel que sera retornada para o usuario do bot
+# função temperature 
 def temperature(chat_id, command):
 	temp = commands.getoutput("vcgencmd measure_temp | cut -c 6-12")
 	bot.sendMessage(chat_id, '*Temperatura atual da CPU: *', parse_mode="Markdown")
 	bot.sendMessage(chat_id, "`%s`" % temp, parse_mode="Markdown")
 
-# função process verifica qual opçao do teclado
-# foi selecionada e se o command for igual a process
-# executa o conteudo da funçao fazendo de contar quantos
-# processo estao ativos rodando no momento e gravando 
-# em uma variavel que sera retornada para o usuario do bot
+# função process
 def process(chat_id, command):
 	quantProc = commands.getoutput("ps -aux | wc -l")
 	bot.sendMessage(chat_id, '*Quantidade de processos ativos: *', parse_mode="Markdown")
 	bot.sendMessage(chat_id, "`%s`" % quantProc, parse_mode="Markdown")
 
-# função memory verifica qual opçao do teclado
-# foi selecionada e se o command for igual a memory
-# executa o conteudo da funçao fazendo uma leitura da 
-# quantidade de memoria total, memoria em uso e memoria livre
-# gravando  em uma variavel que sera retornada para o usuario do bot
+# função memory
 def memory(chat_id, command):
 	mem_total = commands.getoutput("free -h | grep 'Mem' | cut -c 15-18")
 	bot.sendMessage(chat_id, '*Memoria total: *', parse_mode="Markdown")
@@ -93,44 +82,25 @@ def memory(chat_id, command):
 	bot.sendMessage(chat_id, '*Memoria livre: *', parse_mode="Markdown")
 	bot.sendMessage(chat_id, "`%s`" % mem_free, parse_mode="Markdown")
 
-# funçao upTime verifica qual opção do teclado
-# foi selecionada e se o command for igual a upTime
-# executa o conteudo da funçao que pega o upTime 
-# do sistema(tempo ativo desde a ultima reinicialização)
-# gravando  em uma variavel que sera retornada para o usuario do bot
+# funçao upTime 
 def upTime(chat_id, command):
 	uptime = commands.getoutput("uptime -p")
 	bot.sendMessage(chat_id, '*Up Time do sistema: *',parse_mode="Markdown")
 	bot.sendMessage(chat_id,  "_%s_" % uptime, parse_mode="Markdown")
 
-# funçao sdCard verifica qual opção do teclado
-# foi selecionada e se o command for igual a 
-# sdCard executa o conteudo da funçao que realiza
-# uma leitura do estado de uso do MicroSD 
-# ou HD que esta em uso gravando  em uma variavel 
-# que sera retornada para o usuario do bot
+# funçao sdCard 
 def sdCard(chat_id, command):
 	sd = commands.getoutput("df -h | grep '/dev'| head -1")
 	bot.sendMessage(chat_id, '*Uso do MicroSD: *', parse_mode="Markdown")
 	bot.sendMessage(chat_id,  "`%s`" % sd, parse_mode="Markdown")
 
-# funçao date verifica qual opção do teclado
-# foi selecionada e se o command foi igual a 
-# date executa o conteudo da funçao que pega
-# a data/hora atual do sistema e grava em uma
-# variavel e retorna para  usuario do bot
+# funçao date 
 def date(chat_id, command):
 	date = commands.getoutput("date")
 	bot.sendMessage(chat_id,'*Data e hora do Sistema: *', parse_mode="Markdown")
 	bot.sendMessage(chat_id,  "_%s_" % date, parse_mode="Markdown")
 
-# funçao network verifica qual opção do teclado 
-# foi selecionada e se o command foi igual a network
-# executa o conteudo da função que faz a leitura 
-# da quantidade de banda enviada e recebida pelas 
-# interfaces de rede disponiveis ao sistemas
-# sejam elas redes wireless ou rede ethernet grava
-# em uma variavel e retonar para o usuario do bot
+# funçao network 
 def network(chat_id, command):
 # pega a quantidade de dados recebidos pela rede wireless
 	rx_wifi = commands.getoutput("cat /sys/class/net/wlan0/statistics/rx_bytes")
@@ -173,11 +143,7 @@ def network(chat_id, command):
 	else:
 		bot.sendMessage(chat_id, '`%.2f Mbs`' % tx_float_mb, parse_mode="Markdown")
 
-# funçao ip verifica qual opção do teclado foi 
-# selecionada e se o command for igual a ip
-# executa o conteudo da função que pega o valor do ip local
-# atraves de comandos e o ip externo atraves de uma API 
-# grava em uma variavel e retorna para usuario do bot
+# funçao ip 
 def ip(chat_id, command):
 # verifica se o chat id e igual ao do admin ou de alguns dos autorizados
 	if chat_id == admin_id or chat_id == autho_1 or chat_id == autho_2:
@@ -192,7 +158,7 @@ def ip(chat_id, command):
 			ip_ex = response.read()
 			bot.sendMessage(chat_id, '*Ip externo: *', parse_mode="Markdown")
 			bot.sendMessage(chat_id, '`%s`' % ip_ex, parse_mode="Markdown")
-# se o chat id nao estiver na lista retonar essa menssagem
+# se o chat id nao estiver na lista
 	else:
 		bot.sendMessage(chat_id, '127.0.0.1') 
 		
@@ -204,10 +170,6 @@ def next(chat_id, command):
 def back(chat_id, command):
 	bot.sendMessage(chat_id,'Teclado 1 de volta', reply_markup=keyboard)
 
-# funçao help verifica se o command e igual a /help 
-# (nao tem no teclado tem que ser digitado manual igua la /start)
-# entao retornar infomaçoes de funcionamento de todos os comandos
-# disponiveis no bot para o usuario
 def help(chat_id, command):
 	bot.sendMessage(chat_id, 'Ajuda. Encontre aqui informacoes sobre os comandos')
 	bot.sendMessage(chat_id, '*Comando Temperatura*', parse_mode="Markdown") 
@@ -243,32 +205,32 @@ def handle(msg):
 	content_type, chat_type, chat_id = telepot.glance(msg)
 	m = telepot.namedtuple.Message(**msg)
 
-# função criada para fazer uma verificação 
+# função criada para pegar as informações da mensagem 
 # e ver se a messagem foi enviada de um grupo
 # ou de um chat privado e tambem mostrar para
 # o responsavel pelo bot quem esta utilizando 
 # e quais comandos e em que hora ** NO FUTURO SALVAR ISSO NO BANCO**
 	def getinfo(chat_id):
 		if chat_id < 0:
-			print 'Comando usado -->', command 
+			print 'Comando usado -►', command
 			print '---------------------------'
 			print 'Menssage do tipo %s: \n' % (content_type,)
-			print 'Chat ID do Grupo : %s' % m.chat[0] 
+			print 'Chat ID do Grupo : %s' % m.chat[0]
 			print 'Tipo de chat : %s' % m.chat[1]
 			print 'Nome do Grupo: %s' % m.chat[2]
 			print 'Chat Id User: %s' % m.from_[0]
-			print 'Username: %s' % m.from_[3] 
+			print 'Username: %s' % m.from_[3]
 			print 'First Name : %s' % m.from_[1]
 			print 'Last Name: %s' % m.from_[2]
 			print time.strftime('%Y-%m-%d %H:%M:%S')
 			print '--------------------------------------'
 		else:
-			print 'Comando usado -->', command
+			print 'Comando usado -►', command
 			print '---------------------------'
 			print 'Messagem do tipo %s: \n' % (content_type,)
-			print 'Chat ID : %s' % m.chat[0] 
+			print 'Chat ID : %s' % m.chat[0]
 			print 'Tipo de chat : %s' % m.chat[1]
-			print 'Username : %s' % m.chat[3] 
+			print 'Username : %s' % m.chat[3]
 			print 'First Name: %s' % m.chat[4]
 			print 'Last Name: %s' % m.chat[5]
 			print time.strftime('%Y-%m-%d %H:%M:%S')
@@ -277,51 +239,39 @@ def handle(msg):
 	if command == '/start':
 		start(chat_id, command)
 		getinfo(chat_id)
-
 	elif command == 'Temperatura':
 		temperature(chat_id, command)
 		getinfo(chat_id)
-
 	elif command == 'Processos':
 		process(chat_id, command)
 		getinfo(chat_id)
-
 	elif command == 'Memoria':
 		memory(chat_id, command)
 		getinfo(chat_id)
-
 	elif command == 'UpTime':
 		upTime(chat_id, command)
 		getinfo(chat_id)
-
 	elif command == 'UsoSD':
 		sdCard(chat_id, command)
 		getinfo(chat_id)
-
 	elif command == 'Data':
 		date(chat_id, command)
 		getinfo(chat_id)
-
 	elif command == 'Rede':
 		network(chat_id, command)
 		getinfo(chat_id)
-
 	elif command == 'IP':
 		ip(chat_id, command)
 		getinfo(chat_id)
-
 	elif command == '/help':
 		help(chat_id, command)
 		getinfo(chat_id)
-
 	elif command == 'NEXT':
 		next(chat_id, command)
 		getinfo(chat_id)
-	
 	elif command == '...':
 		bot.sendMessage(chat_id, 'teclado 2 funcionando')
 		getinfo(chat_id)
-
 	elif command == 'BACK':
 		back(chat_id,command)
 		getinfo(chat_id)
