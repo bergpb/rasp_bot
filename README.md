@@ -7,6 +7,9 @@ Bot do telegram feito em python rodando na raspberry pi usando a biblioteca Tele
 
 # Versões
 
+## Versão 1.6
+* Envio de imagens usando qualquer botao do segundo teclado e feito o evio de uma imagem
+
 ## Versão 1.5
 * Foi adicionado um segundo teclado para funções futuras
 * Criado a função next que chama o segundo teclado 
