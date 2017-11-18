@@ -314,8 +314,8 @@ def handle(msg):
 		getinfo(chat_id)
 	
 	elif command == '...':
-		imagem = "http://i0.kym-cdn.com/entries/icons/mobile/000/004/815/lologuy.jpg"
-		bot.sendPhoto(chat_id, imagem, "")
+		imagem = "http://i0.kym-cdn.com/entries/icons/mobile/000/004/815/lologuy.jpg" ## link da imagem a ser enviada
+		bot.sendPhoto(chat_id, imagem, "") ## funcao que envia a mensagem com a imagem
 
 	elif command == 'BACK':
 		back(chat_id,command)
