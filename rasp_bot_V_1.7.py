@@ -80,15 +80,15 @@ def process(chat_id, command):
 def memory(chat_id, command):
 	mem_total = commands.getoutput("free -h | grep 'Mem' | cut -c 15-18")
 	bot.sendMessage(chat_id, '*Memoria total: *', parse_mode="Markdown")
-	bot.sendMessage(chat_id, "`%s`" % mem_total, parse_mode="Markdown")
+	bot.sendMessage(chat_id, "`%s`MB" % mem_total, parse_mode="Markdown")
 # memoria em uso
-	mem_used = commands.getoutput("free -h | grep 'Mem' | cut -c 26-29")
+	mem_used = commands.getoutput("free -h | grep 'Mem' | cut -c 27-30")
 	bot.sendMessage(chat_id, '*Memoria em uso: *', parse_mode="Markdown")
-	bot.sendMessage(chat_id, "`%s`" % mem_used, parse_mode="Markdown")
+	bot.sendMessage(chat_id, "`%s`MB" % mem_used, parse_mode="Markdown")
 # memoria livre
-	mem_free = commands.getoutput("free -h | grep 'Mem' | cut -c 37-40")
+	mem_free = commands.getoutput("free -h | grep 'Mem' | cut -c 39-42")
 	bot.sendMessage(chat_id, '*Memoria livre: *', parse_mode="Markdown")
-	bot.sendMessage(chat_id, "`%s`" % mem_free, parse_mode="Markdown")
+	bot.sendMessage(chat_id, "`%s`MB" % mem_free, parse_mode="Markdown")
 
 # funçao upTime verifica qual opção do teclado
 # foi selecionada e se o command for igual a upTime
@@ -163,6 +163,26 @@ def network(chat_id, command):
 	tx_cable = commands.getoutput("cat /sys/class/net/eth0/statistics/tx_bytes")
 	bot.sendMessage(chat_id, '*Quantidade de banda enviada pela rede cabeada: *', parse_mode="Markdown")
 	tx_float = float(tx_cable)
+	tx_float_mb = tx_float / 1024 / 1024
+	if tx_float_mb > 1024:
+		tx_float_gb = tx_float_mb / 1024
+		bot.sendMessage(chat_id, '`%.2f Gbs`' % tx_float_gb, parse_mode="Markdown")
+	else:
+		bot.sendMessage(chat_id, '`%.2f Mbs`' % tx_float_mb, parse_mode="Markdown")
+# pega a quantidade de dados recebidas pelo modem 3G
+	rx_3g = commands.getoutput("cat /sys/class/net/ppp0/statistics/rx_bytes")
+	bot.sendMessage(chat_id, '*Quantidade de banda recebida pelo modem 3G: *', parse_mode="Markdown")
+	rx_float = float(rx_3g)
+	rx_float_mb = rx_float / 1024 / 1024
+	if rx_float_mb > 1024:
+		rx_float_gb = rx_float_mb / 1024
+		bot.sendMessage(chat_id, '`%.2f Gbs`' % rx_float_gb, parse_mode="Markdown")
+	else:
+		bot.sendMessage(chat_id, '`%.2f Mbs`' % rx_float_mb, parse_mode="Markdown")
+# pega a quantidade de dados enviados peo modem 3G
+	tx_3g = commands.getoutput("cat /sys/class/net/ppp0/statistics/tx_bytes")
+	bot.sendMessage(chat_id, '*Quantidade de banda enviada pelo modem 3G: *', parse_mode="Markdown")
+	tx_float = float(tx_3g)
 	tx_float_mb = tx_float / 1024 / 1024
 	if tx_float_mb > 1024:
 		tx_float_gb = tx_float_mb / 1024
