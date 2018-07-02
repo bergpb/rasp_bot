@@ -169,26 +169,6 @@ def network(chat_id, command):
 		bot.sendMessage(chat_id, '`%.2f Gbs`' % tx_float_gb, parse_mode="Markdown")
 	else:
 		bot.sendMessage(chat_id, '`%.2f Mbs`' % tx_float_mb, parse_mode="Markdown")
-# pega a quantidade de dados recebidas pelo modem 3G
-	rx_3g = commands.getoutput("cat /sys/class/net/ppp0/statistics/rx_bytes")
-	bot.sendMessage(chat_id, '*Quantidade de banda recebida pelo modem 3G: *', parse_mode="Markdown")
-	rx_float = float(rx_3g)
-	rx_float_mb = rx_float / 1024 / 1024
-	if rx_float_mb > 1024:
-		rx_float_gb = rx_float_mb / 1024
-		bot.sendMessage(chat_id, '`%.2f Gbs`' % rx_float_gb, parse_mode="Markdown")
-	else:
-		bot.sendMessage(chat_id, '`%.2f Mbs`' % rx_float_mb, parse_mode="Markdown")
-# pega a quantidade de dados enviados peo modem 3G
-	tx_3g = commands.getoutput("cat /sys/class/net/ppp0/statistics/tx_bytes")
-	bot.sendMessage(chat_id, '*Quantidade de banda enviada pelo modem 3G: *', parse_mode="Markdown")
-	tx_float = float(tx_3g)
-	tx_float_mb = tx_float / 1024 / 1024
-	if tx_float_mb > 1024:
-		tx_float_gb = tx_float_mb / 1024
-		bot.sendMessage(chat_id, '`%.2f Gbs`' % tx_float_gb, parse_mode="Markdown")
-	else:
-		bot.sendMessage(chat_id, '`%.2f Mbs`' % tx_float_mb, parse_mode="Markdown")
 
 # funçao ip verifica qual opção do teclado foi 
 # selecionada e se o command for igual a ip
