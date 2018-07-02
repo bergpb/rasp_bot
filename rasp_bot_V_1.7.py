@@ -86,7 +86,7 @@ def memory(chat_id, command):
 	bot.sendMessage(chat_id, '*Memoria em uso: *', parse_mode="Markdown")
 	bot.sendMessage(chat_id, "`%s`MB" % mem_used, parse_mode="Markdown")
 # memoria livre
-	mem_free = commands.getoutput("free -h | grep 'Mem' | cut -c 39-42")
+	mem_free = commands.getoutput("free -h | grep 'Mem' | cut -c 76-79")
 	bot.sendMessage(chat_id, '*Memoria livre: *', parse_mode="Markdown")
 	bot.sendMessage(chat_id, "`%s`MB" % mem_free, parse_mode="Markdown")
 
