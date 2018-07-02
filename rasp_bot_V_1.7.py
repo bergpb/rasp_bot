@@ -179,8 +179,8 @@ def ip(chat_id, command):
 # verifica se o chat id e igual ao do admin ou de alguns dos autorizados
 	if chat_id == admin_id or chat_id == autho_1 or chat_id == autho_2:
 # pega o ip local da maquina por meio de comandos no terminal
-		ip_lan = commands.getoutput("ifconfig wlan0 |  grep inet | cut -c 21-37 | head -1")
-		bot.sendMessage(chat_id, 'Ip local: ', parse_mode="Markdown")
+		ip_lan = commands.getoutput("ifconfig wlan0 |  grep inet | cut -c 13-27 | head -1")
+		bot.sendMessage(chat_id, '*Ip local: *', parse_mode="Markdown")
 		bot.sendMessage(chat_id, '%s' % ip_lan, parse_mode="Markdown")
 # verifica se o chat id e igual ao do admin 
 		if chat_id == admin_id:
