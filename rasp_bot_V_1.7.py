@@ -29,7 +29,7 @@ autho_2 = int(autho_2)
 
 keyboard = ReplyKeyboardMarkup(
 	keyboard=[
-		[KeyboardButton(text="Temperatura"), KeyboardButton(text="Processos")],
+		[KeyboardButton(text="Temperatura"), KeyboardButton(text="Usuarios")],
        		[KeyboardButton(text="Memoria"), KeyboardButton(text="UpTime")],
        		[KeyboardButton(text="UsoSD"), KeyboardButton(text="Data")],
        		[KeyboardButton(text="Rede"), KeyboardButton(text="IP")],
@@ -67,9 +67,9 @@ def temperature(chat_id, command):
 # executa o conteudo da funçao fazendo de contar quantos
 # processo estao ativos rodando no momento e gravando 
 # em uma variavel que sera retornada para o usuario do bot
-def process(chat_id, command):
-	quantProc = commands.getoutput("ps -aux | wc -l")
-	bot.sendMessage(chat_id, '*Quantidade de processos ativos: *', parse_mode="Markdown")
+def users(chat_id, command):
+	quantProc = commands.getoutput("w")
+	bot.sendMessage(chat_id, '*Usuarios logados no sistema: *', parse_mode="Markdown")
 	bot.sendMessage(chat_id, "`%s`" % quantProc, parse_mode="Markdown")
 
 # função memory verifica qual opçao do teclado
@@ -208,8 +208,8 @@ def help(chat_id, command):
 	bot.sendMessage(chat_id, '*Comando Temperatura*', parse_mode="Markdown") 
 	bot.sendMessage(chat_id, 'Comando que tem como funcao retornar ao usuario as informacoes de temperatura da CPU')
 	time.sleep(0.5)
-	bot.sendMessage(chat_id, '*Comando Processos*', parse_mode="Markdown")
-	bot.sendMessage(chat_id, 'Comando que tem como funcao contar e retornar ao usuario a quantidade de processos que estao sendo execuados')
+	bot.sendMessage(chat_id, '*Comando Usuarios*', parse_mode="Markdown")
+	bot.sendMessage(chat_id, 'Comando que tem como funcao contar e retornar a quais usuario que estao logados no sistema')
 	time.sleep(0.5)
 	bot.sendMessage(chat_id, '*Comando Memoria*', parse_mode="Markdown") 
 	bot.sendMessage(chat_id, 'Comando que tem como funcao retornar ao usuario dados da memoria como memoria total, memoria em uso e memoria livre')
@@ -277,7 +277,7 @@ def handle(msg):
 		temperature(chat_id, command)
 		getinfo(chat_id)
 
-	elif command == 'Processos':
+	elif command == 'Usuarios':
 		process(chat_id, command)
 		getinfo(chat_id)
 
