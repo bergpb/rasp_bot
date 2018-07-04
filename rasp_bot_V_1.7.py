@@ -11,22 +11,19 @@ from telepot.namedtuple import ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboar
 # conexao com o arquivo de configuraçao externo config.ini
 config = configparser.ConfigParser()
 config.read('config.ini')
-
-# variaveis que estao com seus valores listados no config.ini
+# bot API 
 BOT_API = config['BOT_API'] ['api']
-
+# id do administrador
 admin_id = config['ADMIN'] ['id'] 
 admin_id = int(admin_id)
-
+# id autorizado 1
 autho_1 = config['AUTHORIZED'] ['id_1']
 autho_1 = int(autho_1)
-
+# id autorizado 2
 autho_2 = config['AUTHORIZED'] ['id_2']
 autho_2 = int(autho_2)
-# Aqui e o teclado que aparece para o usuario 
-# as palavras do teclado sao os comandos
-# que seram enviadas para a estrutura de decisao
 
+# teclado que aparece para o usuario 
 keyboard = ReplyKeyboardMarkup(
 	keyboard=[
 		[KeyboardButton(text="Temperatura"), KeyboardButton(text="Usuarios")],
@@ -35,7 +32,7 @@ keyboard = ReplyKeyboardMarkup(
        		[KeyboardButton(text="Rede"), KeyboardButton(text="IP")],
        		[KeyboardButton(text="NEXT")],
 ])
-
+# segund teclado chamado ao clicar em next
 newkeyboard = ReplyKeyboardMarkup(
 	keyboard=[
         	[KeyboardButton(text="..."), KeyboardButton(text="...")],
@@ -45,28 +42,20 @@ newkeyboard = ReplyKeyboardMarkup(
         	[KeyboardButton(text="BACK")],
 ])
 
-# primeira função que inicia o bot quando 
-# clicado em começar ou enviado /start
-# envia messagens de boas vindas e ativa o teclado
+# inicia o bot quando /start e enviado
+# envia messagens de boas vindas e ativa o primeiro teclado
 def start(chat_id, command):
-	bot.sendMessage(chat_id, ' Bem Vindo!!')
-	bot.sendMessage(chat_id, ' Bot desenvolvido por @joao_slv')
-	bot.sendMessage(chat_id, ' Iniciando o Bot...')
+	bot.sendMessage(chat_id, ' Olá, seja bem vindo!!')
+	bot.sendMessage(chat_id, ' Este bot foi criado por @joao_slv =)')
 	bot.sendMessage(chat_id, ' Use os comandos do teclado abaixo:', reply_markup=keyboard)
-# função temperature verifica qual opçao do teclado
-# foi selecionada e se o command for igual a temperatura 
-# executa o conteudo da funçao fazendo a leitura da temperatura
-# e gravnado em uma variacel que sera retornada para o usuario do bot
+# função temperature executa leitura e  retorna 
+# o valor atual da temperatura da cpu em Celsius 
 def temperature(chat_id, command):
 	temp = commands.getoutput("vcgencmd measure_temp | cut -c 6-12")
 	bot.sendMessage(chat_id, '*Temperatura atual da CPU: *', parse_mode="Markdown")
 	bot.sendMessage(chat_id, "`%s`" % temp, parse_mode="Markdown")
 
-# função process verifica qual opçao do teclado
-# foi selecionada e se o command for igual a process
-# executa o conteudo da funçao fazendo de contar quantos
-# processo estao ativos rodando no momento e gravando 
-# em uma variavel que sera retornada para o usuario do bot
+# busca  quais usuarios estao logados no sistema
 def users(chat_id, command):
 	quantProc = commands.getoutput("w")
 	bot.sendMessage(chat_id, '*Usuarios logados no sistema: *', parse_mode="Markdown")
