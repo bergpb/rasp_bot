@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# importaçao das bibliotecas que estao sendo usadas 
+# bibliotecas que estao sendo usadas 
 import time
 import telepot
 import urllib2
@@ -45,7 +45,7 @@ newkeyboard = ReplyKeyboardMarkup(
 # inicia o bot quando /start e enviado
 # envia messagens de boas vindas e ativa o primeiro teclado
 def start(chat_id, command):
-	bot.sendMessage(chat_id, ' Olá, seja bem vindo!!')
+	bot.sendMessage(chat_id, ' Ola, seja bem vindo!!')
 	bot.sendMessage(chat_id, ' Este bot foi criado por @joao_slv =)')
 	bot.sendMessage(chat_id, ' Use os comandos do teclado abaixo:', reply_markup=keyboard)
 # função temperature executa leitura e  retorna 
@@ -267,7 +267,7 @@ def handle(msg):
 		getinfo(chat_id)
 
 	elif command == 'Usuarios':
-		process(chat_id, command)
+		users(chat_id, command)
 		getinfo(chat_id)
 
 	elif command == 'Memoria':
