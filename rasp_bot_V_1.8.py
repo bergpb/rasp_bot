@@ -46,9 +46,9 @@ newkeyboard = ReplyKeyboardMarkup(
 # envia messagens de boas vindas e ativa o primeiro teclado
 def start(chat_id, command):
  	imagem_goku = "https://pm1.narvii.com/6283/ad9ff5af2e8bdfa88a92458ace75e2cf6adca8d8_hq.jpg" ## link da imagem a ser enviada
-		bot.sendPhoto(chat_id, imagem_goku, "") ## funcao que envia a mensagem com a imagem
-  audio_goku = "https://www.myinstants.com/media/sounds/oi-eu-sou-goku.mp3"
-  bot.sendAudio(chat_id, audio_goku, "")
+	bot.sendPhoto(chat_id, imagem_goku, "") ## funcao que envia a mensagem com a imagem
+  	audio_goku = "https://www.myinstants.com/media/sounds/oi-eu-sou-goku.mp3"
+	bot.sendAudio(chat_id, audio_goku, "")
   
 # função temperature executa leitura e  retorna 
 # o valor atual da temperatura da cpu em Celsius 
@@ -277,16 +277,16 @@ def handle(msg):
 	elif command == '...':
 		imagem = "http://i0.kym-cdn.com/entries/icons/mobile/000/004/815/lologuy.jpg" ## link da imagem a ser enviada
 		bot.sendPhoto(chat_id, imagem, "") ## funcao que envia a mensagem com a imagem
-  som = "https://www.myinstants.com/media/sounds/epic.swf_1.mp3"
-  bot.sendAudio(chat_id, som, "")
+  		som = "https://www.myinstants.com/media/sounds/epic.swf_1.mp3"
+  		bot.sendAudio(chat_id, som, "")
 
 	elif command == 'BACK':
 		back(chat_id,command)
 		getinfo(chat_id)
   
-  elif command == '/about':
-   about(chat_id, command)
-   getinfo(chat_id)
+  	elif command == '/about':
+   		about(chat_id, command)
+   		getinfo(chat_id)
 
 # menssagem de erro caso o usuario digite alguma coisa manualmente
 	else:
