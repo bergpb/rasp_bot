@@ -45,8 +45,8 @@ newkeyboard = ReplyKeyboardMarkup(
 # inicia o bot quando /start e enviado
 # envia messagens de boas vindas e ativa o primeiro teclado
 def start(chat_id, command):
-	bot.sendMessage(chat_id, ' Ola, seja bem vindo!!')
 	bot.sendMessage(chat_id, ' Este bot foi criado por @joao_slv =)')
+	bot.sendMessage(chat_id, 'https://github.com/joaovitor57/rasp_bot/')
 	bot.sendMessage(chat_id, ' Use os comandos do teclado abaixo:', reply_markup=keyboard)
 # função temperature executa leitura e  retorna 
 # o valor atual da temperatura da cpu em Celsius 
@@ -61,11 +61,8 @@ def users(chat_id, command):
 	bot.sendMessage(chat_id, '*Usuarios logados no sistema: *', parse_mode="Markdown")
 	bot.sendMessage(chat_id, "`%s`" % quantProc, parse_mode="Markdown")
 
-# função memory verifica qual opçao do teclado
-# foi selecionada e se o command for igual a memory
-# executa o conteudo da funçao fazendo uma leitura da 
-# quantidade de memoria total, memoria em uso e memoria livre
-# gravando  em uma variavel que sera retornada para o usuario do bot
+# função memory informa o status da memoria RAM total, em uso e livre
+# memoria total
 def memory(chat_id, command):
 	mem_total = commands.getoutput("free -h | grep 'Mem' | cut -c 15-18")
 	bot.sendMessage(chat_id, '*Memoria total: *', parse_mode="Markdown")
@@ -75,50 +72,29 @@ def memory(chat_id, command):
 	bot.sendMessage(chat_id, '*Memoria em uso: *', parse_mode="Markdown")
 	bot.sendMessage(chat_id, "`%s`MB" % mem_used, parse_mode="Markdown")
 # memoria livre
-	mem_free = commands.getoutput("free -h | grep 'Mem' | cut -c 76-79")
+	mem_free = commands.getoutput("free -h | grep 'Mem' | cut -c 76-78")
 	bot.sendMessage(chat_id, '*Memoria livre: *', parse_mode="Markdown")
 	bot.sendMessage(chat_id, "`%s`MB" % mem_free, parse_mode="Markdown")
-
-# funçao upTime verifica qual opção do teclado
-# foi selecionada e se o command for igual a upTime
-# executa o conteudo da funçao que pega o upTime 
-# do sistema(tempo ativo desde a ultima reinicialização)
-# gravando  em uma variavel que sera retornada para o usuario do bot
+# retorna o uptime do sistema
 def upTime(chat_id, command):
 	uptime = commands.getoutput("uptime -p")
 	bot.sendMessage(chat_id, '*Up Time do sistema: *',parse_mode="Markdown")
 	bot.sendMessage(chat_id,  "_%s_" % uptime, parse_mode="Markdown")
 
-# funçao sdCard verifica qual opção do teclado
-# foi selecionada e se o command for igual a 
-# sdCard executa o conteudo da funçao que realiza
-# uma leitura do estado de uso do MicroSD 
-# ou HD que esta em uso gravando  em uma variavel 
-# que sera retornada para o usuario do bot
+#verifica a capacidade total do hd e retorna a sua utilização
 def sdCard(chat_id, command):
 	sd = commands.getoutput("df -h | grep '/dev'| head -1")
 	bot.sendMessage(chat_id, '*Uso do MicroSD: *', parse_mode="Markdown")
 	bot.sendMessage(chat_id,  "`%s`" % sd, parse_mode="Markdown")
-
-# funçao date verifica qual opção do teclado
-# foi selecionada e se o command foi igual a 
-# date executa o conteudo da funçao que pega
-# a data/hora atual do sistema e grava em uma
-# variavel e retorna para  usuario do bot
+# informa o date time atual do sistema 
 def date(chat_id, command):
 	date = commands.getoutput("date")
 	bot.sendMessage(chat_id,'*Data e hora do Sistema: *', parse_mode="Markdown")
 	bot.sendMessage(chat_id,  "_%s_" % date, parse_mode="Markdown")
-
-# funçao network verifica qual opção do teclado 
-# foi selecionada e se o command foi igual a network
-# executa o conteudo da função que faz a leitura 
-# da quantidade de banda enviada e recebida pelas 
-# interfaces de rede disponiveis ao sistemas
-# sejam elas redes wireless ou rede ethernet grava
-# em uma variavel e retonar para o usuario do bot
+# informaçoes sobre a quantidade de dados trafegados 
+# pelas interfaces de rede disponiveis no dispositivo
 def network(chat_id, command):
-# pega a quantidade de dados recebidos pela rede wireless
+# quantidade de dados recebidos via wireless
 	rx_wifi = commands.getoutput("cat /sys/class/net/wlan0/statistics/rx_bytes")
 	bot.sendMessage(chat_id, '*Quantidade de banda recebida pela rede Wifi: *', parse_mode="Markdown")
 	rx_float = float(rx_wifi)
@@ -128,7 +104,7 @@ def network(chat_id, command):
 		bot.sendMessage(chat_id, '`%.2f Gbs`' % rx_float_gb, parse_mode="Markdown")
 	else:
 		bot.sendMessage(chat_id, '`%.2f Mbs`' % rx_float_mb, parse_mode="Markdown")
-# pega a quantidade de dados eviados pela rede wireless
+# quantidade de dados eviados via wireless
 	tx_wifi = commands.getoutput("cat /sys/class/net/wlan0/statistics/tx_bytes")
 	bot.sendMessage(chat_id, '*Quantidade de banda enviada pela rede Wifi: *', parse_mode="Markdown")
 	tx_float = float(tx_wifi)
@@ -138,7 +114,7 @@ def network(chat_id, command):
 		bot.sendMessage(chat_id, '`%.2f Gbs`' % tx_float_gb, parse_mode="Markdown")
 	else:
 		bot.sendMessage(chat_id, '`%.2f Mbs`' % tx_float_mb, parse_mode="Markdown")
-# pega a quantidade de dados recebidos pela rede ethernet
+# quantidade de dados recebidos via cabo ethernet
 	rx_cable = commands.getoutput("cat /sys/class/net/eth0/statistics/rx_bytes")
 	bot.sendMessage(chat_id, '*Quantidade de banda recebida pela rede cabeada: *', parse_mode="Markdown")
 	rx_float = float(rx_cable)
@@ -148,7 +124,7 @@ def network(chat_id, command):
 		bot.sendMessage(chat_id, '`%.2f Gbs`' % rx_float_gb, parse_mode="Markdown")
 	else:
 		bot.sendMessage(chat_id, '`%.2f Mbs`' % rx_float_mb, parse_mode="Markdown")
-# pega quantidade de dados enviados pela rede ethernet
+# quantidade de dados enviados via cabo ethernet
 	tx_cable = commands.getoutput("cat /sys/class/net/eth0/statistics/tx_bytes")
 	bot.sendMessage(chat_id, '*Quantidade de banda enviada pela rede cabeada: *', parse_mode="Markdown")
 	tx_float = float(tx_cable)
@@ -159,27 +135,24 @@ def network(chat_id, command):
 	else:
 		bot.sendMessage(chat_id, '`%.2f Mbs`' % tx_float_mb, parse_mode="Markdown")
 
-# funçao ip verifica qual opção do teclado foi 
-# selecionada e se o command for igual a ip
-# executa o conteudo da função que pega o valor do ip local
-# atraves de comandos e o ip externo atraves de uma API 
-# grava em uma variavel e retorna para usuario do bot
+# faz a leitura dos indereços ip e retorna apenas para os autorizados		
 def ip(chat_id, command):
 # verifica se o chat id e igual ao do admin ou de alguns dos autorizados
 	if chat_id == admin_id or chat_id == autho_1 or chat_id == autho_2:
 # pega o ip local da maquina por meio de comandos no terminal
 		ip_lan = commands.getoutput("ifconfig wlan0 |  grep inet | cut -c 13-27 | head -1")
-		bot.sendMessage(chat_id, '*Ip local: *', parse_mode="Markdown")
+		bot.sendMessage(chat_id, '*IP local: *', parse_mode="Markdown")
 		bot.sendMessage(chat_id, '%s' % ip_lan, parse_mode="Markdown")
 # verifica se o chat id e igual ao do admin 
 		if chat_id == admin_id:
 # pega o ip externo atraves de api 
 			response = urllib2.urlopen('http://bot.whatismyipaddress.com/')
 			ip_ex = response.read()
-			bot.sendMessage(chat_id, '*Ip externo: *', parse_mode="Markdown")
+			bot.sendMessage(chat_id, '*IP externo: *', parse_mode="Markdown")
 			bot.sendMessage(chat_id, '`%s`' % ip_ex, parse_mode="Markdown")
 # se o chat id nao estiver na lista retonar essa menssagem
-	else:
+	else:	
+		bot.sendMessage(chat_id, 'Voce nao pode ver o meu IP')
 		bot.sendMessage(chat_id, '127.0.0.1') 
 		
 def next(chat_id, command):
@@ -188,10 +161,7 @@ def next(chat_id, command):
 def back(chat_id, command):
 	bot.sendMessage(chat_id,'Teclado 1 de volta', reply_markup=keyboard)
 
-# funçao help verifica se o command e igual a /help 
-# (nao tem no teclado tem que ser digitado manual igua la /start)
-# entao retornar infomaçoes de funcionamento de todos os comandos
-# disponiveis no bot para o usuario
+# funçao help informa dados referentes aos comandos
 def help(chat_id, command):
 	bot.sendMessage(chat_id, 'Ajuda. Encontre aqui informacoes sobre os comandos')
 	bot.sendMessage(chat_id, '*Comando Temperatura*', parse_mode="Markdown") 
@@ -220,18 +190,12 @@ def help(chat_id, command):
 
 # Função principal do bot, estrutura de decisão 
 def handle(msg):
-# Configurações da variavel para controlar 
-# a estrutura de decisao e tambem a variavel
-# que salva os dados do chat em uma tupla 
+	
 	command = msg['text']
 	content_type, chat_type, chat_id = telepot.glance(msg)
 	m = telepot.namedtuple.Message(**msg)
 
-# função criada para fazer uma verificação 
-# e ver se a messagem foi enviada de um grupo
-# ou de um chat privado e tambem mostrar para
-# o responsavel pelo bot quem esta utilizando 
-# e quais comandos e em que hora ** NO FUTURO SALVAR ISSO NO BANCO**
+	# dados do utilizados do BOT
 	def getinfo(chat_id):
 		if chat_id < 0:
 			print 'Comando usado -->', command 
