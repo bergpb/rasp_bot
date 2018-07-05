@@ -9,8 +9,11 @@ Bot do telegram feito em python rodando na raspberry pi usando a biblioteca Tele
 
 
 ## Versão 1.8
-* asdf
-** asdf
+* Novo comando /About
+* Nova mensagem de Saudação
+* Encaminhamento de mensagens de texto
+* Envio de audios
+
 ## Versão 1.7
 * Correção na saida comando Memoria
 * Correção na saida do comando IP
