@@ -48,7 +48,7 @@ def start(chat_id, command):
  	imagem_goku = "https://pm1.narvii.com/6283/ad9ff5af2e8bdfa88a92458ace75e2cf6adca8d8_hq.jpg" ## link da imagem a ser enviada
 	bot.sendPhoto(chat_id, imagem_goku, "") ## funcao que envia a mensagem com a imagem
   	audio_goku = "https://www.myinstants.com/media/sounds/oi-eu-sou-goku.mp3"
-	bot.sendAudio(chat_id, audio_goku, "")
+	bot.sendAudio(chat_id, audio_goku, "",reply_markup=keyboard)
   
 # função temperature executa leitura e  retorna 
 # o valor atual da temperatura da cpu em Celsius 
@@ -166,7 +166,7 @@ def back(chat_id, command):
 # funçao help informa dados referentes aos comandos
 def help(chat_id, command):
 	bot.sendMessage(chat_id, 'Ajuda. Encontre aqui informacoes sobre os comandos')
- bot.sendMessage(chat_id, '')
+ 	bot.sendMessage(chat_id, '')
 	bot.sendMessage(chat_id, '*Comando Temperatura*', parse_mode="Markdown") 
 	bot.sendMessage(chat_id, 'Comando que tem como funcao retornar ao usuario as informacoes de temperatura da CPU')
 	time.sleep(0.5)
@@ -191,7 +191,7 @@ def help(chat_id, command):
 	bot.sendMessage(chat_id, '*Comando IP*', parse_mode="Markdown")
 	bot.sendMessage(chat_id, 'Comando que tem como funcao pegar o IP externo e IP local e retornar para o administrador ambos IPs e para usuarios normais somente o IP local')
 
- def about(chat_id, command):
+def about(chat_id, command):
 	bot.sendMessage(chat_id, ' Bot desenvolvido por @joao_slv')
 	bot.sendMessage(chat_id, ' Codigo disponivel https://github.com/joaovitor57/rasp_bot/')
 	bot.sendMessage(chat_id, ' Framework utilizado https://github.com/nickoala/telepot/')
