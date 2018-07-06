@@ -60,6 +60,10 @@ def users(chat_id, command):
 	quantProc = commands.getoutput("w")
 	bot.sendMessage(chat_id, '*Usuarios logados no sistema: *', parse_mode="Markdown")
 	bot.sendMessage(chat_id, "`%s`" % quantProc, parse_mode="Markdown")
+	bot.sendMessage(chat_id, '*Usuarios logados no sistema: *', parse_mode="Markdown")
+	bot.sendMessage(chat_id, "`%s`" % quantProc, parse_mode="Markdown")
+	bot.sendMessage(chat_id, '*Usuarios logados no sistema: *', parse_mode="Markdown")
+	bot.sendMessage(chat_id, "`%s`" % quantProc, parse_mode="Markdown")
 
 # função memory informa o status da memoria RAM total, em uso e livre
 # memoria total
