@@ -57,13 +57,14 @@ def temperature(chat_id, command):
 
 # busca  quais usuarios estao logados no sistema
 def users(chat_id, command):
-	quantProc = commands.getoutput("w")
+	sesr = commands.getoutput("w")
+		
 	bot.sendMessage(chat_id, '*Usuarios logados no sistema: *', parse_mode="Markdown")
-	bot.sendMessage(chat_id, "`%s`" % quantProc, parse_mode="Markdown")
-	bot.sendMessage(chat_id, '*Usuarios logados no sistema: *', parse_mode="Markdown")
-	bot.sendMessage(chat_id, "`%s`" % quantProc, parse_mode="Markdown")
-	bot.sendMessage(chat_id, '*Usuarios logados no sistema: *', parse_mode="Markdown")
-	bot.sendMessage(chat_id, "`%s`" % quantProc, parse_mode="Markdown")
+	bot.sendMessage(chat_id, "`%s`" % users, parse_mode="Markdown")
+	bot.sendMessage(chat_id, '*Hora que foi feito o login: *', parse_mode="Markdown")
+	bot.sendMessage(chat_id, "`%s`" % hora_login, parse_mode="Markdown")
+	bot.sendMessage(chat_id, '*IP de onde esta logado sessão : *', parse_mode="Markdown")
+	bot.sendMessage(chat_id, "`%s`" % local_login, parse_mode="Markdown")
 
 # função memory informa o status da memoria RAM total, em uso e livre
 # memoria total
