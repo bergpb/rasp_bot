@@ -1,0 +1,341 @@
+ # -*- coding: utf-8 -*-
+
+# bibliotecas que estao sendo usadas
+import os
+import time
+import telepot
+import subprocess
+import configparser
+import urllib.request
+import RPi.GPIO as gpio
+from telepot.namedtuple import ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove
+
+# conexao com o arquivo de configuraçao externo config.ini
+config = configparser.ConfigParser()
+config.read('config.ini')
+# bot API
+BOT_API = config['BOT_API'] ['api']
+# id do administrador
+admin_id = config['ADMIN'] ['id']
+admin_id = int(admin_id)
+# id autorizado 1
+autho_1 = config['AUTHORIZED'] ['id_1']
+autho_1 = int(autho_1)
+# id autorizado 2
+autho_2 = config['AUTHORIZED'] ['id_2']
+autho_2 = int(autho_2)
+
+# teclado que aparece para o usuario
+keyboard = ReplyKeyboardMarkup(
+	keyboard=[
+        [KeyboardButton(text="Temperatura"), KeyboardButton(text="Usuarios")],
+        [KeyboardButton(text="Memoria"), KeyboardButton(text="UpTime")],
+        [KeyboardButton(text="UsoSD"), KeyboardButton(text="Data")],
+        [KeyboardButton(text="Rede"), KeyboardButton(text="IP")],
+        [KeyboardButton(text='Pinos'), KeyboardButton(text="NEXT")],
+])
+# teclado para controle de pinos
+keyboard_pins = ReplyKeyboardMarkup(
+    keyboard=[
+        [KeyboardButton(text='4'), KeyboardButton(text='5'), KeyboardButton(text='6'), KeyboardButton(text='12'), KeyboardButton(text='13'), KeyboardButton(text='16'), KeyboardButton(text='17'), KeyboardButton(text='18')],
+        [KeyboardButton(text='20'), KeyboardButton(text='21'), KeyboardButton(text='22'), KeyboardButton(text='23'), KeyboardButton(text='24'), KeyboardButton(text='25'), KeyboardButton(text='26'), KeyboardButton(text='27')],
+        [KeyboardButton(text='BACK')],
+    ])
+# segund teclado chamado ao clicar em next
+newkeyboard = ReplyKeyboardMarkup(
+	keyboard=[
+        [KeyboardButton(text="..."), KeyboardButton(text="...")],
+        [KeyboardButton(text="..."), KeyboardButton(text="...")],
+        [KeyboardButton(text="..."), KeyboardButton(text="...")],
+        [KeyboardButton(text="..."), KeyboardButton(text="...")],
+        [KeyboardButton(text="BACK")],
+])
+
+# inicia o bot quando /start e enviado
+# envia messagens de boas vindas e ativa o primeiro teclado
+def start(chat_id, command):
+    imagem_goku = "https://pm1.narvii.com/6283/ad9ff5af2e8bdfa88a92458ace75e2cf6adca8d8_hq.jpg" ## link da imagem a ser enviada
+    bot.sendPhoto(chat_id, imagem_goku, "") ## funcao que envia a mensagem com a imagem
+    audio_goku = "https://www.myinstants.com/media/sounds/oi-eu-sou-goku.mp3"
+    bot.sendAudio(chat_id, audio_goku, "",reply_markup=keyboard)
+
+# função temperature executa leitura e  retorna
+# o valor atual da temperatura da cpu em Celsius
+def temperature(chat_id, command):
+    temp = int(open('/sys/class/thermal/thermal_zone0/temp').read()) / 1e3
+    bot.sendMessage(chat_id, '*Temperatura atual da CPU: *', parse_mode="Markdown")
+    bot.sendMessage(chat_id, "`%s`°C" % temp, parse_mode="Markdown")
+
+# busca  quais usuarios estao logados no sistema
+def users(chat_id, command):
+    quantProc = subprocess.getoutput("w")
+    bot.sendMessage(chat_id, '*Usuarios logados no sistema: *', parse_mode="Markdown")
+    bot.sendMessage(chat_id, "`%s`" % quantProc, parse_mode="Markdown")
+
+# função memory informa o status da memoria RAM total, em uso e livre
+# memoria total
+def memory(chat_id, command):
+    mem_total = subprocess.getoutput("free -h | grep 'Mem' | cut -c 15-18")
+    bot.sendMessage(chat_id, '*Memoria total: *', parse_mode="Markdown")
+    bot.sendMessage(chat_id, "`%s`MB" % mem_total, parse_mode="Markdown")
+# memoria em uso
+    mem_used = subprocess.getoutput("free -h | grep 'Mem' | cut -c 27-30")
+    bot.sendMessage(chat_id, '*Memoria em uso: *', parse_mode="Markdown")
+    bot.sendMessage(chat_id, "`%s`MB" % mem_used, parse_mode="Markdown")
+# memoria livre
+    mem_free = subprocess.getoutput("free -h | grep 'Mem' | cut -c 76-78")
+    bot.sendMessage(chat_id, '*Memoria livre: *', parse_mode="Markdown")
+    bot.sendMessage(chat_id, "`%s`MB" % mem_free, parse_mode="Markdown")
+# retorna o uptime do sistema
+def upTime(chat_id, command):
+    uptime = subprocess.getoutput("uptime -p")
+    bot.sendMessage(chat_id, '*Up Time do sistema: *',parse_mode="Markdown")
+    bot.sendMessage(chat_id,  "_%s_" % uptime, parse_mode="Markdown")
+
+#verifica a capacidade total do hd e retorna a sua utilização
+def sdCard(chat_id, command):
+    sd_size = subprocess.getoutput("df -h | grep /dev/root | awk '{print $2}'")
+    sd_used = subprocess.getoutput("df -h | grep /dev/root | awk '{print $3}'")
+    sd_available = subprocess.getoutput("df -h | grep /dev/root | awk '{print $4}'")
+    sd_percent_use = subprocess.getoutput("df -h | grep /dev/root | awk '{print $5}'")
+    bot.sendMessage(chat_id, '''Tamanho do MicroSD: {}
+Espaço usado: {}
+Espaço disponível: {}
+Porcentagem: {}'''.format(sd_size, sd_used, sd_available, sd_percent_use), parse_mode="Markdown")
+# informa o date time atual do sistema
+def date(chat_id, command):
+    date = subprocess.getoutput("date")
+    bot.sendMessage(chat_id,'*Data e hora do Sistema: *', parse_mode="Markdown")
+    bot.sendMessage(chat_id,  "_%s_" % date, parse_mode="Markdown")
+# informaçoes sobre a quantidade de dados trafegados
+# pelas interfaces de rede disponiveis no dispositivo
+def network(chat_id, command):
+# quantidade de dados recebidos via wireless
+    rx_wifi = subprocess.getoutput("cat /sys/class/net/wlan0/statistics/rx_bytes")
+    bot.sendMessage(chat_id, '*Quantidade de banda recebida pela rede Wifi: *', parse_mode="Markdown")
+    rx_float = float(rx_wifi)
+    rx_float_mb = rx_float / 1024 / 1024
+    if rx_float_mb > 1024:
+        rx_float_gb = rx_float_mb / 1024
+        bot.sendMessage(chat_id, '`%.2f Gbs`' % rx_float_gb, parse_mode="Markdown")
+    else:
+        bot.sendMessage(chat_id, '`%.2f Mbs`' % rx_float_mb, parse_mode="Markdown")
+# quantidade de dados eviados via wireless
+    tx_wifi = subprocess.getoutput("cat /sys/class/net/wlan0/statistics/tx_bytes")
+    bot.sendMessage(chat_id, '*Quantidade de banda enviada pela rede Wifi: *', parse_mode="Markdown")
+    tx_float = float(tx_wifi)
+    tx_float_mb = tx_float / 1024 / 1024
+    if tx_float_mb > 1024:
+        tx_float_gb = tx_float_mb / 1024
+        bot.sendMessage(chat_id, '`%.2f Gbs`' % tx_float_gb, parse_mode="Markdown")
+    else:
+        bot.sendMessage(chat_id, '`%.2f Mbs`' % tx_float_mb, parse_mode="Markdown")
+# quantidade de dados recebidos via cabo ethernet
+    rx_cable = subprocess.getoutput("cat /sys/class/net/eth0/statistics/rx_bytes")
+    bot.sendMessage(chat_id, '*Quantidade de banda recebida pela rede cabeada: *', parse_mode="Markdown")
+    rx_float = float(rx_cable)
+    rx_float_mb = rx_float / 1024 / 1024
+    if rx_float_mb > 1024:
+        rx_float_gb = rx_float_mb / 1024
+        bot.sendMessage(chat_id, '`%.2f Gbs`' % rx_float_gb, parse_mode="Markdown")
+    else:
+        bot.sendMessage(chat_id, '`%.2f Mbs`' % rx_float_mb, parse_mode="Markdown")
+# quantidade de dados enviados via cabo ethernet
+    tx_cable = subprocess.getoutput("cat /sys/class/net/eth0/statistics/tx_bytes")
+    bot.sendMessage(chat_id, '*Quantidade de banda enviada pela rede cabeada: *', parse_mode="Markdown")
+    tx_float = float(tx_cable)
+    tx_float_mb = tx_float / 1024 / 1024
+    if tx_float_mb > 1024:
+        tx_float_gb = tx_float_mb / 1024
+        bot.sendMessage(chat_id, '`%.2f Gbs`' % tx_float_gb, parse_mode="Markdown")
+    else:
+        bot.sendMessage(chat_id, '`%.2f Mbs`' % tx_float_mb, parse_mode="Markdown")
+
+# faz a leitura dos indereços ip e retorna apenas para os autorizados
+def ip(chat_id, command):
+# verifica se o chat id e igual ao do admin ou de alguns dos autorizados
+    if chat_id == admin_id or chat_id == autho_1 or chat_id == autho_2:
+# pega o ip local da maquina por meio de comandos no terminal
+        ip_lan = subprocess.getoutput("ifconfig wlan0 |  grep inet | cut -c 13-27 | head -1")
+        bot.sendMessage(chat_id, '*IP local: *', parse_mode="Markdown")
+        bot.sendMessage(chat_id, '%s' % ip_lan, parse_mode="Markdown")
+# verifica se o chat id e igual ao do admin
+        if chat_id == admin_id:
+# pega o ip externo atraves de api
+            response = urllib.request.urlopen('http://bot.whatismyipaddress.com/')
+            ip_ex = response.read()
+            bot.sendMessage(chat_id, '*IP externo: *', parse_mode="Markdown")
+            bot.sendMessage(chat_id, '`%s`' % ip_ex.decode('utf-8'), parse_mode="Markdown")
+# se o chat id nao estiver na lista retonar essa menssagem
+    else:
+        bot.sendMessage(chat_id, 'Voce nao pode ver o meu IP')
+        bot.sendMessage(chat_id, '127.0.0.1')
+
+def next(chat_id, command):
+    bot.sendMessage(chat_id,'Teclado 2 como novos comandos', reply_markup=newkeyboard)
+
+def back(chat_id, command):
+    bot.sendMessage(chat_id,'Teclado 1 de volta', reply_markup=keyboard)
+
+# funçao help informa dados referentes aos comandos
+def help(chat_id, command):
+    bot.sendMessage(chat_id, 'Ajuda. Encontre aqui informacoes sobre os comandos')
+    bot.sendMessage(chat_id, '')
+    bot.sendMessage(chat_id, '*Comando Temperatura*', parse_mode="Markdown")
+    bot.sendMessage(chat_id, 'Comando que tem como funcao retornar ao usuario as informacoes de temperatura da CPU')
+    time.sleep(0.5)
+    bot.sendMessage(chat_id, '*Comando Usuarios*', parse_mode="Markdown")
+    bot.sendMessage(chat_id, 'Comando que tem como funcao contar e retornar a quais usuario que estao logados no sistema')
+    time.sleep(0.5)
+    bot.sendMessage(chat_id, '*Comando Memoria*', parse_mode="Markdown")
+    bot.sendMessage(chat_id, 'Comando que tem como funcao retornar ao usuario dados da memoria como memoria total, memoria em uso e memoria livre')
+    time.sleep(0.5)
+    bot.sendMessage(chat_id, '*Comando UpTime*', parse_mode="Markdown")
+    bot.sendMessage(chat_id, 'Comando que tem como funcao retornar ao usuario a informacao do UpTime do sistema ou seja a quanto tempo a maquina esta ligada')
+    time.sleep(0.5)
+    bot.sendMessage(chat_id, '*Comando UsoSD*', parse_mode="Markdown")
+    bot.sendMessage(chat_id, 'Comando que tem como funcao retornar informacao de espaco utilizando e espaco livre na particao principal do sistema')
+    time.sleep(0.5)
+    bot.sendMessage(chat_id, '*Comando Data*', parse_mode="Markdown")
+    bot.sendMessage(chat_id, 'Comando que tem como funcao retornar ao usuario a Hora e Data exatas do sistema')
+    time.sleep(0.5)
+    bot.sendMessage(chat_id, '*Comando Rede*', parse_mode="Markdown")
+    bot.sendMessage(chat_id, 'Comando que tem como funcao medir e retornar ao usuario a quantidade de banda que foi utilizada em Upload e Download tanto em Wifi ou Ethernet')
+    time.sleep(0.5)
+    bot.sendMessage(chat_id, '*Comando IP*', parse_mode="Markdown")
+    bot.sendMessage(chat_id, 'Comando que tem como funcao pegar o IP externo e IP local e retornar para o administrador ambos IPs e para usuarios normais somente o IP local')
+
+def controlPins(chat_id, command, pin):
+    gpio.setmode(gpio.BCM)
+    gpio.setwarnings(False)
+    gpio.setup(pin, gpio.OUT)
+    estado = gpio.input(pin)
+    if estado == 0:
+        gpio.output(pin, True)
+        bot.sendMessage(chat_id, 'Pino {} ligado'.format(pin), reply_markup=keyboard_pins)
+    elif estado == 1:
+        gpio.output(pin, False)
+        bot.sendMessage(chat_id, 'Pino {} desligado'.format(pin), reply_markup=keyboard_pins)
+    else:
+        print('Ops! Falha ao identificar a msg recebida.')
+
+def about(chat_id, command):
+    bot.sendMessage(chat_id, ' Bot desenvolvido por @joao_slv')
+    bot.sendMessage(chat_id, ' Codigo disponivel https://github.com/joaovitor57/rasp_bot/')
+    bot.sendMessage(chat_id, ' Framework utilizado https://github.com/nickoala/telepot/')
+
+# Função principal do bot, estrutura de decisão
+def handle(msg):
+    command = msg['text']
+    content_type, chat_type, chat_id = telepot.glance(msg)
+    m = telepot.namedtuple.Message(**msg)
+
+    # dados do utilizados do BOT
+    def getinfo(chat_id):
+        if chat_id < 0:
+            print('Comando usado -->: %s' % (command))
+            print('---------------------------')
+            print('Menssage do tipo %s: \n' % (content_type))
+            print('Chat ID do Grupo : %s' % m.chat[0])
+            print('Tipo de chat : %s' % m.chat[1])
+            print('Nome do Grupo: %s' % m.chat[2])
+            print('Chat Id User: %s' % m.from_[0])
+            print('Username: %s' % m.from_[3])
+            print('First Name : %s' % m.from_[1])
+            print('Last Name: %s' % m.from_[2])
+            print(time.strftime('%Y-%m-%d %H:%M:%S'))
+            print('--------------------------------------')
+        else:
+            print('Comando usado -->: %s' % (command))
+            print('---------------------------')
+            print('Messagem do tipo %s: \n' % (content_type))
+            print('Chat ID : %s' % m.chat[0])
+            print('Tipo de chat : %s' % m.chat[1])
+            print('Username : %s' % m.chat[3])
+            print('First Name: %s' % m.chat[4])
+            print('Last Name: %s' % m.chat[5])
+            print(time.strftime('%Y-%m-%d %H:%M:%S'))
+            print('--------------------------------------')
+
+    if command.isdigit():
+        pin = int(command)
+        controlPins(chat_id, command, pin)
+        getinfo(chat_id)
+
+    elif command == '/start':
+        start(chat_id, command)
+        getinfo(chat_id)
+
+    elif command == 'Temperatura':
+        temperature(chat_id, command)
+        getinfo(chat_id)
+
+    elif command == 'Usuarios':
+        users(chat_id, command)
+        getinfo(chat_id)
+
+    elif command == 'Memoria':
+        memory(chat_id, command)
+        getinfo(chat_id)
+
+    elif command == 'UpTime':
+        upTime(chat_id, command)
+        getinfo(chat_id)
+
+    elif command == 'UsoSD':
+        sdCard(chat_id, command)
+        getinfo(chat_id)
+
+    elif command == 'Data':
+        date(chat_id, command)
+        getinfo(chat_id)
+
+    elif command == 'Rede':
+        network(chat_id, command)
+        getinfo(chat_id)
+
+    elif command == 'IP':
+        ip(chat_id, command)
+        getinfo(chat_id)
+
+    elif command == 'Pinos':
+        bot.sendMessage(chat_id, 'Selecione o pino no teclado abaixo:', reply_markup=keyboard_pins)
+        getinfo(chat_id)
+
+    elif command == '/help':
+        help(chat_id, command)
+        getinfo(chat_id)
+
+    elif command == 'NEXT':
+        next(chat_id, command)
+        getinfo(chat_id)
+
+    elif command == '...':
+        imagem = "http://i0.kym-cdn.com/entries/icons/mobile/000/004/815/lologuy.jpg" ## link da imagem a ser enviada
+        bot.sendPhoto(chat_id, imagem, "") ## funcao que envia a mensagem com a imagem
+        som = "https://www.myinstants.com/media/sounds/epic.swf_1.mp3"
+        bot.sendAudio(chat_id, som, "")
+
+    elif command == 'BACK':
+        back(chat_id, command)
+        getinfo(chat_id)
+
+    elif command == '/about':
+        about(chat_id, command)
+        getinfo(chat_id)
+
+    # menssagem de erro caso o usuario digite alguma coisa manualmente
+    else:
+        bot.sendMessage(chat_id, 'Use os comandos no teclado')
+        bot.sendMessage(chat_id, 'Ainda nao sei ler =(')
+
+
+# colocar aqui a API do bot gerada pelo botfather
+bot = telepot.Bot(BOT_API)
+bot.message_loop(handle)
+
+print ('Aguardando comandos ...')
+
+# loop while que mantem o bot rodando por tempo indeterminado
+while 1:
+    time.sleep(5)

@@ -7,6 +7,10 @@ Bot do telegram feito em python rodando na raspberry pi usando a biblioteca Tele
 
 # Versões
 
+## Versão 1.9
+* Arquivo requirements.txt adicionado
+* Controle de estados (On/Off) entre pinos
+* Atualização para python3
 
 ## Versão 1.8
 * Novo comando /About
@@ -16,26 +20,26 @@ Bot do telegram feito em python rodando na raspberry pi usando a biblioteca Tele
 ## Versão 1.7
 * Correção na saida comando Memoria
 * Correção na saida do comando IP
-* Substituição do comamdo Processos pelo comando Usuarios 
+* Substituição do comamdo Processos pelo comando Usuarios
 
 ## Versão 1.6
 * Envio de imagens usando qualquer botao do segundo teclado e feito o envio de uma imagem
 
 ## Versão 1.5
 * Foi adicionado um segundo teclado para funções futuras
-* Criado a função next que chama o segundo teclado 
-* Criado a função back que chama de volta o primeiro teclado 
+* Criado a função next que chama o segundo teclado
+* Criado a função back que chama de volta o primeiro teclado
 
 ## Versão 1.4
 * Arquivo de configuraçao externo config.ini usado para guardar API do bot e chat_id com privilegios
 * Feita pelo [René](https://github.com/shenef)
 * Bug maldito corrigido pelo [Berg](https://github.com/bergpb)
 
-## Versão 1.3 
+## Versão 1.3
 * Constantes com os chatid do admin e autorizados as verem o ip
 
 ## Versão 1.2
-* Estruturação do codigo em funçoes facilitando a manutençao e alteração 
+* Estruturação do codigo em funçoes facilitando a manutençao e alteração
 * Feita pelo [Douglas Zuqueto](https://github.com/douglaszuqueto/)
 
 ## Versão 1.1
@@ -55,7 +59,7 @@ Bot do telegram feito em python rodando na raspberry pi usando a biblioteca Tele
 * Separaçao das saidas das informações do chat
 
 ## Versão 0.7
-* Verficação de identidade para retornar o IP apenas para quem tem autorização 
+* Verficação de identidade para retornar o IP apenas para quem tem autorização
 * Utilizaçao de uma API para pegar o ip externo
 
 ## Versão 0.6
@@ -78,8 +82,8 @@ Bot do telegram feito em python rodando na raspberry pi usando a biblioteca Tele
 * Mostra qual comando foi usado
 
 ## Versão 0.2
-* Teclado com opções 
-* Retorno de mensagens 
+* Teclado com opções
+* Retorno de mensagens
 
 ## Versão 0.1
 * Esqueleto do bot
