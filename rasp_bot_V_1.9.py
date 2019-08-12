@@ -98,10 +98,10 @@ def sdCard(chat_id, command):
     sd_used = subprocess.getoutput("df -h | grep /dev/root | awk '{print $3}'")
     sd_available = subprocess.getoutput("df -h | grep /dev/root | awk '{print $4}'")
     sd_percent_use = subprocess.getoutput("df -h | grep /dev/root | awk '{print $5}'")
-    bot.sendMessage(chat_id, '''Tamanho do MicroSD: {}
-Espaço usado: {}
-Espaço disponível: {}
-Porcentagem: {}'''.format(sd_size, sd_used, sd_available, sd_percent_use), parse_mode="Markdown")
+    bot.sendMessage(chat_id, '''Tamanho do MicroSD: %s
+Espaço usado: %s
+Espaço disponível: %s
+Porcentagem: %s''' % (sd_size, sd_used, sd_available, sd_percent_use), parse_mode="Markdown")
 # informa o date time atual do sistema
 def date(chat_id, command):
     date = subprocess.getoutput("date")
